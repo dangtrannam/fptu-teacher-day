@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { fabric } from 'fabric';
 import gsap from 'gsap';
 import Hammer from 'hammerjs';
+import frameWhite from '../assets/frame-white.png';
 import FontFaceObserver from 'fontfaceobserver';
 import Header from '../components/layout/Header';
 
@@ -11,9 +12,8 @@ const testIRegex = (text) => {
     return regexI.test(text);
 }
 
-const FRAME_SIZE = 25.3125 * 15; // 17.5rem
-const USER_WIDTH = 25.3125 * 15; // 17.5rem
-
+const FRAME_SIZE = 17.5 * 16; // 17.5rem
+const USER_WIDTH = 17.5 * 16; // 17.5rem
 const transitionClasses = 'transition ease-in-out duration-300'
 const background = '#262625';
 const DEFAULT_TEXT = 'NGÀN TRẢI NGHIỆM,VẠN'
@@ -70,7 +70,7 @@ const debounce = (func, delay) => {
 };
 
 // eslint-disable-next-line react/prop-types
-const AvatarCreatorPage = ({ currentPage }) => {
+const AvatarFrame = ({ currentPage }) => {
     const hammerRef = useRef(null);
     const boxRef = useRef(null);
     const userImageRef = useRef(null);
@@ -497,7 +497,7 @@ const AvatarCreatorPage = ({ currentPage }) => {
                     <div className={`${isFinish ? '-top-[200px]' : '-top-[240px]'} absolute left-1/2 -translate-x-1/2`}>
 
                         <div className="relative z-20 flex flex-col items-center justify-center gap-4">
-                            <p className={`text-orange-500 text-[18px]  font-montserrat-bold  ${isFinish ? 'hidden' : 'relative top-0'}`}>Bước 1</p>
+                            <p className={`text-white text-[18px]  font-montserrat-bold  ${isFinish ? 'hidden' : 'relative top-0'}`}>Bước 1</p>
                             <div className={`relative min-h-[17.5rem] min-w-[17.5rem] md:min-h-[20rem] md:min-w-[20rem] ${transitionClasses}`} style={{
                                 borderRadius: '10px',
                                 boxShadow: '0px 3px 7px rgba(0, 0, 0, 0.8)',
@@ -513,14 +513,34 @@ const AvatarCreatorPage = ({ currentPage }) => {
                                 <button onClick={exportImage} className="px-8 py-3 bg-orange-500 hover:bg-orange-600 text-white md:text-lg rounded-full w-60 font-montserrat-extrabold font-extrabold">
                                     XUẤT ẢNH
                                 </button>
-
+                                {/*{*/}
+                                {/*    isMobile() ? (*/}
+                                {/*        <div className='flex flex-col items-center justify-center p-4 w-96'>*/}
+                                {/*            <div className='text-center'>*/}
+                                {/*                <span className='text-base text-[#7a7a7a] italic'>Để tải ảnh,</span>*/}
+                                {/*                <span className='font-extrabold italic text-base text-[#ff5815]'> nhấn giữ ảnh và chọn</span>*/}
+                                {/*            </div>*/}
+                                {/*            <div className='text-center mt-2 w-90'>*/}
+                                {/*                <span className='text-base text-[#7a7a7a] italic font-extrabold'>"Thêm vào ảnh"</span>*/}
+                                {/*                <span className='text-base text-[#7a7a7a] italic'> hoặc </span>*/}
+                                {/*                <span className='text-base text-[#7a7a7a] italic font-extrabold'>"Tải hình ảnh xuống"</span>*/}
+                                {/*            </div>*/}
+                                {/*        </div>*/}
+                                {/*    ) : (*/}
+                                {/*        <>*/}
+                                {/*            <button onClick={exportImage} className="px-8 py-3 bg-orange-500 hover:bg-orange-600 text-white md:text-lg rounded-full w-60 font-montserrat font-extrabold">*/}
+                                {/*                XUẤT ẢNH*/}
+                                {/*            </button>*/}
+                                {/*        </>*/}
+                                {/*    )*/}
+                                {/*}*/}
                                 <button onClick={toggleIsFinishing}
                                     className="px-8 py-3 mt-3 bg-white-500 border-orange-600 border md:text-lg text-orange-600 rounded-full w-56 hover:bg-orange-600 hover:text-white font-montserrat-extrabold">
                                     TẠO ẢNH KHÁC
                                 </button>
                             </div>
 
-                            {/* <div ref={unFinishSection1Ref} className={`relative bg-white shadow-lg rounded-full border border-gray-300 p-2 ${transitionClasses} ${isFinish ? 'opacity-0' : 'opacity-100'}`}>
+                            <div ref={unFinishSection1Ref} className={`relative bg-white shadow-lg rounded-full border border-gray-300 p-2 ${transitionClasses} ${isFinish ? 'opacity-0' : 'opacity-100'}`}>
                                 <button
                                     onClick={() => handleTextColorChange('white')}
                                     className={`px-4 py-2 mx-2 ${textColor === 'white' ? 'bg-gray-300 font-semibold border border-gray-300' : 'bg-gray-100 border border-transparent'} rounded-full shadow transition duration-300 md:text-lg font-montserrat-semibold`}
@@ -535,11 +555,12 @@ const AvatarCreatorPage = ({ currentPage }) => {
                                 >
                                     Đen
                                 </button>
-                            </div> */}
+                            </div>
 
 
                             <div ref={unFinishSection2Ref} className={`text-left relative mt-4 ${transitionClasses} ${isFinish ? 'opacity-0' : 'opacity-100'}`}>
-                                {/* <h1 className="w-auto mb-2 h-auto font-montserrat-extrabold font-[900] text-3xl sm:text-4xl lg:text-5xl text-[#7A7A7A] leading-6">Ngàn
+                                <p className={`text-[#FF5815] text-[18px] font-montserrat-extrabold relative top-0 left-[43%]`}>Bước 2</p>
+                                <h1 className="w-auto mb-2 h-auto font-montserrat-extrabold font-[900] text-3xl sm:text-4xl lg:text-5xl text-[#7A7A7A] leading-6">Ngàn
                                     trải nghiệm</h1>
                                 <div className='flex'>
                                     <h1 className={`w-auto h-auto font-montserrat-extrabold font-extrabold text-3xl sm:text-4xl lg:text-5xl ${textColor === 'orange' ? 'text-[#F15A25]' : 'text-[#7A7A7A]'} text-start`}>Vạn</h1>
@@ -553,13 +574,6 @@ const AvatarCreatorPage = ({ currentPage }) => {
                                             fontFamily: 'Montserrat',
                                         }}
                                     />
-                                </div> */}
-                                {/* Form Section for Tablet & Mobile */}
-                                <div className="flex flex-col items-center justify-center px-4 space-y-4 mx-auto">
-                                    <span className="text-lg font-montserrat-extrabold text-orange-500">Bước 2</span>
-                                    <input type="text" placeholder="Họ Tên" className="w-auto px-4 py-2 border border-gray-300 rounded bg-gray-400  text-black placeholder:text-black" />
-                                    <input type="text" placeholder="Trường" className="w-full px-4 py-2 border border-gray-300 rounded bg-gray-400  text-black placeholder:text-black" />
-                                    <input type="text" placeholder="Lời cảm ơn" className="w-full px-4 py-2 border border-gray-300 rounded bg-gray-400 text-black placeholder:text-black" />
                                 </div>
                             </div>
 
@@ -572,11 +586,11 @@ const AvatarCreatorPage = ({ currentPage }) => {
                                     style={{ display: 'none' }}
                                 />
                                 <label htmlFor="avatarUpload"
-                                    className="px-8 w-auto py-3 mb-2 text-white bg-gradient-to-r from-gray-600 to-gray-400 hover:from-gray-700 hover:to-gray-500 font-montserrat-extrabold md:text-xl rounded-full md:w-72 text-center cursor-pointer">
+                                    className="px-8 w-auto py-3 mb-2 text-white bg-gradient-to-r from-orange-600 to-orange-400 hover:from-orange-700 hover:to-orange-500 font-montserrat-extrabold md:text-xl rounded-full md:w-72 text-center cursor-pointer">
                                     THÊM ẢNH CÁ NHÂN
                                 </label>
                                 <button onClick={toggleIsFinishing}
-                                    className="px-8 py-3 text-white bg-gradient-to-r from-gray-600 to-gray-400 hover:from-gray-700 hover:to-gray-500 font-montserrat-extrabold font-extrabold md:text-lg rounded-full w-60 md:w-72">
+                                    className="px-8 py-3 text-white bg-gradient-to-r from-orange-600 to-orange-400 hover:from-orange-700 hover:to-orange-500 font-montserrat-extrabold font-extrabold md:text-lg rounded-full w-60 md:w-72">
                                     HOÀN TẤT
                                 </button>
                             </div>
@@ -589,4 +603,4 @@ const AvatarCreatorPage = ({ currentPage }) => {
     );
 };
 
-export default AvatarCreatorPage;
+export default AvatarFrame;

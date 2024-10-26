@@ -3,9 +3,10 @@ import App from "./App.jsx";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 // import AvatarCreator from "./pages/create-avatar.page.jsx";
 import { Layout } from "./Layout.jsx";
-// import IntroductionPage from "./pages/introduction.page.jsx";
-// import AvatarFrame from "./pages/avatar-frame.page.jsx";
+import IntroductionPage from "./pages/introduction.page.jsx";
+import AvatarCreatorPage from "./pages/avatarCreator.pages.jsx";
 // import CounterTime from "./pages/couter-time.page.jsx";
+// import AvatarFrame from "./pages/avatar-frame.page.jsx";
 
 const router = createBrowserRouter([
   {
@@ -20,16 +21,16 @@ const router = createBrowserRouter([
       //   path: "/avatar-fptu18/avatar-creator",
       //   element: <AvatarFrame />,
       // },
+      {
+        path: "/fptu-teacher-day/introduction",
+        element: <IntroductionPage />,
+      },
+      {
+        path: "/fptu-teacher-day/:type",
+        element: <AvatarCreatorPage />,
+      },
       // {
-      //   path: "/avatar-fptu18/introduction",
-      //   element: <IntroductionPage />,
-      // },
-      // {
-      //   path: "/avatar-fptu18/create-frame/:type",
-      //   element: <AvatarCreator />,
-      // },
-      // {
-      //   path: "/avatar-fptu18/counter-time",
+      //   path: "/fptu-teacher-day/counter-time",
       //   element: <CounterTime />,
       // }
     ],

@@ -1,7 +1,8 @@
 import './index.css';
-// import IntroductionPage from "./pages/introduction.page.jsx";
 import { useState } from "react";
-import HelloPage from './pages/Hello.page.jsx';
+import HelloPage from './pages/hello.page.jsx';
+import IntroductionPage from './pages/introduction.page.jsx';
+import AvatarCreatorPage from './pages/avatarCreator.pages.jsx';
 // import AvatarFrame from "./pages/avatar-frame.page.jsx";
 
 function App() {
@@ -14,12 +15,15 @@ function App() {
       <div className={getClassName(1)}>
         <HelloPage setNextPage={() => setCurrentPage(2)} />
       </div>
-      {/* <div className={getClassName(2)}>
-        <IntroductionPage currentPage={currentPage} setNextPage={() => setCurrentPage(3)} />
+      <div className={getClassName(2)}>
+        <IntroductionPage
+          currentPage={currentPage}
+          setNextPage={() => setCurrentPage(3)}
+        />
       </div>
       <div className={getClassName(3)}>
-        <AvatarFrame currentPage={currentPage} />
-      </div> */}
+        <AvatarCreatorPage currentPage={currentPage} />
+      </div>
     </div>
   )
 }

@@ -1,30 +1,9 @@
-import { Link } from "react-router-dom";
+import Header from "../components/layout/Header";
 
 const IntroductionPage = ({ setNextPage }) => {
     return (
         <div>
-            <div className="bg-gray-400 w-full md:min-h-[14vh]">
-                <div className="flex justify-between items-center py-4 px-6 gap-4 w-full max-w-screen-xl mx-auto">
-                    <Link
-                        to="#"
-                        target="_blank"
-                    >
-                        <img
-                            src="https://via.placeholder.com/240x76"
-                            alt="fptu-logo"
-                        />
-                    </Link>
-                    <Link
-                        to="https://university.fpt.edu.vn/fptu-tuoi-18/"
-                        target="_blank"
-                    >
-                        <img
-                            src="https://via.placeholder.com/240x76"
-                            alt="Logo FTPU 18year"
-                        />
-                    </Link>
-                </div>
-            </div>
+            <Header />
             <div>
                 {/* Main Content Section */}
                 <div className="flex flex-col items-center justify-center px-4 py-8 space-y-6">

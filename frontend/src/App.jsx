@@ -1,8 +1,8 @@
 import './index.css';
 import { useState } from "react";
-import HelloPage from './pages/hello.page.jsx';
 import IntroductionPage from './pages/introduction.page.jsx';
 import AvatarCreatorPage from './pages/avatarCreator.pages.jsx';
+import HelloPage from './pages/Hello.page.jsx';
 // import AvatarFrame from "./pages/avatar-frame.page.jsx";
 
 function App() {

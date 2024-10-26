@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import './styles.css'; // Import the CSS file
+import './style.css'; // Import the CSS file
 import { gsap } from 'gsap';
 import { TimelineMax } from 'gsap/gsap-core';
 
@@ -63,7 +63,6 @@ const CircularProgress = ({ currentPage, setNextPage }) => {
                 }, 4000);
 
             }
-
 
         }, null, null, 1000);
 

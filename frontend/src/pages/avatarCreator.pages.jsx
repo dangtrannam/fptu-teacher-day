@@ -492,7 +492,7 @@ const AvatarFrame = ({ currentPage }) => {
         <>
             <Header />
             <div className='relative h-screen'>
-                <div className={`absolute bottom-0 left-0 right-0 top-[35%] sm:top-[40%] md:top-[35%] bg-white z-50 h-[70%] h-auto rounded-t-3xl`}
+                <div className={`absolute bottom-0 left-0 right-0 top-[35%] sm:top-[40%] md:top-[35%] bg-white z-50 h-[70%] rounded-t-3xl`}
                     ref={boxRef}>
                     <div className={`${isFinish ? '-top-[200px]' : '-top-[240px]'} absolute left-1/2 -translate-x-1/2`}>
 

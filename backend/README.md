@@ -32,6 +32,12 @@
 $ pnpm install
 ```
 
+### Database setup
+
+```bash
+docker run --name mongodb -d -p 27017:27017 mongodb/mongodb-community-server
+```
+
 ## Compile and run the project
 
 ```bash
@@ -39,10 +45,10 @@ $ pnpm install
 $ pnpm run start
 
 # watch mode
-$ pnpm run start:dev
+$ pnpm run dev
 
 # production mode
-$ pnpm run start:prod
+$ pnpm run prod
 ```
 
 ## Run tests

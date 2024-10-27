@@ -1,10 +1,12 @@
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+// import AvatarCreator from "./pages/create-avatar.page.jsx";
 import { Layout } from "./Layout.jsx";
 import IntroductionPage from "./pages/introduction.page.jsx";
-import AvatarFrame from "./pages/avatarCreator.pages.jsx";
-
+import AvatarCreatorPage from "./pages/avatarCreator.pages.jsx";
+// import CounterTime from "./pages/couter-time.page.jsx";
+// import AvatarFrame from "./pages/avatar-frame.page.jsx";
 
 const router = createBrowserRouter([
   {
@@ -24,8 +26,8 @@ const router = createBrowserRouter([
         element: <IntroductionPage />,
       },
       {
-        path: "/fptu-teacher-day/avatar-creator",
-        element: <AvatarFrame />,
+        path: "/fptu-teacher-day/:type",
+        element: <AvatarCreatorPage />,
       },
       // {
       //   path: "/fptu-teacher-day/counter-time",

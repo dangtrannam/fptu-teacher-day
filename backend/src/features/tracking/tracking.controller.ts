@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Req, BadRequestException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Req, BadRequestException, UseGuards } from '@nestjs/common';
 import { TrackingService } from './tracking.service';
 import { CreateTrackingDto } from './dto/create-tracking.dto';
 import { UpdateTrackingDto } from './dto/update-tracking.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('tracking')
 export class TrackingController {
@@ -18,6 +19,7 @@ export class TrackingController {
   }
 
   @Get('access')
+  @UseGuards(AuthGuard('jwt'))
   getAccessTracking() {
     return this.trackingService.getAccessTracking();
   }
@@ -33,6 +35,7 @@ export class TrackingController {
   }
 
   @Get('share')
+  @UseGuards(AuthGuard('jwt'))
   getShareTracking() {
     return this.trackingService.getShareTracking();
   }
@@ -43,11 +46,13 @@ export class TrackingController {
   }
 
   @Get()
+  @UseGuards(AuthGuard('jwt'))
   findAll() {
     return this.trackingService.findAll();
   }
 
   @Get(':id')
+  @UseGuards(AuthGuard('jwt'))
   findOne(@Param('id') id: string) {
     return this.trackingService.findOne(+id);
   }

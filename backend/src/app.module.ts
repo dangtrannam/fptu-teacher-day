@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UploadModule } from './features/upload/upload.module';
 import { TrackingModule } from './features/tracking/tracking.module';
 import { MulterModule } from '@nestjs/platform-express';
+import { AuthenticationModule } from './features/authentication/authentication.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { MulterModule } from '@nestjs/platform-express';
     }),
     UploadModule,
     TrackingModule,
+    AuthenticationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

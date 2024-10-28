@@ -2,7 +2,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import { RouterProvider, createBrowserRouter, useNavigate } from "react-router-dom";
 import { Layout } from "./Layout.jsx";
-import IntroductionPage from "./pages/user/introduction.page.jsx";
+import IntroductionPage from "./pages/user/introduction.page.jsx ";
 import AvatarFrame from "./pages/user/avatarCreator.pages.jsx";
 import LoginPage from "./pages/admin/login.page.jsx";
 import TrackingPage from "./pages/admin/tracking.page.jsx";
@@ -14,7 +14,7 @@ const ProtectedRoute = ({ element }) => {
 
   useEffect(() => {
     if (!token) {
-      navigate("/fptu-teacher-day/login");
+      navigate("/login");
     }
   }, [token, navigate]);
 
@@ -38,15 +38,16 @@ const router = createBrowserRouter([
         path: "/fptu-teacher-day/avatar-creator",
         element: <AvatarFrame />,
       },
-      {
-        path: "/fptu-teacher-day/login",
-        element: <LoginPage />,
-      },
-      {
-        path: "/fptu-teacher-day/admin/tracking-user",
-        element: <ProtectedRoute element={<TrackingPage />} />,
-      },
+
     ],
+  },
+  {
+    path: "/login",
+    element: <LoginPage />,
+  },
+  {
+    path: "/admin/tracking-user",
+    element: <ProtectedRoute element={<TrackingPage />} />,
   },
 ]);
 

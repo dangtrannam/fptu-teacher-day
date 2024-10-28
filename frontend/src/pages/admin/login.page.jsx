@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
     Box,
     Paper,
     Typography,
     TextField,
     Button,
-    Checkbox,
-    FormControlLabel,
     IconButton,
 } from '@mui/material';
 import Grid from '@mui/material/Grid';
@@ -15,6 +13,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { login } from '../../service/auth.service';
 import { useNavigate } from 'react-router-dom';
+import { ADMIN_WISHES_PATH } from '../../constants/routerPaths';
 
 // Import the login function from the login file
 
@@ -34,7 +33,7 @@ const LoginPage = () => {
         setError('');
         try {
             await login(username, password).then(() => {
-                navigate('/admin/tracking-user/')
+                navigate(ADMIN_WISHES_PATH)
             });
         } catch (error) {
             setError(error.response?.data?.message || 'Login failed. Please try again.');
@@ -52,6 +51,21 @@ const LoginPage = () => {
             fontFamily="sans-serif"
         >
             <Grid container spacing={4} maxWidth="90%" alignItems="center" justifyContent="space-between">
+                {/* Image Section */}
+                <Grid item xs={12} md={6} display="flex" justifyContent="center" alignItems="center">
+                    <Box
+                        component="img"
+                        src="https://upload.wikimedia.org/wikipedia/vi/2/2d/Logo_Tr%C6%B0%E1%BB%9Dng_%C4%90%E1%BA%A1i_h%E1%BB%8Dc_FPT.svg"
+                        alt="University Logo"
+                        sx={{
+                            width: { xs: '60%', md: '80%' },
+                            height: { xs: '40vh', md: '35vh' },
+                            objectFit: 'contain',
+                            borderRadius: 2,
+                            maxWidth: '80%',
+                        }}
+                    />
+                </Grid>
                 <Grid item xs={12} md={5}>
                     <Paper
                         elevation={4}
@@ -135,13 +149,6 @@ const LoginPage = () => {
                                 </Box>
                             )}
 
-                            <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
-                                <FormControlLabel
-                                    control={<Checkbox name="remember-me" color="primary" />}
-                                    label={<Typography variant="body1" color="text.primary">Ghi nhớ mật khẩu</Typography>}
-                                />
-                            </Box>
-
                             <Button
                                 variant="contained"
                                 fullWidth
@@ -154,21 +161,7 @@ const LoginPage = () => {
                     </Paper>
                 </Grid>
 
-                {/* Image Section */}
-                <Grid item xs={12} md={6} display="flex" justifyContent="center" alignItems="center">
-                    <Box
-                        component="img"
-                        src="https://upload.wikimedia.org/wikipedia/vi/2/2d/Logo_Tr%C6%B0%E1%BB%9Dng_%C4%90%E1%BA%A1i_h%E1%BB%8Dc_FPT.svg"
-                        alt="University Logo"
-                        sx={{
-                            width: { xs: '60%', md: '80%' },
-                            height: { xs: '40vh', md: '35vh' },
-                            objectFit: 'contain',
-                            borderRadius: 2,
-                            maxWidth: '80%',
-                        }}
-                    />
-                </Grid>
+
             </Grid>
         </Box>
     );

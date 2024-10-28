@@ -11,7 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import Modal from '@mui/material/Modal';
 import ImageIcon from '@mui/icons-material/Visibility'; // Eye icon
 import CloseIcon from '@mui/icons-material/Close'; // Close icon
-import getUploadData from '../../service/wish.service';
+import { getUploadData, getImageData } from '../../service/wish.service';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -54,12 +54,28 @@ const WishComponent = () => {
         }
     };
 
+    const fetchImageData = async (imageUrl) => {
+        try {
+            const data = await getImageData(imageUrl);
+            if (data) {
+                return data;
+            } else {
+                console.error('Fetched data is not an array:', data);
+                return null;
+            }
+        } catch (error) {
+            console.error('Failed to fetch data:', error);
+            return null;
+        }
+    };
+
     useEffect(() => {
         fetchData();
     }, []);
 
-    const handleOpen = (imageUrl) => {
-        setSelectedImage(imageUrl);
+    const handleOpen = async (imageUrl) => {
+        const base64Image = await fetchImageData(imageUrl);
+        setSelectedImage(`data:image/png;base64,${base64Image}`);
         setOpen(true);
     };
 
@@ -70,13 +86,13 @@ const WishComponent = () => {
 
     return (
         <>
-            <h1 className='mb-8 mt-4 font-bold text-xl uppercase'>Wish Management</h1>
+            <h1 className='mb-8 mt-4 font-bold text-xl uppercase'>Những câu chúc của mọi người</h1>
             <TableContainer component={Paper} style={{ overflowX: 'auto' }}>
                 <Table sx={{ minWidth: 500 }} aria-label="customized table">
                     <TableHead>
                         <TableRow>
-                            <StyledTableCell>User Input</StyledTableCell>
-                            <StyledTableCell align="right">View Image</StyledTableCell>
+                            <StyledTableCell>Lời chúc</StyledTableCell>
+                            <StyledTableCell align="right">Hình ảnh</StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -108,7 +124,7 @@ const WishComponent = () => {
                     alignItems: 'center',
                     height: '100vh',
                     position: 'relative' // To position the close button correctly
-                }}>
+                    }}>
                     <img
                         src={selectedImage}
                         alt="Preview"

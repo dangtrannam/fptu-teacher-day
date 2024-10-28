@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { WISH_ENDPOINT } from './apiConfig';
+import { WISH_ENDPOINT, IMAGE_ENDPOINT } from './apiConfig';
 
-const getUploadData = async () => {
+export const getUploadData = async () => {
   try {
     const token = localStorage.getItem('fptuTeacherDayToken');
     const response = await axios.get(WISH_ENDPOINT, {
@@ -17,4 +17,12 @@ const getUploadData = async () => {
   }
 };
 
-export default getUploadData;
+export const getImageData = async (imageUrl) => {
+  try {
+    const response = await axios.get(`${IMAGE_ENDPOINT}/${imageUrl}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching image data:', error);
+    throw error;
+  }
+};

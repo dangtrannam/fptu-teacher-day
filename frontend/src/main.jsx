@@ -8,6 +8,7 @@ import LoginPage from "./pages/admin/login.page.jsx";
 import TrackingPage from "./pages/admin/tracking.page.jsx";
 import { useEffect } from "react";
 import WishPage from "./pages/admin/wish.page.jsx";
+import { ADMIN_TRACKINGS_PATH, ADMIN_WISHES_PATH } from "./constants/routerPaths";
 
 const ProtectedRoute = ({ element }) => {
   const navigate = useNavigate();
@@ -24,19 +25,19 @@ const ProtectedRoute = ({ element }) => {
 
 const router = createBrowserRouter([
   {
-    path: "/fptu-teacher-day/",
+    path: "/",
     element: <Layout />,
     children: [
       {
-        path: "/fptu-teacher-day/",
+        path: "/",
         element: <App />,
       },
       {
-        path: "/fptu-teacher-day/introduction",
+        path: "/introduction",
         element: <IntroductionPage />,
       },
       {
-        path: "/fptu-teacher-day/avatar-creator",
+        path: "/avatar-creator",
         element: <AvatarFrame />,
       },
 
@@ -47,7 +48,7 @@ const router = createBrowserRouter([
     element: <LoginPage />,
   },
   {
-    path: "/admin/tracking-user",
+    path: ADMIN_TRACKINGS_PATH,
     element: <ProtectedRoute element={<TrackingPage />} />,
   },
   {
@@ -55,7 +56,7 @@ const router = createBrowserRouter([
     element: <ProtectedRoute element={<TrackingPage />} />,
   },
   {
-    path: "/admin/wish-management/",
+    path: ADMIN_WISHES_PATH,
     element: <ProtectedRoute element={<WishPage />} />,
   },
 ]);

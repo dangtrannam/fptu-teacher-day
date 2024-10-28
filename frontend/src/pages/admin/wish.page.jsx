@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Sidebar from '../../components/layout/Sidebar';
-import TrackingComponent from '../../components/tracking/tracking.component';
 import WishComponent from '../../components/tracking/wish.component';
 
 const WishPage = () => {

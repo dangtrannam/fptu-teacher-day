@@ -19,7 +19,7 @@ const Header = () => {
                 >
                     <img
                         src="https://via.placeholder.com/240x76"
-                        alt="Logo FTPU 18year"
+                        alt="Logo FTPU"
                     />
                 </Link>
             </div>

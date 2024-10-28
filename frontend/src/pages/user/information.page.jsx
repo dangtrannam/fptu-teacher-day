@@ -44,13 +44,13 @@ const InformationPage = ({ setNextPage }) => {
                             className="w-60 h-14 px-6 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-500"
                         />
 
-                        <button
-                            className="w-60 h-14 px-6 py-3 bg-orange-500 text-white rounded-full font-bold text-lg"
-                            onClick={setNextPage}
-                        >
-                            Tạo ảnh đại diện
-                        </button>
                     </form>
+                    <button
+                        className="w-60 h-14 px-6 py-3 bg-orange-500 text-white rounded-full font-bold text-lg"
+                        onClick={setNextPage}
+                    >
+                        Tạo ảnh đại diện
+                    </button>
                 </div>
             </div>
             {/* Main Content Section */}

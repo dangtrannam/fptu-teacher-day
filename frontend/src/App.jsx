@@ -1,8 +1,8 @@
 import './index.css';
 import { useState } from "react";
-import IntroductionPage from './pages/introduction.page.jsx';
-import AvatarCreatorPage from './pages/avatarCreator.pages.jsx';
-import HelloPage from './pages/Hello.page.jsx';
+import IntroductionPage from './pages/user/introduction.page.jsx';
+import AvatarCreatorPage from './pages/user/avatarCreator.pages.jsx';
+import HelloPage from './pages/user/hello.page.jsx';
 
 function App() {
   const [currentPage, setCurrentPage] = useState(1);

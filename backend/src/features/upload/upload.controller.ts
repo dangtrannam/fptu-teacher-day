@@ -7,6 +7,7 @@ import { Express } from 'express';
 import * as path from 'path';
 import { diskStorage } from 'multer';
 import { editFileName, imageFileFilter } from './utils/file-upload.utils';
+const fs = require('fs');
 
 @Controller('upload')
 export class UploadController {
@@ -48,7 +49,9 @@ export class UploadController {
 
   @Get('image/:imgpath')
   seeUploadedFile(@Param('imgpath') image: string, @Res() res) {
-    const uploadedImage = res.sendFile(image, { root: './files' });
-    return uploadedImage;
+    const filePath = path.join('./files', image);
+    const fileBuffer = fs.readFileSync(filePath);
+    const base64Image = fileBuffer.toString('base64');
+    return res.send(base64Image);
   }
 }

@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import { fabric } from 'fabric';
 import gsap from 'gsap';
 import Hammer from 'hammerjs';
-import frameWhite from '../assets/frame-white.png';
+import frameWhite from '../../assets/frame-white.png';
 import FontFaceObserver from 'fontfaceobserver';
-import Header from '../components/layout/Header';
+import Header from '../../components/layout/Header';
 
 const regexI = /[IÌÍĨỊỈiìíĩịỉ\u0049\u0069\u00CC\u00CD\u0128\u1EC8\u1EC9\u1EC4\u1EC5\u1ECA\u1ECB]/gu;
 

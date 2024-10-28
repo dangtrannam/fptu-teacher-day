@@ -5,6 +5,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { logout } from '../../service/auth.service';
 
 const SideBar = ({ onToggle }) => {
     const [isOpen, setIsOpen] = useState(true);
@@ -15,7 +16,8 @@ const SideBar = ({ onToggle }) => {
     };
 
     const handleLogout = () => {
-        console.log("Logout");
+        logout()
+        navigate('/login');
     };
 
     useEffect(() => {

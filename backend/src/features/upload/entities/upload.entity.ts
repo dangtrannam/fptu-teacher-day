@@ -10,6 +10,12 @@ export class Upload extends Document {
   contentType: string;
 
   @Prop()
+  name: string;
+
+  @Prop()
+  schoolName: string;
+
+  @Prop()
   userInput: string;
 }
 

@@ -53,7 +53,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin/*",
-    element: <ProtectedRoute element={<TrackingPage />} />,
+    element: <ProtectedRoute element={<WishPage />} />,
   },
   {
     path: ADMIN_WISHES_PATH,

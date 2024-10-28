@@ -26,6 +26,8 @@ export class UploadService {
     const uploads = await this.uploadModel.find().exec();
     return uploads.map(upload => ({
       _id: upload._id,
+      name: upload.name,
+      schoolName: upload.schoolName,
       userInput: upload.userInput,
       imageUrl: `${path.basename(upload.imagePath)}`,
       contentType: upload.contentType,

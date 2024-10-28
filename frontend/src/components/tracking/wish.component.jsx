@@ -17,11 +17,11 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: theme.palette.common.black,
         color: theme.palette.common.white,
-        fontSize: 12, // Decrease font size
+        fontSize: 14, // Decrease font size
         padding: '8px', // Decrease padding
     },
     [`&.${tableCellClasses.body}`]: {
-        fontSize: 12, // Decrease font size
+        fontSize: 14, // Decrease font size
         padding: '8px', // Decrease padding
     },
 }));
@@ -91,6 +91,8 @@ const WishComponent = () => {
                 <Table sx={{ minWidth: 500 }} aria-label="customized table">
                     <TableHead>
                         <TableRow>
+                            <StyledTableCell>Họ tên</StyledTableCell>
+                            <StyledTableCell>Trường</StyledTableCell>
                             <StyledTableCell>Lời chúc</StyledTableCell>
                             <StyledTableCell align="right">Hình ảnh</StyledTableCell>
                         </TableRow>
@@ -99,6 +101,12 @@ const WishComponent = () => {
                         {data.length > 0 ? (
                             data.map((item) => (
                                 <StyledTableRow key={item._id}>
+                                    <StyledTableCell component="th" scope="row">
+                                        {item.name}
+                                    </StyledTableCell>
+                                    <StyledTableCell component="th" scope="row">
+                                        {item.schoolName}
+                                    </StyledTableCell>
                                     <StyledTableCell component="th" scope="row">
                                         {item.userInput}
                                     </StyledTableCell>

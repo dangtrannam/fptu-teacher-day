@@ -2,7 +2,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import { RouterProvider, createBrowserRouter, useNavigate } from "react-router-dom";
 import { Layout } from "./Layout.jsx";
-import IntroductionPage from "./pages/user/introduction.page.jsx ";
+import IntroductionPage from "./pages/user/introduction.page.jsx";
 import AvatarFrame from "./pages/user/avatarCreator.pages.jsx";
 import LoginPage from "./pages/admin/login.page.jsx";
 import TrackingPage from "./pages/admin/tracking.page.jsx";

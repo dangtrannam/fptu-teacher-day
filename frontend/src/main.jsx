@@ -7,6 +7,7 @@ import AvatarFrame from "./pages/user/avatarCreator.pages.jsx";
 import LoginPage from "./pages/admin/login.page.jsx";
 import TrackingPage from "./pages/admin/tracking.page.jsx";
 import { useEffect } from "react";
+import WishPage from "./pages/admin/wish.page.jsx";
 
 const ProtectedRoute = ({ element }) => {
   const navigate = useNavigate();
@@ -48,6 +49,14 @@ const router = createBrowserRouter([
   {
     path: "/admin/tracking-user",
     element: <ProtectedRoute element={<TrackingPage />} />,
+  },
+  {
+    path: "/admin/*",
+    element: <ProtectedRoute element={<TrackingPage />} />,
+  },
+  {
+    path: "/admin/wish-management/",
+    element: <ProtectedRoute element={<WishPage />} />,
   },
 ]);
 

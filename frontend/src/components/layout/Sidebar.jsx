@@ -77,15 +77,15 @@ const SideBar = ({ onToggle }) => {
                             <ListItemIcon>
                                 <DashboardIcon sx={{ color: location.pathname === '/admin/tracking-user/' ? '#f27024' : '#9ca3af' }} />
                             </ListItemIcon>
-                            <ListItemText primary="Dashboard" />
+                            <ListItemText primary="Tracking" />
                         </ListItem>
                         <ListItem
                             button
                             component={Link}
-                            to="/admin/users-management/"
+                            to="/admin/wish-management/"
                             sx={{
-                                backgroundColor: location.pathname === '/admin/users-management/' ? '#374151' : 'transparent',
-                                color: location.pathname === '/admin/users-management/' ? '#f27024' : '#ffffff',
+                                backgroundColor: location.pathname === '/admin/wish-management/' ? '#374151' : 'transparent',
+                                color: location.pathname === '/admin/wish-management/' ? '#f27024' : '#ffffff',
                                 '&:hover': {
                                     backgroundColor: '#9ca3af',
                                     color: '#f27024',
@@ -95,7 +95,7 @@ const SideBar = ({ onToggle }) => {
                             <ListItemIcon>
                                 <PeopleIcon sx={{ color: location.pathname === '/admin/users-management/' ? '#f27024' : '#9ca3af' }} />
                             </ListItemIcon>
-                            <ListItemText primary="Users" />
+                            <ListItemText primary="Wish" />
                         </ListItem>
                     </List>
                     <Box mt="auto">

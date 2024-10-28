@@ -34,7 +34,7 @@ const LoginPage = () => {
         setError('');
         try {
             await login(username, password).then(() => {
-                navigate('/admin/tracking-user')
+                navigate('/admin/tracking-user/')
             });
         } catch (error) {
             setError(error.response?.data?.message || 'Login failed. Please try again.');

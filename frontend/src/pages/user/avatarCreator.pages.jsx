@@ -491,8 +491,8 @@ const AvatarFrame = ({ currentPage }) => {
     return (
         <>
             <Header />
-            <div className='relative h-screen'>
-                <div className={`absolute bottom-0 left-0 right-0 top-[35%] sm:top-[40%] md:top-[35%] bg-white z-50 h-[70%] rounded-t-3xl`}
+            <div className='relative h-screen bg-bgBase bg-cover bg-center'>
+                <div className={`absolute bottom-0 left-0 right-0 top-[35%] sm:top-[40%] md:top-[35%]  z-50 h-[70%] rounded-t-3xl`}
                     ref={boxRef}>
                     <div className={`${isFinish ? '-top-[200px]' : '-top-[240px]'} absolute left-1/2 -translate-x-1/2`}>
 
@@ -513,49 +513,12 @@ const AvatarFrame = ({ currentPage }) => {
                                 <button onClick={exportImage} className="px-8 py-3 bg-orange-500 hover:bg-orange-600 text-white md:text-lg rounded-full w-60 font-montserrat-extrabold font-extrabold">
                                     XUẤT ẢNH
                                 </button>
-                                {/*{*/}
-                                {/*    isMobile() ? (*/}
-                                {/*        <div className='flex flex-col items-center justify-center p-4 w-96'>*/}
-                                {/*            <div className='text-center'>*/}
-                                {/*                <span className='text-base text-[#7a7a7a] italic'>Để tải ảnh,</span>*/}
-                                {/*                <span className='font-extrabold italic text-base text-[#ff5815]'> nhấn giữ ảnh và chọn</span>*/}
-                                {/*            </div>*/}
-                                {/*            <div className='text-center mt-2 w-90'>*/}
-                                {/*                <span className='text-base text-[#7a7a7a] italic font-extrabold'>"Thêm vào ảnh"</span>*/}
-                                {/*                <span className='text-base text-[#7a7a7a] italic'> hoặc </span>*/}
-                                {/*                <span className='text-base text-[#7a7a7a] italic font-extrabold'>"Tải hình ảnh xuống"</span>*/}
-                                {/*            </div>*/}
-                                {/*        </div>*/}
-                                {/*    ) : (*/}
-                                {/*        <>*/}
-                                {/*            <button onClick={exportImage} className="px-8 py-3 bg-orange-500 hover:bg-orange-600 text-white md:text-lg rounded-full w-60 font-montserrat font-extrabold">*/}
-                                {/*                XUẤT ẢNH*/}
-                                {/*            </button>*/}
-                                {/*        </>*/}
-                                {/*    )*/}
-                                {/*}*/}
                                 <button onClick={toggleIsFinishing}
                                     className="px-8 py-3 mt-3 bg-white-500 border-orange-600 border md:text-lg text-orange-600 rounded-full w-56 hover:bg-orange-600 hover:text-white font-montserrat-extrabold">
                                     TẠO ẢNH KHÁC
                                 </button>
                             </div>
 
-                            <div ref={unFinishSection1Ref} className={`relative bg-white shadow-lg rounded-full border border-gray-300 p-2 ${transitionClasses} ${isFinish ? 'opacity-0' : 'opacity-100'}`}>
-                                <button
-                                    onClick={() => handleTextColorChange('white')}
-                                    className={`px-4 py-2 mx-2 ${textColor === 'white' ? 'bg-gray-300 font-semibold border border-gray-300' : 'bg-gray-100 border border-transparent'} rounded-full shadow transition duration-300 md:text-lg font-montserrat-semibold`}
-                                    style={{ boxShadow: '0px 3px 6px rgba(0, 0, 0, 0.1)' }}
-                                >
-                                    Trắng
-                                </button>
-                                <button
-                                    onClick={() => handleTextColorChange('#111111')}
-                                    className={`px-4 py-2 mx-2 ${textColor === '#111111' ? 'bg-gray-300 font-semibold border border-gray-300' : 'bg-gray-100 border border-transparent'} rounded-full shadow transition duration-300 md:text-lg font-montserrat-semibold`}
-                                    style={{ boxShadow: '0px 3px 6px rgba(0, 0, 0, 0.1)' }}
-                                >
-                                    Đen
-                                </button>
-                            </div>
 
 
                             <div ref={unFinishSection2Ref} className={`text-left relative mt-4 ${transitionClasses} ${isFinish ? 'opacity-0' : 'opacity-100'}`}>

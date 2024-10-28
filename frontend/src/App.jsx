@@ -2,7 +2,7 @@ import './index.css';
 import { useState } from "react";
 import IntroductionPage from './pages/user/introduction.page.jsx';
 import AvatarCreatorPage from './pages/user/avatarCreator.pages.jsx';
-import HelloPage from './pages/user/hello.page.jsx';
+import InformationPage from './pages/user/information.page.jsx';
 
 function App() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -15,10 +15,10 @@ function App() {
   return (
     <div className="relative w-full h-full">
       <div className={getClassName(1)}>
-        <HelloPage setNextPage={() => setCurrentPage(2)} />
+        <IntroductionPage setNextPage={() => setCurrentPage(2)} />
       </div>
       <div className={getClassName(2)}>
-        <IntroductionPage setNextPage={() => setCurrentPage(3)} />
+        <InformationPage setNextPage={() => setCurrentPage(3)} />
       </div>
       <div className={getClassName(3)}>
         <AvatarCreatorPage />

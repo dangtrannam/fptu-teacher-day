@@ -8,6 +8,7 @@ import LoginPage from "./pages/admin/login.page.jsx";
 import TrackingPage from "./pages/admin/tracking.page.jsx";
 import { useEffect } from "react";
 import WishPage from "./pages/admin/wish.page.jsx";
+import CreateAvataExample from "./pages/user/createAvata.example.jsx";
 
 const ProtectedRoute = ({ element }) => {
   const navigate = useNavigate();
@@ -37,7 +38,8 @@ const router = createBrowserRouter([
       },
       {
         path: "/fptu-teacher-day/avatar-creator",
-        element: <AvatarFrame />,
+        // element: <AvatarFrame />,
+        element: <CreateAvataExample />
       },
 
     ],

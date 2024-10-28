@@ -1,10 +1,25 @@
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter, useNavigate } from "react-router-dom";
 import { Layout } from "./Layout.jsx";
-import IntroductionPage from "./pages/introduction.page.jsx";
-import AvatarFrame from "./pages/avatarCreator.pages.jsx";
+import IntroductionPage from "./pages/user/introduction.page.jsx";
+import AvatarFrame from "./pages/user/avatarCreator.pages.jsx";
+import LoginPage from "./pages/admin/login.page.jsx";
+import TrackingPage from "./pages/admin/tracking.page.jsx";
+import { useEffect } from "react";
 
+const ProtectedRoute = ({ element }) => {
+  const navigate = useNavigate();
+  const token = localStorage.getItem("fptuTeacherDayToken"); // Assuming token is stored in localStorage
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/fptu-teacher-day/login");
+    }
+  }, [token, navigate]);
+
+  return token ? element : null;
+};
 
 const router = createBrowserRouter([
   {
@@ -15,10 +30,6 @@ const router = createBrowserRouter([
         path: "/fptu-teacher-day/",
         element: <App />,
       },
-      // {
-      //   path: "/avatar-fptu18/avatar-creator",
-      //   element: <AvatarFrame />,
-      // },
       {
         path: "/fptu-teacher-day/introduction",
         element: <IntroductionPage />,
@@ -27,10 +38,14 @@ const router = createBrowserRouter([
         path: "/fptu-teacher-day/avatar-creator",
         element: <AvatarFrame />,
       },
-      // {
-      //   path: "/fptu-teacher-day/counter-time",
-      //   element: <CounterTime />,
-      // }
+      {
+        path: "/fptu-teacher-day/login",
+        element: <LoginPage />,
+      },
+      {
+        path: "/fptu-teacher-day/admin/tracking-user",
+        element: <ProtectedRoute element={<TrackingPage />} />,
+      },
     ],
   },
 ]);

@@ -10,27 +10,20 @@ function App() {
 
   // Function to return class names for transition
   const getClassName = (page) => {
-    return `absolute inset-0  h-full transition-opacity duration-700 ease-in-out ${currentPage === page ? 'opacity-100 z-10' : 'opacity-0 z-0'}`;
+    return `transition-opacity duration-700 ease-in-out absolute inset-0 ${currentPage === page ? 'opacity-100 z-10' : 'opacity-0 -z-10'}`;
   }
 
   return (
-    <div className="relative w-screen h-full">
-
-      <div>
-        <Background />
-      </div>
-
-      {/* <div className={getClassName(1)}>
+    <div className="relative">
+      <div className={getClassName(1)}>
         <IntroductionPage setNextPage={() => setCurrentPage(2)} />
       </div>
       <div className={getClassName(2)}>
         <InformationPage setNextPage={() => setCurrentPage(3)} />
       </div>
       <div className={getClassName(3)}>
-        <AvatarCreatorPage />
-        <CreateAvatarExample />
+        {/* <CreateAvatarExample /> */}
       </div> 
-      */}
     </div>
   );
 }

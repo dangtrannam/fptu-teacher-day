@@ -5,7 +5,7 @@ import Button from '../../components/common/button.component';
 import InputField from '../../components/common/inputField.component';
 
 const InformationPage = ({ setNextPage }) => (
-    <div className="h-screen flex flex-col bg-bgBase_Mobile md:bg-bgBase lg:bg-bgBase w-full bg-cover bg-center p-4">
+    <div className="h-screen flex flex-col bg-bgBase_Mobile md:bg-bgBase lg:bg-bgBase w-full bg-cover bg-center">
         <Header />
         <div className="flex justify-center mt-6 mb-20 mx-auto flex-col items-center">
             <SVGLogo />

@@ -2,14 +2,15 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
     return (
-        <div className="bg-white bg-opacity-30 w-full md:min-h-[14vh]">
-            <div className="flex justify-between items-center py-4 px-6 gap-4 w-full max-w-screen-xl mx-auto">
+        <div className="bg-white bg-opacity-10 w-screen-xl md:min-h-[14vh]">
+            <div className="flex justify-between items-center py-4 px-6 gap-4 w-auto max-w-screen-xl mx-auto">
                 <Link
                     to="#"
                     target="_blank"
                 >
                     <img
-                        src="https://via.placeholder.com/240x76"
+                        // src="https://via.placeholder.com/240x76"
+                        src="/assets/logo/logo-coc-doc.png"
                         alt="fptu-logo"
                     />
                 </Link>
@@ -18,8 +19,10 @@ const Header = () => {
                     target="_blank"
                 >
                     <img
-                        src="https://via.placeholder.com/240x76"
+                        // src="https://via.placeholder.com/240x76"
+                        src="/assets/logo/logo-thankyou.png"
                         alt="Logo FTPU"
+                        className="w-full h-full"
                     />
                 </Link>
             </div>
@@ -27,4 +30,4 @@ const Header = () => {
     )
 }
 
-export default Header
+export default Header;

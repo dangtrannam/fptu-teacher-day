@@ -14,7 +14,8 @@ export default {
             },
             backgroundImage: {
                 'bgBase': "url('./src/assets/images/backGroundImg_2x.png')",
-                // Add more custom background images here
+                'bgBase_Mobile': "url('./src/assets/images/bg_mobile_2x.png')",
+                'bgBase_Tablet': "url('./src/assets/images/bg_tablet_2x.png')",
             },
         },
     },

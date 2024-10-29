@@ -18,6 +18,18 @@ export default {
                 'bgBase_Tablet': "url('./src/assets/images/bg_tablet_2x.png')",
                 'wish_card': "url('./src/assets/images/wish_card.png')",
             },
+            backgroundColor: {
+                'black-50': 'rgba(0, 0, 0, 0.5)',
+                'orange-opacity': 'rgba(242, 113, 37, 0.4)',
+                'brand': 'rgba(242, 113, 37, 1)'
+            },
+            textColor: {
+                'brand': 'rgba(242, 113, 37, 1)',
+            },
+            borderColor: {
+                'brand': 'rgba(242, 113, 37, 1)',
+                'orange-opacity': 'rgba(242, 113, 37, 0.4)',
+            },
         },
     },
     plugins: [],

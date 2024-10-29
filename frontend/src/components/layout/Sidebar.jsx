@@ -63,7 +63,7 @@ const SideBar = ({ onToggle }) => {
                     </Box>
                     <List>
                         <ListItem
-                            button
+                            button={true}
                             component={Link}
                             to={ADMIN_WISHES_PATH}
                             sx={{
@@ -81,7 +81,7 @@ const SideBar = ({ onToggle }) => {
                             <ListItemText primary="Lời chúc" />
                         </ListItem>
                         <ListItem
-                            button
+                            button={true}
                             component={Link}
                             to={ADMIN_TRACKINGS_PATH}
                             sx={{
@@ -103,7 +103,7 @@ const SideBar = ({ onToggle }) => {
                         <Button
                             onClick={handleLogout}
                             startIcon={<LogoutIcon />}
-                            fullWidth
+                            fullWidth={true}
                             sx={{
                                 color: '#9ca3af',
                                 justifyContent: 'flex-start',

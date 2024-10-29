@@ -22,7 +22,7 @@ function App() {
       </div>
       <div className={getClassName(3)}>
         {/* <AvatarCreatorPage /> */}
-        <CreateAvatarExample />
+        <CreateAvatarExample setNextPage={() => setCurrentPage(2)} />
       </div>
     </div>
   );

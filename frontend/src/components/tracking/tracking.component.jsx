@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { getAllTracking } from '../../service/tracking.service';
 import dayjs from 'dayjs';
 
@@ -48,7 +48,7 @@ const TrackingComponent = () => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 p-4 justify-items-center">
             <div className="bg-white shadow-md p-6 rounded-lg text-center w-full">
-                <h2 className="text-xl font-bold mb-2">Total Truy Cập</h2>
+                <h2 className="text-xl font-bold mb-2">Tổng Truy Cập</h2>
                 <p className="text-3xl font-semibold text-blue-500">{totalAccessCount}</p>
             </div>
 
@@ -58,7 +58,7 @@ const TrackingComponent = () => {
             </div>
 
             <div className="bg-white shadow-md p-6 rounded-lg text-center w-full">
-                <h2 className="text-xl font-bold mb-2">So Sánh Với Hôm Qua</h2>
+                <h2 className="text-xl font-bold mb-2">Tăng Trưởng So Với Hôm Qua</h2>
                 <p className={`text-3xl font-semibold ${comparisonWithYesterday >= 0 ? 'text-green-500' : 'text-red-500'}`}>
                     {comparisonWithYesterday.toFixed(2)}%
                 </p>

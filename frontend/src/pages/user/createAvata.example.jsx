@@ -13,8 +13,8 @@ const CreateAvatarExample = ({ onAddWishOther, onShare }) => (
         <Header className="z-20" />
 
         {/* ContentBox */}
-        <ContentBox description="Lorem ipsum dolor sit amet consectetur. Volutpat enim felis aenean nec fringilla venenatis.">
-            <span className='max-w-80 text-center mx-auto text-xs font-normal text-black'>
+        <ContentBox>
+            <span className='max-w-60 text-center mx-auto text-xs font-normal text-black font-inter'>
                 Lorem ipsum dolor sit amet consectetur. Vel mi id est tincidunt ac auctor sagittis metus. At risus interdum venenatis fringilla feugiat diam.
             </span>
         </ContentBox>

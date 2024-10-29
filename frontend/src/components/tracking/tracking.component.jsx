@@ -16,7 +16,7 @@ const TrackingComponent = () => {
                 const today = dayjs();
                 const yesterday = today.subtract(1, 'day');
 
-                // filter access today
+                // filter access todayl
                 const todayData = data.filter(item =>
                     dayjs(item.timestamp).isSame(today, 'day')
                 );

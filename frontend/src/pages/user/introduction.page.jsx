@@ -12,7 +12,7 @@ const IntroductionPage = ({ setNextPage }) => (
                 <p className="text-center text-gray-700 text-base md:text-lg">
                     Lorem ipsum dolor sit amet consectetur. Lobortis sit mauris vestibulum justo interdum.
                 </p>
-                <Button label="Bắt đầu" size="large" onClick={setNextPage} />
+                <Button label="Gửi lời chúc" size="large" onClick={setNextPage} />
             </div>
         </div>
     </div>

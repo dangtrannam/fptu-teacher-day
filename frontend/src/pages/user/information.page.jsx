@@ -15,7 +15,11 @@ const InformationPage = ({ setNextPage }) => (
                     <InputField placeholder="Trường" />
                     <InputField placeholder="Lời cảm ơn" />
                 </form>
-                <Button label="Gửi lời chúc" size="large" onClick={setNextPage} />
+                <Button
+                    variant='primary'
+                    label="Gửi lời chúc"
+                    size="large"
+                    onClick={setNextPage} />
             </div>
         </div>
     </div>

@@ -13,7 +13,7 @@ export default {
                 '2000': '2000ms',
             },
             backgroundImage: {
-                'bgBase': "url('./src/assets/images/backGroundImg_1.5x.png')",
+                'bgBase': "url('./src/assets/images/backGroundImg_2x.png')",
                 // Add more custom background images here
             },
         },

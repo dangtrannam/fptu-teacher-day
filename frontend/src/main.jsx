@@ -8,7 +8,7 @@ import TrackingPage from "./pages/admin/tracking.page.jsx";
 import { useEffect } from "react";
 import WishPage from "./pages/admin/wish.page.jsx";
 import { ADMIN_TRACKINGS_PATH, ADMIN_WISHES_PATH } from "./constants/routerPaths";
-import WishCardResult from "./pages/user/WishCardResult.jsx";
+import WishCardResult from "./pages/user/wish-card-result.page..jsx";
 
 const ProtectedRoute = ({ element }) => {
   const navigate = useNavigate();

@@ -2,7 +2,7 @@ import './index.css';
 import { useState } from "react";
 import IntroductionPage from './pages/user/introduction.page.jsx';
 import InformationPage from './pages/user/information.page.jsx';
-import WishCardResult from './pages/user/WishCardResult.jsx';
+import WishCardResult from './pages/user/wish-card-result.page..jsx';
 
 function App() {
   const [currentPage, setCurrentPage] = useState(1);

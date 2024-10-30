@@ -7,15 +7,15 @@ import LoginPage from "./pages/admin/login.page.jsx";
 import TrackingPage from "./pages/admin/tracking.page.jsx";
 import { useEffect } from "react";
 import WishPage from "./pages/admin/wish.page.jsx";
-import { ADMIN_TRACKINGS_PATH, ADMIN_WISHES_PATH } from "./constants/routerPaths";
-import WishCardResult from "./pages/user/wish-card-result.page..jsx";
+import WishCardResultPage from "./pages/user/wish-card-result.page.jsx";
+import { ADMIN_TRACKINGS_PATH, ADMIN_WISHES_PATH } from "./constants/routerPaths.js";
 
 const ProtectedRoute = ({ element }) => {
   const navigate = useNavigate();
   const token = localStorage.getItem("fptuTeacherDayToken"); // Assuming token is stored in localStorage
 
   useEffect(() => {
-    if (!token || token === undefined || token === null) {
+    if (!token) {
       navigate("/login");
     }
   }, [token, navigate]);
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/wish-card-result",
-        element: <WishCardResult />,
+        element: <WishCardResultPage />,
       },
 
     ],

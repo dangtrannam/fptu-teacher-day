@@ -6,8 +6,9 @@ import ContentBox from '../../components/common/contentBox.component';
 import Background from '../../components/common/background.component';
 import { trackingUserShare } from '../../service/tracking.service';
 import { postWishData } from '../../service/wish.service';
+import { handleRemoveLocalStorage } from '../../service/localStorageService';
 
-const WishCardResult = ({ setNextPage }) => {
+const WishCardResultPage = ({ setNextPage }) => {
     const [wishData, setWishData] = useState({});
     const contentBoxRef = useRef(null);
 
@@ -32,14 +33,14 @@ const WishCardResult = ({ setNextPage }) => {
             //Download image
             const link = document.createElement("a");
             link.href = dataURL;
-            link.download = "wish-card.png";
+            link.download = "fpt_20-11.png";
             link.click();
 
             // conver dataURL to Blob
             const blob = await fetch(dataURL).then(res => res.blob());
 
             // create new File object
-            const file = new File([blob], 'wish-card.png', { type: 'image/png' });
+            const file = new File([blob], 'fpt_20-11.png', { type: 'image/png' });
             return file;
         } catch (error) {
             console.error('Error exporting image:', error);
@@ -50,7 +51,6 @@ const WishCardResult = ({ setNextPage }) => {
 
     const handleShare = async () => {
         trackingUserShare(); // follow user share action
-
         const exportedImageFile = await exportImage(); // export image from contentBoxRef
 
         // create new wishData object
@@ -63,16 +63,15 @@ const WishCardResult = ({ setNextPage }) => {
 
         // post wish data to server
         try {
-            const response = await postWishData(newWishData);
-            console.log('Wish data posted successfully:', response);
+            await postWishData(newWishData)
+            handleRemoveLocalStorage(setNextPage);
         } catch (error) {
             console.error('Failed to post wish data:', error);
         }
     };
 
     const handleAddOtherWish = () => {
-        localStorage.removeItem('inputData');
-        setNextPage();
+        handleRemoveLocalStorage(setNextPage);
     };
 
     return (
@@ -96,7 +95,12 @@ const WishCardResult = ({ setNextPage }) => {
 
                 <div className="flex flex-col sm:flex-row justify-around items-center w-full max-w-[30rem] sm:max-w-[49rem] mx-auto mt-6 z-20 space-y-4 sm:space-y-0">
                     <div className="flex-1 px-2 sm:px-4 md:px-8 xl:px-12 self-stretch">
-                        <Button variant="opacity" label="Gửi lời chúc khác" size="medium" onClick={handleAddOtherWish} />
+                        <Button
+                            variant="opacity"
+                            label="Gửi lời chúc khác"
+                            size="medium"
+                            onClick={handleAddOtherWish}
+                        />
                     </div>
                     <div className="flex-1 px-2 sm:px-4 md:px-8 xl:px-12 self-stretch">
                         <Button variant="primary" label="Chia sẻ" size="medium" onClick={handleShare} />
@@ -107,4 +111,4 @@ const WishCardResult = ({ setNextPage }) => {
     );
 };
 
-export default WishCardResult;
+export default WishCardResultPage;

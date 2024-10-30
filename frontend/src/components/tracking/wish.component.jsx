@@ -56,7 +56,11 @@ const WishComponent = () => {
     const fetchImageData = async (imageUrl) => {
         try {
             const data = await getImageData(imageUrl);
-            return data; // Return fetched image data
+            if (data) {
+                return data;
+            } else {
+                console.error('Failed to fetch image data:', data);
+            }
         } catch (error) {
             return null; // Return null if there is an error
         }

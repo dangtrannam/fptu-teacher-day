@@ -7,7 +7,7 @@ const getUserIP = async () => {
         const response = await axios.get(GET_IP_URL);
         return response.data.ip;
     } catch (error) {
-        console.error('Error retrieving IP:', error);
+        logError('Error retrieving IP:', error);
         throw new Error('Unable to retrieve IP address');
     }
 };

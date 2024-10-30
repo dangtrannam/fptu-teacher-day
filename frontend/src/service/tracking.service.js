@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { GET_IP_URL, TRACKING_ACCESS_ENDPOINT, TRACKING_SHARE_ENDPOINT } from './apiConfig';
+import { getAuthHeaders } from '../constants/getAuthHeaders';
+import { logError } from '../constants/logError';
 
 // Helper to retrieve IP address
 const getUserIP = async () => {
@@ -12,18 +14,8 @@ const getUserIP = async () => {
     }
 };
 
-// Helper to retrieve headers with optional token
-const getAuthHeaders = () => {
-    const token = getLocalStorageToken();
-    return token
-        ? { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
-        : { 'Content-Type': 'application/json' };
-};
-
 // Helper to handle error logging consistently
-const logError = (action, error) => {
-    console.error(`Error during ${action}:`, error);
-};
+
 
 // Track user access
 export const trackingUserAccess = async () => {

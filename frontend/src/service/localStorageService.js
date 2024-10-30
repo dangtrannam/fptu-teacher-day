@@ -18,7 +18,9 @@ export const setLocalStorageToken = (token) => {
 };
 
 export const getLocalStorageToken = () => {
-    return localStorage.getItem('fptuTeacherDayToken');
+    const token = localStorage.getItem('fptuTeacherDayToken');
+    console.log('Token from localStorage:', token); // Log the token for debugging
+    return token;
 };
 export const removeLocalStorageToken = () => {
     localStorage.removeItem('fptuTeacherDayToken');

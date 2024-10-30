@@ -12,7 +12,11 @@ export async function login(username, password) {
             }
         });
         const data = response.data;
-        localStorage.setItem('fptuTeacherDayToken', data.access_token);
+        if (data.access_token) {
+            localStorage.setItem('fptuTeacherDayToken', data.access_token);
+        } else {
+            throw new Error('Invalid token');
+        }
         return data;
     } catch (error) {
         throw new Error(`Login failed: ${error.response?.data?.message || error.message}`);

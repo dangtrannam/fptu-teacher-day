@@ -15,7 +15,7 @@ const ProtectedRoute = ({ element }) => {
   const token = localStorage.getItem("fptuTeacherDayToken"); // Assuming token is stored in localStorage
 
   useEffect(() => {
-    if (!token) {
+    if (!token || token === undefined || token === null) {
       navigate("/login");
     }
   }, [token, navigate]);

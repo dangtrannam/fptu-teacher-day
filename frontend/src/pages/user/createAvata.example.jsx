@@ -3,6 +3,7 @@ import Button from '../../components/common/button.component';
 import ContentBox from '../../components/common/contentBox.component';
 import Background from '../../components/common/background.component';
 import { useEffect, useState } from 'react';
+import { trackingUserShare } from '../../service/tracking.service';
 
 const CreateAvatarExample = ({ setNextPage }) => {
     const [wishData, setWishData] = useState();
@@ -12,11 +13,10 @@ const CreateAvatarExample = ({ setNextPage }) => {
         if (data) {
             setWishData(JSON.parse(data));
         }
-        console.log('áđasadas')
     }, [data]);
 
     const handleShare = () => {
-        console.log('Share');
+        trackingUserShare();
     };
 
     const handleAddOtherWish = () => {

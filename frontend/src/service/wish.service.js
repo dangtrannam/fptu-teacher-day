@@ -17,6 +17,21 @@ export const getUploadData = async () => {
   }
 };
 
+export const postWishData = async (wishData) => {
+  try {
+    const response = await axios.post(WISH_ENDPOINT, wishData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    return response.data;
+  }
+  catch (error) {
+    console.error('Error posting wish data:', error);
+    throw error;
+  }
+}
+
 export const getImageData = async (imageUrl) => {
   try {
     const response = await axios.get(`${IMAGE_ENDPOINT}/${imageUrl}`);

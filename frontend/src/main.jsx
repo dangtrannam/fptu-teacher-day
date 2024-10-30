@@ -9,10 +9,11 @@ import { useEffect } from "react";
 import WishPage from "./pages/admin/wish.page.jsx";
 import WishCardResultPage from "./pages/user/wish-card-result.page.jsx";
 import { ADMIN_TRACKINGS_PATH, ADMIN_WISHES_PATH } from "./constants/routerPaths.js";
+import { getLocalStorageToken } from "./service/localStorageService.js";
 
 const ProtectedRoute = ({ element }) => {
   const navigate = useNavigate();
-  const token = localStorage.getItem("fptuTeacherDayToken"); // Assuming token is stored in localStorage
+  const token = getLocalStorageToken();
 
   useEffect(() => {
     if (!token) {

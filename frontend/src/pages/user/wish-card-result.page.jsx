@@ -6,13 +6,13 @@ import ContentBox from '../../components/common/contentBox.component';
 import Background from '../../components/common/background.component';
 import { trackingUserShare } from '../../service/tracking.service';
 import { postWishData } from '../../service/wish.service';
-import { handleRemoveLocalStorage } from '../../service/localStorageService';
+import { getLocalStorageData, handleRemoveLocalStorage } from '../../service/localStorageService';
 
 const WishCardResultPage = ({ setNextPage }) => {
     const [wishData, setWishData] = useState({});
     const contentBoxRef = useRef(null);
+    const data = getLocalStorageData();
 
-    const data = localStorage.getItem('inputData');
     useEffect(() => {
         if (data) {
             setWishData(JSON.parse(data));

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { LOGIN_ENDPOINT } from './apiConfig';
+import { removeLocalStorageToken, setLocalStorageToken } from './localStorageService';
 
 export async function login(username, password) {
     try {
@@ -13,7 +14,7 @@ export async function login(username, password) {
         });
         const data = response.data;
         if (data.access_token) {
-            localStorage.setItem('fptuTeacherDayToken', data.access_token);
+            setLocalStorageToken(data.access_token);
         } else {
             throw new Error('Invalid token');
         }
@@ -24,5 +25,5 @@ export async function login(username, password) {
 }
 
 export function logout() {
-    localStorage.removeItem('fptuTeacherDayToken');
+    removeLocalStorageToken();
 }

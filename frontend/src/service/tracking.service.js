@@ -14,7 +14,7 @@ const getUserIP = async () => {
 
 // Helper to retrieve headers with optional token
 const getAuthHeaders = () => {
-    const token = localStorage.getItem('fptuTeacherDayToken');
+    const token = getLocalStorageToken();
     return token
         ? { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
         : { 'Content-Type': 'application/json' };

@@ -3,7 +3,7 @@ import { WISH_ENDPOINT, IMAGE_ENDPOINT } from './apiConfig';
 
 export const getUploadData = async () => {
   try {
-    const token = localStorage.getItem('fptuTeacherDayToken');
+    const token = getLocalStorageToken();
     const response = await axios.get(WISH_ENDPOINT, {
       headers: {
         Authorization: `Bearer ${token}`,

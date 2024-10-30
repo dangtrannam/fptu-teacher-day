@@ -3,12 +3,12 @@ import Button from '../../components/common/button.component';
 import Background from '../../components/common/background.component';
 import SVGLogo from '../../components/common/svg.component.jsx';
 import { trackingUserAccess } from '../../service/tracking.service.js';
+import { handleRemoveLocalStorage } from '../../service/localStorageService.js';
 
 const IntroductionPage = ({ setNextPage }) => {
 
     const handleStart = () => {
-        localStorage.removeItem('inputData');
-        setNextPage();
+        handleRemoveLocalStorage(setNextPage);
         trackingUserAccess();
     };
 

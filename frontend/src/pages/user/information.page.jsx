@@ -4,6 +4,7 @@ import SVGLogo from '../../components/common/svg.component';
 import Button from '../../components/common/button.component';
 import InputField from '../../components/common/inputField.component';
 import Background from '../../components/common/background.component';
+import { setLocalStorageData } from '../../service/localStorageService';
 
 const InformationPage = ({ setNextPage }) => {
     const [name, setName] = useState('');
@@ -14,7 +15,8 @@ const InformationPage = ({ setNextPage }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const newData = { name, schoolName, userInput };
-        localStorage.setItem('inputData', JSON.stringify(newData));
+        // Save data to local storage
+        setLocalStorageData(newData);
 
         setNextPage(); // Move to next page after saving data
         setName('');

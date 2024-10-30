@@ -2,19 +2,27 @@ import Header from '../../components/layout/Header';
 import Button from '../../components/common/button.component';
 import ContentBox from '../../components/common/contentBox.component';
 import Background from '../../components/common/background.component';
+import { useEffect, useState } from 'react';
 
 const CreateAvatarExample = ({ setNextPage }) => {
+    const [wishData, setWishData] = useState();
+
+    const data = localStorage.getItem('inputData');
+    useEffect(() => {
+        if (data) {
+            setWishData(JSON.parse(data));
+        }
+        console.log('áđasadas')
+    }, [data]);
+
     const handleShare = () => {
         console.log('Share');
-    }
+    };
 
     const handleAddOtherWish = () => {
-        console.log('Add other wish');
-        // reset local storage
-
-        // Go to previous page
-        setNextPage();
-    }
+        localStorage.removeItem('inputData');
+        setNextPage(); // Navigate to the previous page or desired page
+    };
 
     return (
         <div className="relative w-screen overflow-hidden">
@@ -25,7 +33,7 @@ const CreateAvatarExample = ({ setNextPage }) => {
             <div className="absolute left-1/2 w-full -translate-x-1/2 top-[12vh] flex justify-center mt-6 mb-20 mx-auto flex-col items-center px-2 md:px-4">
                 <ContentBox description="Lorem ipsum dolor sit amet consectetur. Volutpat enim felis aenean nec fringilla venenatis.">
                     <span className="max-w-[45%] text-center mx-auto text-base font-normal text-black font-inter">
-                        Lorem ipsum dolor sit amet consectetur. Vel mi id est tincidunt ac auctor sagittis metus. At risus interdum venenatis fringilla feugiat diam.
+                        {wishData?.userInput || 'Bạn chưa nhập lời chúc'}
                     </span>
                 </ContentBox>
 
@@ -40,7 +48,7 @@ const CreateAvatarExample = ({ setNextPage }) => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default CreateAvatarExample;

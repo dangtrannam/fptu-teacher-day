@@ -7,15 +7,20 @@ import Background from '../../components/common/background.component';
 
 const InformationPage = ({ setNextPage }) => {
     const [name, setName] = useState('');
-    const [school, setSchool] = useState('');
-    const [message, setMessage] = useState('');
+    const [schoolName, setSchoolName] = useState('');
+    const [userInput, setUserInput] = useState('');
 
     // handle submit 
     const handleSubmit = (e) => {
-        localStorage.setItem('inputData', JSON.stringify({ name, school, message }));
         e.preventDefault();
-        setNextPage();
-    }
+        const newData = { name, schoolName, userInput };
+        localStorage.setItem('inputData', JSON.stringify(newData));
+
+        setNextPage(); // Move to next page after saving data
+        setName('');
+        setSchoolName('');
+        setUserInput('');
+    };
 
     return (
         <div className="relative w-screen overflow-hidden">
@@ -33,14 +38,14 @@ const InformationPage = ({ setNextPage }) => {
                         />
                         <InputField
                             placeholder="Trường"
-                            value={school}
-                            onChange={(e) => setSchool(e.target.value)}
+                            value={schoolName}
+                            onChange={(e) => setSchoolName(e.target.value)}
                             className="w-full max-w-xs md:max-w-sm lg:max-w-md"
                         />
                         <InputField
                             placeholder="Lời cảm ơn"
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
+                            value={userInput}
+                            onChange={(e) => setUserInput(e.target.value)}
                             className="w-full max-w-xs md:max-w-sm lg:max-w-md"
                         />
                     </form>

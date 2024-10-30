@@ -56,9 +56,9 @@ const WishCardResult = ({ setNextPage }) => {
         // create new wishData object
         const newWishData = {
             image: exportedImageFile, // user input image
-            name: wishData.name || 'Tên không xác định', // get name from wishData
-            schoolName: wishData.schoolName || 'Trường không xác định', // get schoolName from wishData
-            userInput: wishData.userInput || 'Bạn chưa nhập lời chúc', // get userInput from wishData
+            name: wishData.name || '', // get name from wishData
+            schoolName: wishData.schoolName || '', // get schoolName from wishData
+            userInput: wishData.userInput || '', // get userInput from wishData
         };
 
         // post wish data to server

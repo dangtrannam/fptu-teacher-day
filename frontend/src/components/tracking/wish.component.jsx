@@ -43,7 +43,6 @@ const WishComponent = () => {
     const fetchData = async () => {
         try {
             const uploadData = await getUploadData();
-            console.log('Fetched upload data:', uploadData); // Log the API response
             if (Array.isArray(uploadData)) {
                 setData(uploadData);
             } else {
@@ -57,17 +56,12 @@ const WishComponent = () => {
     const fetchImageData = async (imageUrl) => {
         try {
             const data = await getImageData(imageUrl);
-            if (data) {
-                return data;
-            } else {
-                console.error('Fetched data is not an array:', data);
-                return null;
-            }
+            return data; // Return fetched image data
         } catch (error) {
-            console.error('Failed to fetch data:', error);
-            return null;
+            return null; // Return null if there is an error
         }
     };
+
 
     useEffect(() => {
         fetchData();
@@ -132,7 +126,7 @@ const WishComponent = () => {
                     alignItems: 'center',
                     height: '100vh',
                     position: 'relative' // To position the close button correctly
-                    }}>
+                }}>
                     <img
                         src={selectedImage}
                         alt="Preview"

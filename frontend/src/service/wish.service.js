@@ -1,14 +1,11 @@
 import axios from 'axios';
 import { WISH_ENDPOINT, IMAGE_ENDPOINT } from './apiConfig';
+import { getAuthHeaders } from '../constants/getAuthHeaders';
 
 export const getUploadData = async () => {
   try {
-    const token = getLocalStorageToken();
     const response = await axios.get(WISH_ENDPOINT, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        contentType: 'application/json'
-      }
+      headers: getAuthHeaders()
     });
     return response.data;
   } catch (error) {

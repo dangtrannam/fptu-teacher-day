@@ -3,7 +3,7 @@ import Button from '../../components/common/button.component';
 import ContentBox from '../../components/common/contentBox.component';
 import Background from '../../components/common/background.component';
 
-const CreateAvatarExample = ({ setNextPage })) => {
+const CreateAvatarExample = ({ setNextPage }) => {
   const handleShare = () => {
         console.log('Share');
     }
@@ -39,6 +39,7 @@ const CreateAvatarExample = ({ setNextPage })) => {
                 </div>
             </div>
         </div>
+    </div>
     )
 }
 

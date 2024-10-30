@@ -151,7 +151,7 @@ const LoginPage = () => {
 
                             <Button
                                 variant="contained"
-                                fullWidth
+                                fullWidth={true}
                                 sx={{ py: '1.5vh', mt: 2, textTransform: 'none', boxShadow: 4, background: '#f27024' }}
                                 onClick={handleLogin}
                             >

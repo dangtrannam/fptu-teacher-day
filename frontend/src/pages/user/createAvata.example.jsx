@@ -1,10 +1,22 @@
-import React from 'react';
 import Header from '../../components/layout/Header';
 import Button from '../../components/common/button.component';
 import ContentBox from '../../components/common/contentBox.component';
 import Background from '../../components/common/background.component';
 
-const CreateAvatarExample = ({ onAddWishOther, onShare }) => (
+const CreateAvatarExample = ({ setNextPage })) => {
+  const handleShare = () => {
+        console.log('Share');
+    }
+
+    const handleAddOtherWish = () => {
+        console.log('Add other wish');
+        // reset local storage
+
+        // Go to previous page
+        setNextPage();
+    }
+   
+  return (
     <div className="relative w-screen overflow-hidden">
         <Background />
         <Header />
@@ -20,14 +32,14 @@ const CreateAvatarExample = ({ onAddWishOther, onShare }) => (
             {/* Button Container */}
             <div className="flex flex-col sm:flex-row justify-around items-center w-full max-w-[30rem] sm:max-w-[49rem] mx-auto mt-6 z-20 space-y-4 sm:space-y-0">
                 <div className='flex-1 px-2 sm:px-4 md:px-8 xl:px-12 self-stretch'>
-                    <Button variant="opacity" label="Gửi lời chúc khác" size="medium" onClick={onAddWishOther} />
+                    <Button variant="opacity" label="Gửi lời chúc khác" size="medium" nClick={handleAddOtherWish} />
                 </div>
                 <div className='flex-1 px-2 sm:px-4 md:px-8 xl:px-12 self-stretch'>
-                    <Button variant="primary" label="Chia sẻ" size="medium" onClick={onShare} />
+                    <Button variant="primary" label="Chia sẻ" size="medium" onClick={handleShare} />
                 </div>
             </div>
         </div>
-    </div>
-);
+    )
+}
 
 export default CreateAvatarExample;

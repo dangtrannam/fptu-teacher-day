@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
     return (
-        <div className="bg-white bg-opacity-30 md:min-h-[12vh]">
+        <div className="absolute top-0 left-0 right-0 bg-black/10 bg-opacity-30 md:min-h-[100px] px-4">
             <div className="flex justify-between items-center py-3 gap-4 w-auto max-w-screen-xl mx-auto">
                 <Link
                     to="#"
@@ -11,6 +11,7 @@ const Header = () => {
                     <img
                         src="/assets/logo/logo-coc-doc.png"
                         alt="fptu-logo"
+                        className="w-24 md:w-32 lg:w-40 h-auto"
                     />
                 </Link>
                 <Link
@@ -20,12 +21,12 @@ const Header = () => {
                     <img
                         src="/assets/logo/logo-thankyou.png"
                         alt="Logo FTPU"
-                        className="w-full h-full"
+                        className="w-24 md:w-32 lg:w-40 h-auto"
                     />
                 </Link>
             </div>
         </div>
-    )
+    );
 }
 
 export default Header;

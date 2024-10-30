@@ -3,7 +3,7 @@ import React from 'react';
 const Button = ({ label, size = 'medium', variant = 'primary', onClick = () => { } }) => {
     const sizeClasses = {
         large: 'w-60 h-14 px-6 py-3',
-        medium: 'w-[30%] py-4',
+        medium: 'w-full py-4',
         small: 'px-8 py-4'
     };
 
@@ -16,7 +16,7 @@ const Button = ({ label, size = 'medium', variant = 'primary', onClick = () => {
 
     return (
         <button
-            className={`${sizeClasses[size]} ${variantClasses[variant]} rounded-full border font-inter uppercase text-white text-xl font-semibold`}
+            className={`${sizeClasses[size]} ${variantClasses[variant]} rounded-full border font-inter uppercase text-white text-lg md:text-xl font-semibold line-clamp-1`}
             onClick={onClick}
         >
             {label}

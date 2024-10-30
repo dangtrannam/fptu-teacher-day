@@ -5,7 +5,7 @@ import Background from '../../components/common/background.component';
 import { useEffect, useState } from 'react';
 import { trackingUserShare } from '../../service/tracking.service';
 
-const CreateAvatarExample = ({ setNextPage }) => {
+const WishCardResult = ({ setNextPage }) => {
     const [wishData, setWishData] = useState();
 
     const data = localStorage.getItem('inputData');
@@ -51,4 +51,4 @@ const CreateAvatarExample = ({ setNextPage }) => {
     );
 };
 
-export default CreateAvatarExample;
+export default WishCardResult;

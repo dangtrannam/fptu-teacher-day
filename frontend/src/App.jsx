@@ -2,8 +2,7 @@ import './index.css';
 import { useState } from "react";
 import IntroductionPage from './pages/user/introduction.page.jsx';
 import InformationPage from './pages/user/information.page.jsx';
-import CreateAvatarExample from './pages/user/createAvata.example.jsx';
-import Background from './components/common/background.component.jsx';
+import WishCardResult from './pages/user/WishCardResult.jsx';
 
 function App() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -22,7 +21,7 @@ function App() {
         <InformationPage setNextPage={() => setCurrentPage(3)} />
       </div>
       <div className={getClassName(3)}>
-        <CreateAvatarExample setNextPage={() => setCurrentPage(2)} />
+        <WishCardResult setNextPage={() => setCurrentPage(2)} />
       </div>
     </div>
   );

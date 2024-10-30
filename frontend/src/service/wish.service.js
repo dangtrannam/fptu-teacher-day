@@ -19,7 +19,14 @@ export const getUploadData = async () => {
 
 export const postWishData = async (wishData) => {
   try {
-    const response = await axios.post(WISH_ENDPOINT, wishData, {
+
+    const formData = new FormData();
+    formData.append('image', wishData.image);
+    formData.append('name', wishData.name);
+    formData.append('schoolName', wishData.schoolName);
+    formData.append('userInput', wishData.userInput);
+
+    const response = await axios.post(WISH_ENDPOINT, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }

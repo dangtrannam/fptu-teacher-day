@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { toPng } from 'html-to-image'; // Importing toPng from html-to-image
+import { toPng } from 'html-to-image';
 import Header from '../../components/layout/Header';
 import Button from '../../components/common/button.component';
 import ContentBox from '../../components/common/contentBox.component';
@@ -8,7 +8,7 @@ import { trackingUserShare } from '../../service/tracking.service';
 import { postWishData } from '../../service/wish.service';
 
 const WishCardResult = ({ setNextPage }) => {
-    const [wishData, setWishData] = useState();
+    const [wishData, setWishData] = useState({});
     const contentBoxRef = useRef(null);
 
     const data = localStorage.getItem('inputData');
@@ -25,56 +25,81 @@ const WishCardResult = ({ setNextPage }) => {
             const dataURL = await toPng(contentBoxRef.current, {
                 backgroundColor: null,
                 quality: 1.0,
-                // Use scrollHeight to capture the full content
                 height: contentBoxRef.current.scrollHeight,
-                // Width can be set to its offsetWidth
                 width: contentBoxRef.current.offsetWidth,
             });
 
+            //Download image
             const link = document.createElement("a");
             link.href = dataURL;
             link.download = "wish-card.png";
             link.click();
+
+            // conver dataURL to Blob
+            const blob = await fetch(dataURL).then(res => res.blob());
+
+            // create new File object
+            const file = new File([blob], 'wish-card.png', { type: 'image/png' });
+            return file;
         } catch (error) {
             console.error('Error exporting image:', error);
+            throw error;
         }
     };
 
-    const handleShare = () => {
-        trackingUserShare(); // Track share event
-        exportImage();       // Export the image for download
-        // postWishData(wishData); // Save the wish data to the server
+
+    const handleShare = async () => {
+        trackingUserShare(); // follow user share action
+
+        const exportedImageFile = await exportImage(); // export image from contentBoxRef
+
+        // create new wishData object
+        const newWishData = {
+            image: exportedImageFile, // user input image
+            name: wishData.name || 'Tên không xác định', // get name from wishData
+            schoolName: wishData.schoolName || 'Trường không xác định', // get schoolName from wishData
+            userInput: wishData.userInput || 'Bạn chưa nhập lời chúc', // get userInput from wishData
+        };
+
+        // post wish data to server
+        try {
+            const response = await postWishData(newWishData);
+            console.log('Wish data posted successfully:', response);
+        } catch (error) {
+            console.error('Failed to post wish data:', error);
+        }
     };
 
     const handleAddOtherWish = () => {
         localStorage.removeItem('inputData');
-        setNextPage(); // Navigate to the previous page or desired page
+        setNextPage();
     };
 
     return (
         <div className="relative w-screen overflow-hidden">
             <Background />
             <Header />
-            {/* Black overlay */}
             <div className="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
             <div className="absolute left-1/2 w-full -translate-x-1/2 top-[12vh] flex justify-center mt-6 mb-20 mx-auto flex-col items-center px-2 md:px-4">
 
-                {/* ContentBox with ref */}
-                <div className='w-full sm:max-w-[49rem] md:min-h-[32.5rem]' ref={contentBoxRef}>
-                    <ContentBox>
+                <div className='w-full sm:max-w-[49rem] md:min-h-[32.5rem] bg-pink rounded-lg px-4 sm:px-16 pb-8 sm:pb-[50px] mx-auto mt-9 z-20'>
+                    <p className="text-black font-medium text-xl w-full md:max-w-[80%] text-center mx-auto py-4 md:py-8 font-inter flex flex-col">
+                        <span>Bạn đã gửi lời chúc thành công</span>
+                        <span>Hãy share để cùng nhau cảm ơn thầy cô nhé!</span>
+                    </p>
+                    <ContentBox ref={contentBoxRef}>
                         <span className="max-w-[40%] text-center mx-auto text-base font-normal text-black font-inter">
-                            {wishData?.userInput || 'Bạn chưa nhập lời chúc'}
+                            {wishData.userInput || 'Bạn chưa nhập lời chúc'}
                         </span>
                     </ContentBox>
                 </div>
 
-                {/* Button Container */}
                 <div className="flex flex-col sm:flex-row justify-around items-center w-full max-w-[30rem] sm:max-w-[49rem] mx-auto mt-6 z-20 space-y-4 sm:space-y-0">
                     <div className="flex-1 px-2 sm:px-4 md:px-8 xl:px-12 self-stretch">
                         <Button variant="opacity" label="Gửi lời chúc khác" size="medium" onClick={handleAddOtherWish} />
                     </div>
                     <div className="flex-1 px-2 sm:px-4 md:px-8 xl:px-12 self-stretch">
-                        <Button variant="primary" label="Tải xuống" size="medium" onClick={handleShare} />
+                        <Button variant="primary" label="Chia sẻ" size="medium" onClick={handleShare} />
                     </div>
                 </div>
             </div>

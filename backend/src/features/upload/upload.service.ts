@@ -29,7 +29,7 @@ export class UploadService {
       name: upload.name,
       schoolName: upload.schoolName,
       userInput: upload.userInput,
-      imageUrl: `${path.basename(upload.imagePath)}`,
+      imageUrl: upload.imagePath ? `${path.basename(upload.imagePath)}` : null,
       contentType: upload.contentType,
     }));
   }

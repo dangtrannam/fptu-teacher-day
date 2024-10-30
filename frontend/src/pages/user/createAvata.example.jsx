@@ -5,16 +5,16 @@ import Background from '../../components/common/background.component';
 
 const CreateAvatarExample = ({ setNextPage }) => {
   const handleShare = () => {
-        console.log('Share');
-    }
+    console.log("Share");
+  };
 
-    const handleAddOtherWish = () => {
-        console.log('Add other wish');
-        // reset local storage
+  const handleAddOtherWish = () => {
+    console.log("Add other wish");
+    // reset local storage
 
-        // Go to previous page
-        setNextPage();
-    }
+    // Go to previous page
+    setNextPage();
+  };
    
   return (
     <div className="relative w-screen overflow-hidden">
@@ -32,7 +32,7 @@ const CreateAvatarExample = ({ setNextPage }) => {
             {/* Button Container */}
             <div className="flex flex-col sm:flex-row justify-around items-center w-full max-w-[30rem] sm:max-w-[49rem] mx-auto mt-6 z-20 space-y-4 sm:space-y-0">
                 <div className='flex-1 px-2 sm:px-4 md:px-8 xl:px-12 self-stretch'>
-                    <Button variant="opacity" label="Gửi lời chúc khác" size="medium" nClick={handleAddOtherWish} />
+                    <Button variant="opacity" label="Gửi lời chúc khác" size="medium" onClick={handleAddOtherWish} />
                 </div>
                 <div className='flex-1 px-2 sm:px-4 md:px-8 xl:px-12 self-stretch'>
                     <Button variant="primary" label="Chia sẻ" size="medium" onClick={handleShare} />

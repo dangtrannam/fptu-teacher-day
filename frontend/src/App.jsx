@@ -22,7 +22,7 @@ function App() {
         <InformationPage setNextPage={() => setCurrentPage(3)} />
       </div>
       <div className={getClassName(3)}>
-        {/* <CreateAvatarExample /> */}
+        <CreateAvatarExample />
       </div> 
     </div>
   );

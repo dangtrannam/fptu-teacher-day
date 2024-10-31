@@ -23,8 +23,8 @@ function dataUrlToFile(dataUrl, fileName) {
 
 const WishCardResultPage = ({ setNextPage }) => {
     const [wishData, setWishData] = useState({});
+    const [imageUrl, setImageUrl] = useState(null);
     const contentBoxRef = useRef(null);
-    const imageRef = useRef(null);
     const data = getLocalStorageData();
 
     useEffect(() => {
@@ -33,6 +33,7 @@ const WishCardResultPage = ({ setNextPage }) => {
         }
     }, [data]);
 
+    // Function to generate the image and save URL in state
     const exportImage = async () => {
         if (!contentBoxRef.current) return;
 
@@ -43,34 +44,36 @@ const WishCardResultPage = ({ setNextPage }) => {
                 height: contentBoxRef.current.scrollHeight,
                 width: contentBoxRef.current.offsetWidth,
             });
-
-            // Nếu là di động và hỗ trợ chia sẻ
-            if (isMobile() && navigator.share) {
-                imageRef.current.src = dataURL;
-                imageRef.current.classList.remove('hidden');
-                contentBoxRef.current.classList.add('hidden');
-
-                const file = dataUrlToFile(dataURL, "fpt_20-11.png");
-                await navigator.share({ files: [file], title: "FPTU 20-11" });
-            } else {
-                // Tải xuống cho người dùng trên máy tính
-                const a = document.createElement('a');
-                a.href = dataURL;
-                a.download = 'fpt_20-11.png';
-                a.click();
-            }
+            setImageUrl(dataURL);  // Save the generated image URL to state
         } catch (error) {
             console.error('Error exporting image:', error);
         }
     };
 
+    useEffect(() => {
+        exportImage();  // Generate image when component mounts
+    }, [wishData]);
+
     const handleShare = async () => {
         trackingUserShare();
-        await exportImage();
+
+        if (isMobile() && navigator.share && imageUrl) {
+            try {
+                const file = dataUrlToFile(imageUrl, "fpt_20-11.png");
+                await navigator.share({ files: [file], title: "FPTU 20-11" });
+            } catch (error) {
+                console.error('Error sharing image:', error);
+            }
+        } else if (imageUrl) {
+            const a = document.createElement('a');
+            a.href = imageUrl;
+            a.download = 'fpt_20-11.png';
+            a.click();
+        }
 
         try {
             await postWishData({
-                image: imageRef.current.src,
+                image: imageUrl,
                 name: wishData.name || '',
                 schoolName: wishData.schoolName || '',
                 userInput: wishData.userInput || '',
@@ -95,12 +98,16 @@ const WishCardResultPage = ({ setNextPage }) => {
                         <span>Bạn đã gửi lời chúc thành công</span>
                         <span>Hãy share để cùng nhau cảm ơn thầy cô nhé!</span>
                     </p>
-                    <img ref={imageRef} className='hidden w-full aspect-video rounded-md bg-contain bg-wish_card bg-center' alt='final-image' />
-                    <ContentBox ref={contentBoxRef} className='bg-wish_card bg-center'>
-                        <span className="max-w-[40%] text-center mx-auto text-base font-normal text-black font-inter">
-                            {wishData.userInput || 'Bạn chưa nhập lời chúc'}
-                        </span>
-                    </ContentBox>
+                    {/* Show generated image instead of ContentBox */}
+                    {imageUrl ? (
+                        <img src={imageUrl} className='w-full rounded-md bg-wish_card bg-center bg-cover' alt='Generated wish card' />
+                    ) : (
+                        <ContentBox ref={contentBoxRef} className='bg-wish_card bg-center bg-cover bg-no-repeat'>
+                            <span className="max-w-[40%] text-center mx-auto text-base font-normal text-black font-inter">
+                                {wishData.userInput || 'Bạn chưa nhập lời chúc'}
+                            </span>
+                        </ContentBox>
+                    )}
                 </div>
                 <div className="flex flex-col sm:flex-row justify-around items-center w-full max-w-[30rem] sm:max-w-[49rem] mx-auto mt-6 z-20 space-y-4 sm:space-y-0">
                     <div className="flex-1 px-2 sm:px-4 md:px-8 xl:px-12 self-stretch">

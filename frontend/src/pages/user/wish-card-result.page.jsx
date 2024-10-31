@@ -9,12 +9,7 @@ import { postWishData } from '../../service/wish.service';
 import { getLocalStorageData, handleRemoveLocalStorage } from '../../service/localStorageService';
 
 function isMobile() {
-    const regex = /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
-    return regex.test(navigator.userAgent);
-}
-
-function isShareable() {
-    return !!navigator.share;
+    return /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
 
 function dataUrlToFile(dataUrl, fileName) {
@@ -23,16 +18,7 @@ function dataUrlToFile(dataUrl, fileName) {
     for (let i = 0; i < binary.length; i++) {
         array.push(binary.charCodeAt(i));
     }
-    const byteArray = new Uint8Array(array);
-    return new File([byteArray], fileName, {
-        type: "image/png"
-    });
-}
-
-function convertToFileList(file) {
-    const dataTransfer = new DataTransfer();
-    dataTransfer.items.add(file);
-    return dataTransfer.files;
+    return new File([new Uint8Array(array)], fileName, { type: 'image/png' });
 }
 
 const WishCardResultPage = ({ setNextPage }) => {
@@ -58,61 +44,37 @@ const WishCardResultPage = ({ setNextPage }) => {
                 width: contentBoxRef.current.offsetWidth,
             });
 
-            // Convert dataURL to Blob
-            const blob = await fetch(dataURL).then(res => res.blob());
-            const fileShare = dataUrlToFile(dataURL, "fpt_20-11.png");
-            const files = convertToFileList(fileShare);
-
-            if (isMobile() && isShareable()) {
-                // Automatically display image for mobile users
+            // Nếu là di động và hỗ trợ chia sẻ
+            if (isMobile() && navigator.share) {
                 imageRef.current.src = dataURL;
                 imageRef.current.classList.remove('hidden');
                 contentBoxRef.current.classList.add('hidden');
 
-                // Share the image after generating
-                await shareImage(files);
+                const file = dataUrlToFile(dataURL, "fpt_20-11.png");
+                await navigator.share({ files: [file], title: "FPTU 20-11" });
             } else {
-                // Non-mobile download functionality
-                const file = new File([blob], 'fpt_20-11.png', { type: 'image/png' });
-                const url = URL.createObjectURL(file);
+                // Tải xuống cho người dùng trên máy tính
                 const a = document.createElement('a');
-                a.href = url;
+                a.href = dataURL;
                 a.download = 'fpt_20-11.png';
                 a.click();
-                URL.revokeObjectURL(url);
             }
         } catch (error) {
             console.error('Error exporting image:', error);
         }
     };
 
-    const shareImage = async (files) => {
-        try {
-            await navigator.share({
-                files: files,
-                title: "FPTU 20-11",
-                text: ""
-            });
-            console.log("Successfully shared");
-        } catch (error) {
-            console.log("Error sharing:", error);
-        }
-    };
-
     const handleShare = async () => {
-        trackingUserShare(); // Log user share action
-        await exportImage(); // Generate and potentially share the image
-
-        // Post wish data to server
-        const newWishData = {
-            image: imageRef.current.src, // Use the image source for posting
-            name: wishData.name || '',
-            schoolName: wishData.schoolName || '',
-            userInput: wishData.userInput || '',
-        };
+        trackingUserShare();
+        await exportImage();
 
         try {
-            await postWishData(newWishData);
+            await postWishData({
+                image: imageRef.current.src,
+                name: wishData.name || '',
+                schoolName: wishData.schoolName || '',
+                userInput: wishData.userInput || '',
+            });
         } catch (error) {
             console.error('Failed to post wish data:', error);
         }
@@ -129,14 +91,11 @@ const WishCardResultPage = ({ setNextPage }) => {
             <div className="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
             <div className="absolute left-1/2 w-full -translate-x-1/2 top-[12vh] flex justify-center mt-6 mb-20 mx-auto flex-col items-center px-2 md:px-4">
                 <div className='w-full sm:max-w-[49rem] md:min-h-[32.5rem] bg-pink rounded-lg px-4 sm:px-16 pb-8 sm:pb-[50px] mx-auto mt-9 z-20'>
-                    <p className="text-black font-medium text-xl w-full md:max-w-[80%] text-center mx-auto py-4 md:py-8 font-inter flex flex-col">
+                    <p className="text-black font-medium text-xl w-full md:max-w-[80%] text-center mx-auto py-4 md:py-8 font-inter">
                         <span>Bạn đã gửi lời chúc thành công</span>
                         <span>Hãy share để cùng nhau cảm ơn thầy cô nhé!</span>
                     </p>
-                    <img
-                        ref={imageRef}
-                        className='hidden w-full aspect-video flex-col items-center justify-center rounded-md bg-contain bg-no-repeat bg-wish_card bg-center'
-                        alt={'final-image'} />
+                    <img ref={imageRef} className='hidden w-full aspect-video rounded-md bg-contain bg-wish_card bg-center' alt='final-image' />
                     <ContentBox ref={contentBoxRef} className='bg-wish_card bg-center'>
                         <span className="max-w-[40%] text-center mx-auto text-base font-normal text-black font-inter">
                             {wishData.userInput || 'Bạn chưa nhập lời chúc'}

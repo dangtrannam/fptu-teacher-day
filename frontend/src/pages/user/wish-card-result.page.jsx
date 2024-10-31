@@ -51,7 +51,14 @@ const WishCardResultPage = ({ setNextPage }) => {
     };
 
     useEffect(() => {
-        exportImage();  // Generate image when component mounts
+        if (Object.keys(wishData).length > 0) {
+            setImageUrl(null); // Clear previous image
+            const timeoutId = setTimeout(() => {
+                exportImage(); // Generate image after a slight delay
+            }, 100); // Delay to ensure rendering
+
+            return () => clearTimeout(timeoutId); // Cleanup on unmount
+        }
     }, [wishData]);
 
     const handleShare = async () => {

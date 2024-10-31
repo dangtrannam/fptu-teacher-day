@@ -3,16 +3,17 @@ import App from "./App.jsx";
 import { RouterProvider, createBrowserRouter, useNavigate } from "react-router-dom";
 import { Layout } from "./Layout.jsx";
 import IntroductionPage from "./pages/user/introduction.page.jsx";
-import AvatarFrame from "./pages/user/avatarCreator.pages.jsx";
 import LoginPage from "./pages/admin/login.page.jsx";
 import TrackingPage from "./pages/admin/tracking.page.jsx";
 import { useEffect } from "react";
 import WishPage from "./pages/admin/wish.page.jsx";
-import { ADMIN_TRACKINGS_PATH, ADMIN_WISHES_PATH } from "./constants/routerPaths";
+import WishCardResultPage from "./pages/user/wish-card-result.page.jsx";
+import { ADMIN_TRACKINGS_PATH, ADMIN_WISHES_PATH } from "./constants/routerPaths.js";
+import { getLocalStorageToken } from "./service/localStorageService.js";
 
 const ProtectedRoute = ({ element }) => {
   const navigate = useNavigate();
-  const token = localStorage.getItem("fptuTeacherDayToken"); // Assuming token is stored in localStorage
+  const token = getLocalStorageToken();
 
   useEffect(() => {
     if (!token) {
@@ -37,8 +38,8 @@ const router = createBrowserRouter([
         element: <IntroductionPage />,
       },
       {
-        path: "/avatar-creator",
-        element: <AvatarFrame />,
+        path: "/wish-card-result",
+        element: <WishCardResultPage />,
       },
 
     ],

@@ -18,6 +18,7 @@ export class UploadService {
       ...createUploadDto,
       imagePath: file.filename,
       contentType: file.mimetype,
+      timestamp: new Date(),
     });
     return createdUpload.save();
   }
@@ -29,6 +30,7 @@ export class UploadService {
       name: upload.name,
       schoolName: upload.schoolName,
       userInput: upload.userInput,
+      timestamp: upload.timestamp,
       imageUrl: upload.imagePath ? `${path.basename(upload.imagePath)}` : null,
       contentType: upload.contentType,
     }));

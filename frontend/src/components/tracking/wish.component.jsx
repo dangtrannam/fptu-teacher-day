@@ -12,6 +12,7 @@ import Modal from '@mui/material/Modal';
 import ImageIcon from '@mui/icons-material/Visibility'; // Eye icon
 import CloseIcon from '@mui/icons-material/Close'; // Close icon
 import { getUploadData, getImageData } from '../../service/wish.service';
+import dayjs from 'dayjs';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -92,6 +93,7 @@ const WishComponent = () => {
                             <StyledTableCell>Họ tên</StyledTableCell>
                             <StyledTableCell>Trường</StyledTableCell>
                             <StyledTableCell>Lời chúc</StyledTableCell>
+                            <StyledTableCell>Ngày tạo</StyledTableCell>
                             <StyledTableCell align="right">Hình ảnh</StyledTableCell>
                         </TableRow>
                     </TableHead>
@@ -107,6 +109,9 @@ const WishComponent = () => {
                                     </StyledTableCell>
                                     <StyledTableCell component="th" scope="row">
                                         {item.userInput}
+                                    </StyledTableCell>
+                                    <StyledTableCell component="th" scope="row">
+                                        {dayjs(item.timestamp).format('DD-MM-YYYY HH:mm')}
                                     </StyledTableCell>
                                     <StyledTableCell align="right">
                                         <IconButton onClick={() => handleOpen(item.imageUrl)}>

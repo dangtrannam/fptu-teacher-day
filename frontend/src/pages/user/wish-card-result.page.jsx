@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { toPng } from 'html-to-image';
 import Header from '../../components/layout/Header';
 import Button from '../../components/common/button.component';
@@ -25,13 +25,13 @@ const WishCardResultPage = ({ setNextPage }) => {
     const [wishData, setWishData] = useState({});
     const [imageUrl, setImageUrl] = useState(null);
     const contentBoxRef = useRef(null);
-    const data = getLocalStorageData();
-
+    
     useEffect(() => {
-        if (data) {
-            setWishData(JSON.parse(data));
+        const userWishData = getLocalStorageData();
+        if (userWishData) {
+            setWishData(JSON.parse(userWishData));
         }
-    }, [data]);
+    }, []);
 
     // Function to generate the image and save URL in state
     const exportImage = async () => {
@@ -79,8 +79,14 @@ const WishCardResultPage = ({ setNextPage }) => {
         }
 
         try {
+            // conver dataURL to Blob
+            const blob = await fetch(imageUrl).then(res => res.blob());
+
+            // create new File object
+            const file = new File([blob], 'fpt_20-11.png', { type: 'image/png' });
+
             await postWishData({
-                image: imageUrl,
+                image: file,
                 name: wishData.name || '',
                 schoolName: wishData.schoolName || '',
                 userInput: wishData.userInput || '',
@@ -107,9 +113,9 @@ const WishCardResultPage = ({ setNextPage }) => {
                     </p>
                     {/* Show generated image instead of ContentBox */}
                     {imageUrl ? (
-                        <img src={imageUrl} className='w-full rounded-md bg-wish_card bg-center bg-cover' alt='Generated wish card' />
+                        <img src={imageUrl} className='w-full rounded-md bg-wish_card bg-[#f2702534] bg-center bg-cover' alt='Generated wish card' />
                     ) : (
-                        <ContentBox ref={contentBoxRef} className='bg-wish_card bg-center bg-cover bg-no-repeat'>
+                        <ContentBox ref={contentBoxRef} className='bg-wish_card bg-[#f2702534] bg-center bg-cover bg-no-repeat'>
                             <span className="max-w-[40%] text-center mx-auto text-base font-normal text-black font-inter">
                                 {wishData.userInput || 'Bạn chưa nhập lời chúc'}
                             </span>

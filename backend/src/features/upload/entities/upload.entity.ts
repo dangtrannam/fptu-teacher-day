@@ -17,6 +17,9 @@ export class Upload extends Document {
 
   @Prop()
   userInput: string;
+
+  @Prop()
+  timestamp: Date;
 }
 
 export const UploadSchema = SchemaFactory.createForClass(Upload);

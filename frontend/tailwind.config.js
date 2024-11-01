@@ -18,6 +18,18 @@ export default {
                 'bgBase_Mobile': "url('./src/assets/images/bg_mobile_2x.png')",
                 'bgBase_Tablet': "url('./src/assets/images/bg_tablet_2x.png')",
                 'wish_card': "url('./src/assets/images/wish_card_flower.png')",
+                'cloud1': "url('./src/assets/images/cloud1.png')",
+                'cloud2': "url('./src/assets/images/cloud2.png')",
+                'cloud3': "url('./src/assets/images/cloud3.png')",
+                'cloud4': "url('./src/assets/images/cloud4.png')",
+                'mascot1': "url('./src/assets/images/mascot1.png')",
+                'mascot2': "url('./src/assets/images/mascot2.png')",
+                'mascot3': "url('./src/assets/images/mascot3.png')",
+                'mascot4': "url('./src/assets/images/mascot4.png')",
+                'mascot5': "url('./src/assets/images/mascot5.png')",
+                'mascot6': "url('./src/assets/images/mascot6.png')",
+                'mascot7': "url('./src/assets/images/mascot7.png')",
+                'mascot8': "url('./src/assets/images/mascot8.png')"
             },
             backgroundColor: {
                 'black-50': 'rgba(0, 0, 0, 0.5)',

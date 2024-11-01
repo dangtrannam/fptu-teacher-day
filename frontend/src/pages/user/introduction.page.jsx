@@ -20,8 +20,9 @@ const IntroductionPage = ({ setNextPage }) => {
                     <SVGLogo />
                 </div>
                 <div className="flex flex-col items-center justify-center space-y-6 w-full mt-10 px-4 lg:px-0">
-                    <p className="text-center text-gray-700 text-base md:text-lg font-inter">
-                        Lorem ipsum dolor sit amet consectetur. Lobortis sit mauris vestibulum justo interdum.
+                    <p className="text-center text-white text-base md:text-xl font-inter flex flex-col uppercase font-bold">
+                        <span>GỬI LỜI CHÚC ĐIỆN TỬ TỚI THẦY CÔ</span>
+                        <span>Đã có <strong className='text-orange-500'>100+</strong> Lời chúc được gửi thành công</span>
                     </p>
                     <Button
                         variant='primary'

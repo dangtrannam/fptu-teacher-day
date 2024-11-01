@@ -24,6 +24,7 @@ export default {
                 'orange-opacity': 'rgba(242, 113, 37, 0.4)',
                 'brand': 'rgba(242, 113, 37, 1)',
                 'pink': 'rgba(255, 240, 235, 1)',
+                'pink-200': '#fbcab0',
             },
             textColor: {
                 'brand': 'rgba(242, 113, 37, 1)',

@@ -45,7 +45,7 @@ const InformationPage = ({ setNextPage }) => {
                             className="w-full max-w-xs md:max-w-sm lg:max-w-md"
                         />
                         <InputField
-                            placeholder="Lời cảm ơn"
+                            placeholder="Lời chúc"
                             value={userInput}
                             onChange={(e) => setUserInput(e.target.value)}
                             className="w-full max-w-xs md:max-w-sm lg:max-w-md"

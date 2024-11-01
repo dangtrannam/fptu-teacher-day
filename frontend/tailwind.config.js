@@ -17,7 +17,7 @@ export default {
                 'bgBase': "url('./src/assets/images/backGroundImg_2x.png')",
                 'bgBase_Mobile': "url('./src/assets/images/bg_mobile_2x.png')",
                 'bgBase_Tablet': "url('./src/assets/images/bg_tablet_2x.png')",
-                'wish_card': "url('./src/assets/images/wish_card_1.png')",
+                'wish_card': "url('./src/assets/images/wish_card_flower.png')",
             },
             backgroundColor: {
                 'black-50': 'rgba(0, 0, 0, 0.5)',

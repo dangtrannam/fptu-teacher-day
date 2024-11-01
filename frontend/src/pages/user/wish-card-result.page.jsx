@@ -25,21 +25,20 @@ const WishCardResultPage = ({ setNextPage }) => {
     const [wishData, setWishData] = useState({});
     const [imageUrl, setImageUrl] = useState(null);
     const contentBoxRef = useRef(null);
-    
+    const userWishData = getLocalStorageData();
+
     useEffect(() => {
-        const userWishData = getLocalStorageData();
         if (userWishData) {
             setWishData(JSON.parse(userWishData));
         }
-    }, []);
-
+    }, [userWishData]);
     // Function to generate the image and save URL in state
     const exportImage = async () => {
         if (!contentBoxRef.current) return;
 
         try {
             const dataURL = await toPng(contentBoxRef.current, {
-                backgroundColor: null,
+                backgroundColor: '#fbcab0',
                 quality: 1.0,
                 height: contentBoxRef.current.scrollHeight,
                 width: contentBoxRef.current.offsetWidth,
@@ -107,15 +106,15 @@ const WishCardResultPage = ({ setNextPage }) => {
             <div className="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
             <div className="absolute left-1/2 w-full -translate-x-1/2 top-[12vh] flex justify-center mt-6 mb-20 mx-auto flex-col items-center px-2 md:px-4">
                 <div className='w-full sm:max-w-[49rem] md:min-h-[32.5rem] bg-pink rounded-lg px-4 sm:px-16 pb-8 sm:pb-[50px] mx-auto mt-9 z-20'>
-                    <p className="text-black font-medium text-xl w-full md:max-w-[80%] text-center mx-auto py-4 md:py-8 font-inter">
+                    <p className="flex flex-col text-black font-medium text-xl w-full md:max-w-[80%] text-center mx-auto py-4 md:pt-10 md:pb-6 font-inter">
                         <span>Bạn đã gửi lời chúc thành công</span>
                         <span>Hãy share để cùng nhau cảm ơn thầy cô nhé!</span>
                     </p>
                     {/* Show generated image instead of ContentBox */}
                     {imageUrl ? (
-                        <img src={imageUrl} className='w-full rounded-md bg-wish_card bg-[#f2702534] bg-center bg-cover' alt='Generated wish card' />
+                        <img src={imageUrl} className='w-full rounded-md bg-wish_card bg-center bg-cover' alt='Generated wish card' />
                     ) : (
-                        <ContentBox ref={contentBoxRef} className='bg-wish_card bg-[#f2702534] bg-center bg-cover bg-no-repeat'>
+                        <ContentBox ref={contentBoxRef} className='bg-wish_card bg-center bg-cover bg-no-repeat'>
                             <span className="max-w-[40%] text-center mx-auto text-base font-normal text-black font-inter">
                                 {wishData.userInput || 'Bạn chưa nhập lời chúc'}
                             </span>

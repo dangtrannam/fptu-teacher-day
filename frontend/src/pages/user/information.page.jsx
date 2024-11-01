@@ -80,6 +80,7 @@ const InformationPage = ({ setNextPage }) => {
                             value={userInput}
                             onChange={(e) => setUserInput(e.target.value)}
                             className="w-full max-w-xs md:max-w-sm lg:max-w-md"
+                            hint="tối đa 200 ký tự"
                         />
                         {isSubmitted && errors.userInput && <p className="text-red-500 text-sm font-bold mt-1">{errors.userInput}</p>}
                     </form>

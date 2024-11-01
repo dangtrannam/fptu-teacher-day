@@ -114,7 +114,9 @@ const WishCardResultPage = ({ setNextPage }) => {
                     {imageUrl ? (
                         <img src={imageUrl} className='w-full rounded-md bg-wish_card bg-center bg-cover' alt='Generated wish card' />
                     ) : (
-                        <ContentBox ref={contentBoxRef} className='bg-wish_card bg-center bg-cover bg-no-repeat bg-pink-200 md:h-96 h-48'>
+                        <ContentBox
+                            key={imageUrl}
+                            ref={contentBoxRef} className='bg-wish_card bg-center bg-cover bg-no-repeat md:h-96 h-48'>
                             <span className="md:max-w-[80%] max-w-56 text-center text-xs md:text-xl font-normal text-black font-inter">
                                 {wishData.userInput || 'Bạn chưa nhập lời chúc'}
                                 {/* Lorem ipsum dolor sit amet consectetur. Vels mi id est tincidunt ac auctor sagittis metus. At risus interdum venenatis fringilla feugiat diam. */}

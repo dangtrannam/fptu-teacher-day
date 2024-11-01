@@ -29,12 +29,17 @@ function convertToFileList(file) {
 
 async function shareImage(files) {
     try {
-        await navigator.share({
-            files: files,
-            title: "FPTU 20-11",
-            text: ""
-        });
-        console.log("Successfully shared");
+        console.log("can share:", navigator.canShare({ files }));
+        
+        if (navigator.canShare({ files })) {
+            await navigator.share({
+                files,
+                title: "FPTU 20-11",
+                text: ""
+            });
+            console.log("Successfully shared");
+        }
+        
     } catch (error) {
         console.log("Error sharing:", error);
     }
@@ -47,66 +52,45 @@ const WishCardResultPage = ({ setNextPage }) => {
         if (!userWishData?.name || !userWishData?.schoolName || !userWishData?.userInput) {
             return;
         }
-        trackingUserShare();
-        const imageElement = document.getElementById('content-box');
-        const blob = await domToBlob(imageElement, {
-            quality: 1.0,
-            scale: 3,
-            height: imageElement.scrollHeight,
-            width: imageElement.offsetWidth,
-            cacheBust: true,
-        });
-        
-        const file = new File([blob], 'fpt_20-11.png', { type: 'image/png' });
-        
-        console.log(navigator.share);
-        
-        if (isMobile() && !!navigator.share) {
-            
-            try {
-                const canvas = await domToCanvas(imageElement, {
-                    quality: 1.0,
-                    scale: 3,
-                    height: imageElement.scrollHeight,
-                    width: imageElement.offsetWidth,
-                    cacheBust: true,
-                });
-                requestAnimationFrame(async () => {
-                    const dataURL = canvas.toDataURL({
-                        format: "png",
-                        quality: 1.0, // Maximum quality
-                        multiplier: 2 // Adjust the resolution without resizing the canvas
-                    });
-                    
-                    // Convert data URL to file
-                    const file = dataUrlToFile(dataURL, "fptu-tuoi18.png");
-                    const files = convertToFileList(file);
-                    if (files.length > 0) {
-                        alert('Chia sẻ ảnh');
-                        shareImage(files);
-                    }
-                })
-            } catch (error) {
-                console.error('Error sharing image:', error);
-            }
-        } else {
-            const image = URL.createObjectURL(file);
-            const a = document.createElement('a');
-            a.href = image;
-            a.download = 'fpt_20-11.png';
-            a.click();
-        }
-
-        try {
-            await postWishData({
-                image: file,
-                name: userWishData?.name || '',
-                schoolName: userWishData?.schoolName || '',
-                userInput: userWishData?.userInput || '',
+        requestAnimationFrame(async () => {
+            trackingUserShare();
+            const imageElement = document.getElementById('content-box');
+            const blob = await domToBlob(imageElement, {
+                quality: 1.0,
+                scale: 3,
+                height: imageElement.scrollHeight,
+                width: imageElement.offsetWidth,
+                cacheBust: true,
             });
-        } catch (error) {
-            console.error('Failed to post wish data:', error);
-        }
+            
+            const file = new File([blob], 'fpt_20-11.png', { type: 'image/png' });
+            
+            if (isMobile() && !!navigator.share) {
+                
+                try {
+                    await shareImage([file]);
+                } catch (error) {
+                    console.error('Error sharing image:', error);
+                }
+            } else {
+                const image = URL.createObjectURL(file);
+                const a = document.createElement('a');
+                a.href = image;
+                a.download = 'fpt_20-11.png';
+                a.click();
+            }
+    
+            try {
+                await postWishData({
+                    image: file,
+                    name: userWishData?.name || '',
+                    schoolName: userWishData?.schoolName || '',
+                    userInput: userWishData?.userInput || '',
+                });
+            } catch (error) {
+                console.error('Failed to post wish data:', error);
+            }
+        });
     };
 
     const handleAddOtherWish = () => {

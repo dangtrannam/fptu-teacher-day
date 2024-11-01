@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Button = ({ label, size = 'medium', variant = 'primary', onClick = () => { } }) => {
+const Button = ({ label, size = 'medium', type, variant = 'primary', onClick = () => { } }) => {
     const sizeClasses = {
         large: 'w-60 h-14 px-6 py-3',
         medium: 'w-full py-4',
@@ -18,6 +18,7 @@ const Button = ({ label, size = 'medium', variant = 'primary', onClick = () => {
         <button
             className={`${sizeClasses[size]} ${variantClasses[variant]} rounded-full border font-inter uppercase text-white text-lg md:text-xl font-semibold line-clamp-1`}
             onClick={onClick}
+            type={type}
         >
             {label}
         </button>

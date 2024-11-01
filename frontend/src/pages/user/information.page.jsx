@@ -57,15 +57,17 @@ const InformationPage = ({ setNextPage }) => {
             <Header />
             <div className="absolute left-1/2 -translate-x-1/2 top-[12vh] flex justify-center mt-6 mb-20 mx-auto flex-col items-center">
                 <SVGLogo className="w-24 md:w-32 lg:w-40 h-auto" />
-                <div className="flex flex-col items-center justify-center space-y-10 max-w-md w-full mt-10 px-4">
-                    <form className="flex flex-col items-center space-y-4 max-w-md w-full" onSubmit={handleSubmit}>
+                <div className="flex flex-col items-center justify-center space-y-4 max-w-md w-full mt-10 px-4">
+                    <form className="flex flex-col items-center max-w-md w-full" onSubmit={handleSubmit}>
                         <InputField
                             placeholder="Họ tên"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             className="w-full max-w-xs md:max-w-sm lg:max-w-md"
                         />
-                        {isSubmitted && errors.name && <p className="text-red-500 text-sm font-bold mt-1">{errors.name}</p>}
+                        <div className="h-6">
+                            {isSubmitted && errors.name && <p className="text-red-500 text-sm font-bold">{errors.name}</p>}
+                        </div>
 
                         <InputField
                             placeholder="Trường"
@@ -73,7 +75,9 @@ const InformationPage = ({ setNextPage }) => {
                             onChange={(e) => setSchoolName(e.target.value)}
                             className="w-full max-w-xs md:max-w-sm lg:max-w-md"
                         />
-                        {isSubmitted && errors.schoolName && <p className="text-red-500 text-sm font-bold mt-1">{errors.schoolName}</p>}
+                        <div className="h-6">
+                            {isSubmitted && errors.schoolName && <p className="text-red-500 text-sm font-bold">{errors.schoolName}</p>}
+                        </div>
 
                         <InputField
                             placeholder="Lời chúc"
@@ -82,13 +86,17 @@ const InformationPage = ({ setNextPage }) => {
                             className="w-full max-w-xs md:max-w-sm lg:max-w-md"
                             hint="tối đa 200 ký tự"
                         />
-                        {isSubmitted && errors.userInput && <p className="text-red-500 text-sm font-bold mt-1">{errors.userInput}</p>}
+                        <div className="h-6">
+                            {isSubmitted && errors.userInput && <p className="text-red-500 text-sm font-bold">{errors.userInput}</p>}
+                        </div>
                     </form>
+
 
                     <Button
                         variant="primary"
                         label="Gửi lời chúc"
                         size="large"
+                        type={'submit'}
                         onClick={handleSubmit}
                     />
                 </div>

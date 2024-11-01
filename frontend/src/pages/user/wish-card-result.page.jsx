@@ -116,8 +116,8 @@ const WishCardResultPage = ({ setNextPage }) => {
                     ) : (
                         <ContentBox ref={contentBoxRef} className='bg-wish_card bg-center bg-cover bg-no-repeat bg-pink-200 md:h-96 h-48'>
                             <span className="md:max-w-[80%] max-w-56 text-center text-xs md:text-xl font-normal text-black font-inter">
-                                {/* {wishData.userInput || 'Bạn chưa nhập lời chúc'} */}
-                                Lorem ipsum dolor sit amet consectetur. Vels mi id est tincidunt ac auctor sagittis metus. At risus interdum venenatis fringilla feugiat diam.
+                                {wishData.userInput || 'Bạn chưa nhập lời chúc'}
+                                {/* Lorem ipsum dolor sit amet consectetur. Vels mi id est tincidunt ac auctor sagittis metus. At risus interdum venenatis fringilla feugiat diam. */}
                             </span>
                         </ContentBox>
                     )}

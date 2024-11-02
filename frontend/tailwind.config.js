@@ -30,7 +30,10 @@ export default {
                 // 'mascot5': "url('./assets/images/mascot5.png')",
                 // 'mascot6': "url('./assets/images/mascot6.png')",
                 // 'mascot7': "url('./assets/images/mascot7.png')",
-                // 'mascot8': "url('./assets/images/mascot8.png')"
+                // 'mascot8': "url('./assets/images/mascot8.png')",
+                // "animation_background_forward": "url('./assets/images/animation_background/background-forward.png')",
+                // "animation_background_backward": "url('./assets/images/animation_background/background-backward.png')",
+                // "animation_background_middle": "url('./assets/images/animation_background/background-middle.png')",
                 // If production, use the following lines
                 'bgBase': "url('./images/backGroundImg_2x.png')",
                 'bgBase_Mobile': "url('./images/bg_mobile_2x.png')",
@@ -47,7 +50,10 @@ export default {
                 'mascot5': "url('./images/mascot5.png')",
                 'mascot6': "url('./images/mascot6.png')",
                 'mascot7': "url('./images/mascot7.png')",
-                'mascot8': "url('./images/mascot8.png')"
+                'mascot8': "url('./images/mascot8.png')",
+                "animation_background_forward": "url('./images/animation_background/background-forward.png')",
+                "animation_background_backward": "url('./images/animation_background/background-backward.png')",
+                "animation_background_middle": "url('./images/animation_background/background-middle.png')",
             },
             backgroundColor: {
                 'black-50': 'rgba(0, 0, 0, 0.5)',

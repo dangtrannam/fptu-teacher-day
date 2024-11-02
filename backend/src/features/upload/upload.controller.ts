@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, Res } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, Res, Query, DefaultValuePipe, ParseIntPipe } from '@nestjs/common';
 import { UploadService } from './upload.service';
 import { CreateUploadDto } from './dto/create-upload.dto';
 import { UpdateUploadDto } from './dto/update-upload.dto';
@@ -11,11 +11,11 @@ const fs = require('fs');
 
 @Controller('upload')
 export class UploadController {
-  constructor(private readonly uploadService: UploadService) {}
+  constructor(private readonly uploadService: UploadService) { }
 
   @Post()
   @UseInterceptors(
-    FileInterceptor('image',{
+    FileInterceptor('image', {
       storage: diskStorage({
         destination: './files',
         filename: editFileName,
@@ -28,8 +28,12 @@ export class UploadController {
   }
 
   @Get()
-  findAll() {
-    return this.uploadService.findAll();
+  findAll(
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
+    @Query('search', new DefaultValuePipe('')) search: string,
+  ) {
+    return this.uploadService.findAll(page, limit, search);
   }
 
   @Get(':id')

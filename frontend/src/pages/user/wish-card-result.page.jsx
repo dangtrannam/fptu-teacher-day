@@ -93,19 +93,31 @@ const WishCardResultPage = ({ setNextPage }) => {
                 });
             });
 
-            // Add text with adjusted font size for higher resolution
-            const text = new fabric.Text(userWishData?.userInput || 'Bạn chưa nhập lời chúc', {
+            // Add text with adjusted font size and line wrapping
+            const text = new fabric.Textbox(userWishData?.userInput || 'Bạn chưa nhập lời chúc', {
                 left: canvas.width / 2,
-                top: canvas.height / 3,
-                fontSize: (contentBox.offsetWidth < 768 ? 16 : 20) * PIXEL_RATIO,
+                // Adjust top position to match md:pt-20 for larger screens, pt-3 for mobile
+                top: contentBox.offsetWidth < 768 ? canvas.height / 3: canvas.height / 2.5,
+                // Match text-xs for mobile, text-xl for desktop with PIXEL_RATIO scaling
+                fontSize: (contentBox.offsetWidth < 768 ? 12 : 20) * PIXEL_RATIO,
                 fontFamily: 'Inter',
                 fill: '#000000',
                 textAlign: 'center',
                 originX: 'center',
                 originY: 'center',
-                width: canvas.width * 0.8
+                // Match md:max-w-[80%] and max-w-56 constraints
+                width: contentBox.offsetWidth < 768 ? 
+                       canvas.width * 0.6 : // mobile
+                       canvas.width * 0.8,  // desktop
+                lineHeight: 1.5,
+                breakWords: true,
+                wordWrap: true,
+                padding: contentBox.offsetWidth < 768 ? 
+                         12 * PIXEL_RATIO : // mobile padding
+                         20 * PIXEL_RATIO,  // desktop padding
+                fontWeight: 400, // font-normal
             });
-            
+
             canvas.add(text);
             canvas.renderAll();
 

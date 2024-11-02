@@ -23,9 +23,45 @@ export class UploadService {
     return createdUpload.save();
   }
 
-  async findAll(): Promise<any[]> {
-    const uploads = await this.uploadModel.find().exec();
-    return uploads.map(upload => ({
+  async findAll(
+    page: number = 1,
+    limit: number = 20,
+    search: string = '',
+  ): Promise<{
+    data: any[],
+    total: number,
+    currentPage: number,
+    totalPages: number,
+  }> {
+    //create a seach filter
+    const searchFilter = search ? {
+      $or: [
+        { name: { $regex: search, $options: 'i' } },
+        { schoolName: { $regex: search, $options: 'i' } },
+        { userInput: { $regex: search, $options: 'i' } },
+      ],
+    } : {};
+
+    // get total documents in the Upload collection
+    const total = await this.uploadModel.countDocuments(searchFilter);
+
+    // Get total pages
+    const totalPages = Math.ceil(total / limit);
+
+    // Ensure page doesn't exceed total pages
+    const validatedPage = Math.max(1, Math.min(page, totalPages));
+
+    // Calculate skip
+    const skip = (validatedPage - 1) * limit;
+
+    //get paginated documents
+    const uploads = await this.uploadModel
+      .find(searchFilter)
+      .skip(skip)
+      .limit(limit)
+      .exec();
+
+    const data = uploads.map(upload => ({
       _id: upload._id,
       name: upload.name,
       schoolName: upload.schoolName,
@@ -34,6 +70,14 @@ export class UploadService {
       imageUrl: upload.imagePath ? `${path.basename(upload.imagePath)}` : null,
       contentType: upload.contentType,
     }));
+
+    return {
+      data,
+      total,
+      currentPage: validatedPage,
+      totalPages,
+    };
+
   }
 
   findOne(id: number) {

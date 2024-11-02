@@ -11,6 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import Modal from '@mui/material/Modal';
 import ImageIcon from '@mui/icons-material/Visibility'; // Eye icon
 import CloseIcon from '@mui/icons-material/Close'; // Close icon
+import TablePagination from '@mui/material/TablePagination';
 import { getUploadData, getImageData } from '../../service/wish.service';
 import dayjs from 'dayjs';
 
@@ -40,14 +41,18 @@ const WishComponent = () => {
     const [data, setData] = useState([]); // Initialize as an empty array
     const [open, setOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState('');
+    const [page, setPage] = useState(1);
+    const [limit, setLimit] = useState(10);
+    const [total, setTotal] = useState(0);
 
-    const fetchData = async () => {
+    const fetchData = async (page, limit) => {
         try {
-            const uploadData = await getUploadData();
-            if (Array.isArray(uploadData)) {
-                setData(uploadData);
+            const response = await getUploadData({ page, limit });
+            if (response && Array.isArray(response.data)) {
+                setData(response.data);
+                setTotal(response.total);
             } else {
-                console.error('Fetched data is not an array:', uploadData);
+                console.error('Fetched data is not an array:', response);
             }
         } catch (error) {
             console.error('Failed to fetch data:', error);
@@ -67,10 +72,9 @@ const WishComponent = () => {
         }
     };
 
-
     useEffect(() => {
-        fetchData();
-    }, []);
+        fetchData(page, limit);
+    }, [page, limit]);
 
     const handleOpen = async (imageUrl) => {
         const base64Image = await fetchImageData(imageUrl);
@@ -81,6 +85,15 @@ const WishComponent = () => {
     const handleClose = () => {
         setOpen(false);
         setSelectedImage('');
+    };
+
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage + 1); // Material-UI uses zero-based index for pages
+    };
+
+    const handleChangeRowsPerPage = (event) => {
+        setLimit(parseInt(event.target.value, 10));
+        setPage(1); // Reset to first page
     };
 
     return (
@@ -122,11 +135,20 @@ const WishComponent = () => {
                             ))
                         ) : (
                             <StyledTableRow>
-                                <StyledTableCell colSpan={2} align="center">No data available</StyledTableCell>
+                                <StyledTableCell colSpan={5} align="center">No data available</StyledTableCell>
                             </StyledTableRow>
                         )}
                     </TableBody>
                 </Table>
+                <TablePagination
+                    rowsPerPageOptions={[5, 10, 25]}
+                    component="div"
+                    count={total}
+                    rowsPerPage={limit}
+                    page={page - 1} // Material-UI uses zero-based index for pages
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                />
             </TableContainer>
             <Modal open={open} onClose={handleClose}>
                 <div style={{

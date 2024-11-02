@@ -2,9 +2,9 @@ import axios from 'axios';
 import { WISH_ENDPOINT, IMAGE_ENDPOINT } from './apiConfig';
 import { getAuthHeaders } from '../constants/getAuthHeaders';
 
-export const getUploadData = async () => {
+export const getUploadData = async ({ page = 1, limit = 10, search = '' }) => {
   try {
-    const response = await axios.get(WISH_ENDPOINT, {
+    const response = await axios.get(`${WISH_ENDPOINT}?page=${page}&limit=${limit}&search=${search}`, {
       headers: getAuthHeaders()
     });
     return response.data;

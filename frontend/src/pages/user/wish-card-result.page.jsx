@@ -67,8 +67,7 @@ const WishCardResultPage = ({ setNextPage }) => {
 
             // Load background image first
             const bgImg = await new Promise((resolve) => {
-                // if Local development, use this url: /assets/images/wish_card_flower_2.png
-                fabric.Image.fromURL('/images/wish_card_flower_2.png', (img) => {
+                fabric.Image.fromURL('/assets/images/wish_card_flower_2.png', (img) => {
                     // Scale image accounting for pixel ratio
                     const scale = (contentBox.offsetWidth * PIXEL_RATIO) / img.width;
                     img.scale(scale);

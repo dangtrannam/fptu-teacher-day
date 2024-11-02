@@ -57,7 +57,11 @@ const WishCardResultPage = ({ setNextPage }) => {
             console.log("Starting canvas generation...");
             
             // Set higher DPI
-            const PIXEL_RATIO = window.devicePixelRatio || 2;
+            // const PIXEL_RATIO = window.devicePixelRatio || 2;
+            // ? Set these 2 values to match the scale size on both mobile and desktop
+            const PIXEL_RATIO = 3;
+            const offsetWidth = 350;
+
             // Create initial canvas with temporary size
             const canvas = new fabric.Canvas(document.createElement('canvas'), {
                 width: 1600,  // increased base width
@@ -69,8 +73,9 @@ const WishCardResultPage = ({ setNextPage }) => {
             const bgImg = await new Promise((resolve) => {
                 fabric.Image.fromURL('/assets/images/wish_card_flower_2.png', (img) => {
                     // Scale image accounting for pixel ratio
-                    const scale = (contentBox.offsetWidth * PIXEL_RATIO) / img.width;
+                    const scale = (offsetWidth * PIXEL_RATIO) / img.width;
                     img.scale(scale);
+                    
                     
                     // Resize canvas to match scaled image
                     canvas.setDimensions({
@@ -96,25 +101,18 @@ const WishCardResultPage = ({ setNextPage }) => {
             // Add text with adjusted font size and line wrapping
             const text = new fabric.Textbox(userWishData?.userInput || 'Bạn chưa nhập lời chúc', {
                 left: canvas.width / 2,
-                // Adjust top position to match md:pt-20 for larger screens, pt-3 for mobile
-                top: contentBox.offsetWidth < 768 ? canvas.height / 3: canvas.height / 2.5,
-                // Match text-xs for mobile, text-xl for desktop with PIXEL_RATIO scaling
-                fontSize: (contentBox.offsetWidth < 768 ? 12 : 20) * PIXEL_RATIO,
+                top: canvas.height / 3,
+                fontSize: 12 * PIXEL_RATIO,
                 fontFamily: 'Inter',
                 fill: '#000000',
                 textAlign: 'center',
                 originX: 'center',
                 originY: 'center',
-                // Match md:max-w-[80%] and max-w-56 constraints
-                width: contentBox.offsetWidth < 768 ? 
-                       canvas.width * 0.6 : // mobile
-                       canvas.width * 0.8,  // desktop
+                width: canvas.width * 0.6,
                 lineHeight: 1.5,
                 breakWords: true,
                 wordWrap: true,
-                padding: contentBox.offsetWidth < 768 ? 
-                         12 * PIXEL_RATIO : // mobile padding
-                         20 * PIXEL_RATIO,  // desktop padding
+                padding: 12 * PIXEL_RATIO,
                 fontWeight: 400, // font-normal
             });
 

@@ -45,14 +45,13 @@ export class UploadService {
     // get total documents in the Upload collection
     const total = await this.uploadModel.countDocuments(searchFilter);
 
-    // get total pages
+    // Get total pages
     const totalPages = Math.ceil(total / limit);
 
-    //  Reset to page 1 if search is present and calculate skip
-    const currentPage = (search && total <= limit) ? 1 : page;
-
     // Ensure page doesn't exceed total pages
-    const validatedPage = Math.min(currentPage, totalPages);
+    const validatedPage = Math.max(1, Math.min(page, totalPages));
+
+    // Calculate skip
     const skip = (validatedPage - 1) * limit;
 
     //get paginated documents

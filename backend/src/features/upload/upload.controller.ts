@@ -30,7 +30,7 @@ export class UploadController {
   @Get()
   findAll(
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
-    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
+    @Query('limit', new DefaultValuePipe(20), ParseIntPipe) limit: number,
     @Query('search', new DefaultValuePipe('')) search: string,
   ) {
     return this.uploadService.findAll(page, limit, search);

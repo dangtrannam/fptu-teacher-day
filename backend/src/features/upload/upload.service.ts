@@ -25,7 +25,7 @@ export class UploadService {
 
   async findAll(
     page: number = 1,
-    limit: number = 10,
+    limit: number = 20,
     search: string = '',
   ): Promise<{
     data: any[],

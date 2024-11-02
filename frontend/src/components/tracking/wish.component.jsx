@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useCallback, useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -16,6 +15,8 @@ import TablePagination from '@mui/material/TablePagination';
 import { getUploadData, getImageData } from '../../service/wish.service';
 import dayjs from 'dayjs';
 import { Input } from '@mui/material';
+import { debounce } from 'lodash';
+import normalizeString from './utils/normalizeString';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -39,27 +40,46 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
+
 const WishComponent = () => {
     const [data, setData] = useState([]);
     const [open, setOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState('');
     const [page, setPage] = useState(1);
-    const [limit, setLimit] = useState(10);
+    const [limit, setLimit] = useState(20);
     const [total, setTotal] = useState(0);
     const [search, setSearch] = useState(''); // State for search input
+
+    // Debounce function to limit the number of API calls
+    const debouncedFetchData = useCallback(
+        debounce((page, limit, search) => {
+            fetchData(page, limit, search);
+        }, 300), // Adjust the debounce delay as needed
+        []
+    );
+
+    const handleSearchChange = (e) => {
+        const value = e.target.value;
+        setSearch(value);
+        debouncedFetchData(page, limit, value);
+    };
 
     // Update fetchData to include the search parameter
     const fetchData = async (page, limit, search) => {
         try {
             const response = await getUploadData({ page, limit, search });
             if (response && Array.isArray(response.data)) {
-                setData(response.data);
+                const normalizedSearch = normalizeString(search);
+                const filteredData = response.data.filter(item => {
+                    return normalizeString(item.name).includes(normalizedSearch) ||
+                        normalizeString(item.schoolName).includes(normalizedSearch) ||
+                        normalizeString(item.userInput).includes(normalizedSearch);
+                });
+                setData(filteredData);
                 setTotal(response.total);
-            } else {
-                console.error('Fetched data is not an array:', response);
             }
         } catch (error) {
-            console.error('Failed to fetch data:', error);
+            console.error('Error fetching data:', error);
         }
     };
 
@@ -83,7 +103,8 @@ const WishComponent = () => {
     };
 
     const handleChangeRowsPerPage = (event) => {
-        setLimit(parseInt(event.target.value, 10));
+        const newLimit = parseInt(event.target.value, 10);
+        setLimit(newLimit || 20);
         setPage(1);
     };
 
@@ -94,7 +115,7 @@ const WishComponent = () => {
                 type='text'
                 placeholder='Tìm kiếm...'
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={handleSearchChange}
                 className='mb-4 p-2 min-w-64 w-[60%] border border-gray-300 rounded-md'
             />
 
@@ -136,7 +157,7 @@ const WishComponent = () => {
                     </TableBody>
                 </Table>
                 <TablePagination
-                    rowsPerPageOptions={[5, 10, 25]}
+                    rowsPerPageOptions={[20, 50, 100]}
                     component="div"
                     count={total}
                     rowsPerPage={limit}

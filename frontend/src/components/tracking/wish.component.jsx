@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -9,22 +10,23 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
 import Modal from '@mui/material/Modal';
-import ImageIcon from '@mui/icons-material/Visibility'; // Eye icon
-import CloseIcon from '@mui/icons-material/Close'; // Close icon
+import ImageIcon from '@mui/icons-material/Visibility';
+import CloseIcon from '@mui/icons-material/Close';
 import TablePagination from '@mui/material/TablePagination';
 import { getUploadData, getImageData } from '../../service/wish.service';
 import dayjs from 'dayjs';
+import { Input } from '@mui/material';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: theme.palette.common.black,
         color: theme.palette.common.white,
-        fontSize: 14, // Decrease font size
-        padding: '8px', // Decrease padding
+        fontSize: 14,
+        padding: '8px',
     },
     [`&.${tableCellClasses.body}`]: {
-        fontSize: 14, // Decrease font size
-        padding: '8px', // Decrease padding
+        fontSize: 14,
+        padding: '8px',
     },
 }));
 
@@ -38,16 +40,18 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const WishComponent = () => {
-    const [data, setData] = useState([]); // Initialize as an empty array
+    const [data, setData] = useState([]);
     const [open, setOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState('');
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(10);
     const [total, setTotal] = useState(0);
+    const [search, setSearch] = useState(''); // State for search input
 
-    const fetchData = async (page, limit) => {
+    // Update fetchData to include the search parameter
+    const fetchData = async (page, limit, search) => {
         try {
-            const response = await getUploadData({ page, limit });
+            const response = await getUploadData({ page, limit, search });
             if (response && Array.isArray(response.data)) {
                 setData(response.data);
                 setTotal(response.total);
@@ -59,25 +63,12 @@ const WishComponent = () => {
         }
     };
 
-    const fetchImageData = async (imageUrl) => {
-        try {
-            const data = await getImageData(imageUrl);
-            if (data) {
-                return data;
-            } else {
-                console.error('Failed to fetch image data:', data);
-            }
-        } catch (error) {
-            return null; // Return null if there is an error
-        }
-    };
-
     useEffect(() => {
-        fetchData(page, limit);
-    }, [page, limit]);
+        fetchData(page, limit, search);
+    }, [page, limit, search]);
 
     const handleOpen = async (imageUrl) => {
-        const base64Image = await fetchImageData(imageUrl);
+        const base64Image = await getImageData(imageUrl);
         setSelectedImage(`data:image/png;base64,${base64Image}`);
         setOpen(true);
     };
@@ -88,17 +79,25 @@ const WishComponent = () => {
     };
 
     const handleChangePage = (event, newPage) => {
-        setPage(newPage + 1); // Material-UI uses zero-based index for pages
+        setPage(newPage + 1);
     };
 
     const handleChangeRowsPerPage = (event) => {
         setLimit(parseInt(event.target.value, 10));
-        setPage(1); // Reset to first page
+        setPage(1);
     };
 
     return (
         <>
-            <h1 className='mb-8 mt-4 font-bold text-xl uppercase'>Những câu chúc của mọi người</h1>
+            <h1 className="mb-8 mt-4 font-bold text-xl uppercase">Những câu chúc của mọi người</h1>
+            <Input
+                type='text'
+                placeholder='Tìm kiếm...'
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className='mb-4 p-2 min-w-64 w-[60%] border border-gray-300 rounded-md'
+            />
+
             <TableContainer component={Paper} style={{ overflowX: 'auto' }}>
                 <Table sx={{ minWidth: 500 }} aria-label="customized table">
                     <TableHead>
@@ -117,15 +116,9 @@ const WishComponent = () => {
                                     <StyledTableCell component="th" scope="row">
                                         {item.name}
                                     </StyledTableCell>
-                                    <StyledTableCell component="th" scope="row">
-                                        {item.schoolName}
-                                    </StyledTableCell>
-                                    <StyledTableCell component="th" scope="row">
-                                        {item.userInput}
-                                    </StyledTableCell>
-                                    <StyledTableCell component="th" scope="row">
-                                        {dayjs(item.timestamp).format('DD-MM-YYYY HH:mm')}
-                                    </StyledTableCell>
+                                    <StyledTableCell>{item.schoolName}</StyledTableCell>
+                                    <StyledTableCell>{item.userInput}</StyledTableCell>
+                                    <StyledTableCell>{dayjs(item.timestamp).format('DD-MM-YYYY HH:mm')}</StyledTableCell>
                                     <StyledTableCell align="right">
                                         <IconButton onClick={() => handleOpen(item.imageUrl)}>
                                             <ImageIcon sx={{ color: '#9ca3af' }} />
@@ -135,7 +128,9 @@ const WishComponent = () => {
                             ))
                         ) : (
                             <StyledTableRow>
-                                <StyledTableCell colSpan={5} align="center">No data available</StyledTableCell>
+                                <StyledTableCell colSpan={5} align="center">
+                                    No data available
+                                </StyledTableCell>
                             </StyledTableRow>
                         )}
                     </TableBody>
@@ -145,23 +140,26 @@ const WishComponent = () => {
                     component="div"
                     count={total}
                     rowsPerPage={limit}
-                    page={page - 1} // Material-UI uses zero-based index for pages
+                    page={page - 1}
                     onPageChange={handleChangePage}
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
             </TableContainer>
+
             <Modal open={open} onClose={handleClose}>
-                <div style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    height: '100vh',
-                    position: 'relative' // To position the close button correctly
-                }}>
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        height: '100vh',
+                        position: 'relative',
+                    }}
+                >
                     <img
                         src={selectedImage}
                         alt="Preview"
-                        style={{ maxWidth: '60%', maxHeight: '80%', borderRadius: '8px' }} // Adjust modal image size
+                        style={{ maxWidth: '60%', maxHeight: '80%', borderRadius: '8px' }}
                     />
                     <IconButton
                         onClick={handleClose}
@@ -171,8 +169,9 @@ const WishComponent = () => {
                             right: 16,
                             color: 'white',
                             backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                            borderRadius: '50%'
-                        }}>
+                            borderRadius: '50%',
+                        }}
+                    >
                         <CloseIcon />
                     </IconButton>
                 </div>

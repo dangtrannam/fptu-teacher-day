@@ -40,7 +40,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-
 const WishComponent = () => {
     const [data, setData] = useState([]);
     const [open, setOpen] = useState(false);
@@ -49,20 +48,6 @@ const WishComponent = () => {
     const [limit, setLimit] = useState(20);
     const [total, setTotal] = useState(0);
     const [search, setSearch] = useState(''); // State for search input
-
-    // Debounce function to limit the number of API calls
-    const debouncedFetchData = useCallback(
-        debounce((page, limit, search) => {
-            fetchData(page, limit, search);
-        }, 300), // Adjust the debounce delay as needed
-        []
-    );
-
-    const handleSearchChange = (e) => {
-        const value = e.target.value;
-        setSearch(value);
-        debouncedFetchData(page, limit, value);
-    };
 
     // Update fetchData to include the search parameter
     const fetchData = async (page, limit, search) => {
@@ -83,9 +68,24 @@ const WishComponent = () => {
         }
     };
 
+    // Debounce function to limit the number of API calls for search input
+    const debouncedFetchData = useCallback(
+        debounce((searchValue) => {
+            fetchData(page, limit, searchValue);
+        }, 300),
+        [page, limit] // Only depend on page and limit
+    );
+
+    const handleSearchChange = (e) => {
+        const value = e.target.value;
+        setSearch(value);
+        debouncedFetchData(value); // Only debounce based on search input
+    };
+
+    // Fetch data immediately when page or limit changes
     useEffect(() => {
         fetchData(page, limit, search);
-    }, [page, limit, search]);
+    }, [page, limit]);
 
     const handleOpen = async (imageUrl) => {
         const base64Image = await getImageData(imageUrl);

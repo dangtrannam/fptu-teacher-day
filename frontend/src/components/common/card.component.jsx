@@ -36,9 +36,9 @@ export default function CardComponent({ animate }) {
   const [hearts, setHearts] = useState([])
 
   const generateHearts = () => {
-    const newHearts = Array(5).fill(null).map((_, index) => ({
+    const newHearts = Array(20).fill(null).map((_, index) => ({
       id: Date.now() + index,
-      delay: index * 0.1
+      delay: index * 0.05
     }))
     setHearts(prevHearts => [...prevHearts, ...newHearts])
   }

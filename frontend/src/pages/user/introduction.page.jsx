@@ -42,7 +42,7 @@ const IntroductionPage = ({ setNextPage }) => {
             <Background />
             <CloudOverlay animate={animateClouds}/>
             <CardComponent animate={animateClouds}/>
-            <div className="absolute left-1/2 -translate-x-1/2 top-0  min-[500px]:-top-10 min-[1200px]:-top-20 flex flex-col items-center justify-center mt-16 lg:mt-32 mb-10 mx-auto max-w-2xl w-full z-[100]">
+            <div className="absolute left-1/2 -translate-x-1/2 top-24  min-[500px]:top-24 min-[1200px]:top-12 flex flex-col items-center justify-center mt-16 mb-10 mx-auto max-w-2xl w-full z-[100]">
                 <div className="flex justify-center items-center w-full">
                     <SVGLogo />
                 </div>

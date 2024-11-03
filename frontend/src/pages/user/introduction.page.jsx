@@ -60,12 +60,12 @@ const IntroductionPage = ({ setNextPage }) => {
             <Background />
             <CloudOverlay animate={animateClouds} />
             <CardComponent animate={animateClouds} />
-            <div className="absolute left-1/2 -translate-x-1/2 top-24  min-[500px]:top-24 min-[1200px]:top-12 flex flex-col items-center justify-center mt-16 mb-10 mx-auto max-w-2xl w-full z-[100]">
+            <div className="absolute left-1/2 -translate-x-1/2 top-2 min-[500px]:top-10 min-[1200px]:top-10 flex flex-col items-center justify-center mt-16 mb-10 mx-auto max-w-2xl w-full z-[100]">
                 <div className="flex justify-center items-center w-full">
                     <SVGLogo />
                 </div>
                 <div className="flex flex-col items-center justify-center space-y-6 w-full mt-10 px-4 lg:px-0">
-                    <p className="text-center text-white text-base md:text-xl font-inter flex flex-col uppercase font-bold">
+                    <p className="text-center text-white text-sm md:text-base lg:text-xl font-inter flex flex-col uppercase font-bold">
                         <span>GỬI LỜI CHÚC ĐIỆN TỬ TỚI THẦY CÔ</span>
                         <span>Đã có <strong className='text-orange-500'><Counter from={100} to={400} />+</strong> Lời chúc được gửi thành công</span>
                     </p>

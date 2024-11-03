@@ -8,7 +8,7 @@ const Button = ({ label, size = 'medium', type, variant = 'primary', onClick = (
     };
 
     const variantClasses = {
-        primary: 'bg-brand border-brand hover:bg-orange-600 hover:border-orange-600',
+        primary: 'bg-brand border-brand',
         // secondary: 'bg-gray-500 text-white border-gray-500',
         // outline: 'bg-transparent text-brand border-brand', 
         opacity: 'bg-orange-opacity border-brand hover:bg-brand hover:border-brand'
@@ -16,7 +16,7 @@ const Button = ({ label, size = 'medium', type, variant = 'primary', onClick = (
 
     return (
         <button
-            className={`${sizeClasses[size]} ${variantClasses[variant]} rounded-full border font-inter uppercase text-white text-lg md:text-xl font-semibold line-clamp-1`}
+            className={`button ${sizeClasses[size]} ${variantClasses[variant]} rounded-full border font-inter uppercase text-white text-lg md:text-xl font-semibold line-clamp-1 overflow-hidden relative`}
             onClick={onClick}
             type={type}
         >

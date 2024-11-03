@@ -99,7 +99,7 @@ const WishCardResultPage = ({ setNextPage }) => {
             });
 
             // Add text with adjusted font size and line wrapping
-            const text = new fabric.Textbox(userWishData?.userInput || 'Bạn chưa nhập lời chúc', {
+            const userInput = new fabric.Textbox(userWishData?.userInput || 'Bạn chưa nhập lời chúc', {
                 left: canvas.width / 2,
                 top: canvas.height / 3,
                 fontSize: 12 * PIXEL_RATIO,
@@ -116,7 +116,23 @@ const WishCardResultPage = ({ setNextPage }) => {
                 fontWeight: 400, // font-normal
             });
 
-            canvas.add(text);
+            // Add user name below the text at the bottom right
+            const nameText = new fabric.Text(userWishData?.name || '', {
+                left: canvas.width / 1.5,
+                top: userInput.top + userInput.height + 12 * PIXEL_RATIO,
+                fontSize: 12 * PIXEL_RATIO,
+                fontFamily: 'Inter',
+                fill: '#000000',
+                textAlign: 'center',
+                originX: 'center',
+                originY: 'top',
+                fontStyle: 'italic',
+                fontWeight: 400, // font-normal
+            });
+
+            canvas.add(nameText);
+
+            canvas.add(userInput);
             canvas.renderAll();
 
             const dataURL = canvas.toDataURL({
@@ -167,6 +183,9 @@ const WishCardResultPage = ({ setNextPage }) => {
                             <span className="md:max-w-[80%] max-w-56 text-center text-xs md:text-xl font-normal font-inter">
                                 {userWishData?.userInput || 'Bạn chưa nhập lời chúc'}
                             </span>
+                            <div className="md:max-w-[80%] max-w-56 text-right text-xs md:text-xl font-normal font-inter mt-3">
+                                <span className='italic'>{userWishData?.name || ''}</span>
+                            </div>
                         </div>
                     </div>
                 </div>

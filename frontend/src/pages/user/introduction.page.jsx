@@ -20,28 +20,46 @@ const IntroductionPage = ({ setNextPage }) => {
     const handleStart = () => {
         setAnimateClouds(true)
         setTimeout(() => {
-        handleRemoveLocalStorage(setNextPage)
-        trackingUserAccess()
+            handleRemoveLocalStorage(setNextPage)
+            trackingUserAccess()
         }, 200)
     }
 
     const Counter = ({ from, to }) => {
-        const count = useMotionValue(from)
-        const rounded = useTransform(count, (latest) => Math.round(latest))
-        
+        const count = useMotionValue(from);
+        const rounded = useTransform(count, (latest) => Math.round(latest));
+
         useEffect(() => {
-            const controls = animate(count, to, { duration: 2, ease: 'easeOut' })
-            return controls.stop
-        }, [count, to])
-        
-        return <motion.span>{rounded}</motion.span>
-    }
+            let current = from;
+            const interval = setInterval(() => {
+                if (current < to) {
+                    // Random increment between 1 or 2
+                    const increment = Math.floor(Math.random() * 2) + 1;
+                    current += increment;
+
+                    if (current > to) current = to;
+                    // Slower animation
+                    animate(count, current, {
+                        duration: 2,
+                        ease: "easeInOut"
+                    });
+                    // Stop when reached target
+                    if (current >= to) {
+                        clearInterval(interval);
+                    }
+                }
+            }, 1500);
+            return () => clearInterval(interval);
+        }, [from, to]);
+
+        return <motion.span>{rounded}</motion.span>;
+    };
 
     return (
         <div className="relative  w-screen overflow-hidden">
             <Background />
-            <CloudOverlay animate={animateClouds}/>
-            <CardComponent animate={animateClouds}/>
+            <CloudOverlay animate={animateClouds} />
+            <CardComponent animate={animateClouds} />
             <div className="absolute left-1/2 -translate-x-1/2 top-24  min-[500px]:top-24 min-[1200px]:top-12 flex flex-col items-center justify-center mt-16 mb-10 mx-auto max-w-2xl w-full z-[100]">
                 <div className="flex justify-center items-center w-full">
                     <SVGLogo />

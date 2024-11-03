@@ -35,7 +35,7 @@ const WishCardResultPage = ({ setNextPage }) => {
         if (!userWishData?.name || !userWishData?.schoolName || !userWishData?.userInput) {
             return;
         }
-        
+
         const file = await ShareImage();
         try {
             trackingUserShare();
@@ -48,14 +48,14 @@ const WishCardResultPage = ({ setNextPage }) => {
         } catch (error) {
             console.error('Failed to post wish data:', error);
         }
-        
+
     };
 
     async function ShareImage() {
         const contentBox = document.getElementById('content-box');
         try {
             console.log("Starting canvas generation...");
-            
+
             // Set higher DPI
             // const PIXEL_RATIO = window.devicePixelRatio || 2;
             // ? Set these 2 values to match the scale size on both mobile and desktop
@@ -75,24 +75,24 @@ const WishCardResultPage = ({ setNextPage }) => {
                     // Scale image accounting for pixel ratio
                     const scale = (offsetWidth * PIXEL_RATIO) / img.width;
                     img.scale(scale);
-                    
-                    
+
+
                     // Resize canvas to match scaled image
                     canvas.setDimensions({
                         width: img.width * scale,
                         height: img.height * scale
                     });
-    
+
                     img.set({
                         originX: 'center',
                         originY: 'center',
                         left: canvas.width / 2,
                         top: canvas.height / 2
                     });
-                    
+
                     canvas.add(img);
                     resolve();
-                }, { 
+                }, {
                     crossOrigin: 'anonymous',
                     quality: 1.0 // max quality for image loading
                 });
@@ -127,7 +127,7 @@ const WishCardResultPage = ({ setNextPage }) => {
 
             const file = dataUrlToFile(dataURL, "fpt_20-11.png");
             console.log("File created:", file);
-            
+
             const files = convertToFileList(file);
             if (isMobile() && navigator.canShare({ files }) && navigator.share) {
                 console.log("Sharing...");
@@ -157,9 +157,9 @@ const WishCardResultPage = ({ setNextPage }) => {
             <div className="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
             <div className="absolute left-1/2 w-full -translate-x-1/2 top-[12vh] flex justify-center mt-6 mb-20 mx-auto flex-col items-center px-2 md:px-4">
                 <div className='w-full sm:max-w-[49rem] md:min-h-[32.5rem] bg-pink rounded-lg px-4 sm:px-16 pb-8 sm:pb-[50px] mx-auto mt-9 z-20'>
-                    <p className="flex flex-col font-medium text-xs md:text-xl w-full md:max-w-[80%] text-center mx-auto py-4 md:pt-10 md:pb-6 font-inter">
+                    <p className="flex flex-col font-medium text-xs md:text-xl w-full md:max-w-[100%] text-center mx-auto py-4 md:pt-10 md:pb-6 font-inter">
                         <span>Bạn đã gửi lời chúc thành công</span>
-                        <span>Hãy share để cùng nhau cảm ơn thầy cô nhé!</span>
+                        <span>Cùng <strong className='italic'>{userWishData?.name}</strong> chia sẻ thông điệp cảm ơn thầy cô nhé!</span>
                     </p>
                     {/* Show generated image instead of ContentBox */}
                     <div id='content-box' className='md:h-96 h-48 w-full aspect-video rounded-md bg-wish_card bg-center bg-cover bg-no-repeat'>

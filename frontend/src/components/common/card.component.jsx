@@ -26,9 +26,47 @@ const FallingHeart = ({ delay, onComplete }) => (
   </motion.div>
 )
 
-const mascots = [
-  'bg-mascot1', 'bg-mascot2', 'bg-mascot3', 'bg-mascot4',
-  'bg-mascot5', 'bg-mascot6', 'bg-mascot7', 'bg-mascot8'
+const cards = [
+  {
+    id: 1,
+    mascot: 'bg-mascot1',
+    text: 'Chúc thầy cô sẽ không phải gặp lại SV not pass FE để học lại hehe. Chúc thầy cô 20/11 thật nhiều niềm vui và hạnh phúc!'
+  },
+  {
+    id: 2,
+    mascot: 'bg-mascot2',
+    text: `Happy Teachers' Day! Thank you for your patience, wisdom, and kindness. We are truly grateful for having you!`
+  },
+  {
+    id: 3,
+    mascot: 'bg-mascot3',
+    text: `20/11 chúc thầy cô thật chill và luôn yêu nghề! Cảm ơn thầy cô đã không bao giờ ‘bó tay’ với tụi em!`
+  },
+  {
+    id: 4,
+    mascot: 'bg-mascot4',
+    text: `Em chúc cô thật nhiều sức khỏe, ngày càng xinh đẹp, mãi là bông hoa duyên dáng giữa trời thu Hà Nội!`
+  },
+  {
+    id: 5,
+    mascot: 'bg-mascot5',
+    text: `Chúc thầy cô ngày 20/11 vui vẻ, hạnh phúc, yêu đời! Cảm ơn thầy cô đã luôn ở đây và không bỏ cuộc với đám học sinh như chúng em.`
+  },
+  {
+    id: 6,
+    mascot: 'bg-mascot6',
+    text: `Chúc thầy cô có một 20/11 thật hạnh phúc và bình an. Em rất biết ơn sự tận tụy của thầy cô trong từng bài giảng!`
+  },
+  {
+    id: 7,
+    mascot: 'bg-mascot7',
+    text: `Để có lớp chúng em, thầy cô đã quá dũng cảm rồi! Chúc thầy cô 20/11 nhiều năng lượng và luôn nở nụ cười nhé!`
+  },
+  {
+    id: 8,
+    mascot: 'bg-mascot8',
+    text: `20/11 chúc thầy cô yêu đời, yêu nghề, yêu luôn cả đám học trò lắm chuyện như chúng em!`
+  }
 ]
 
 export default function CardComponent({ animate }) {
@@ -45,9 +83,9 @@ export default function CardComponent({ animate }) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentMascot((prev) => (prev + 1) % mascots.length)
+      setCurrentMascot((prev) => (prev + 1) % cards.length)
       generateHearts()
-    }, 3000)
+    }, 5000)
 
     return () => clearInterval(interval)
   }, [])
@@ -58,38 +96,48 @@ export default function CardComponent({ animate }) {
 
   return (
     <motion.div 
-      className="absolute z-50 bottom-20 left-1/2 -translate-x-1/2 min-[500px]:bottom-16 min-[1200px]:bottom-10 w-full max-w-lg bg-gradient-to-b from-white to-[#ADCFF1] p-6 shadow-[0_4px_6px_0_rgba(0,0,0,0.25)] rounded-[16px]"
+      className="absolute z-50 bottom-20 left-1/2 -translate-x-1/2 min-[500px]:bottom-16 min-[1200px]:bottom-10 w-full max-w-lg px-2"
       animate={animate ? { y: '100%', x: "-50%" } : { x: "-50%", y: 0 }}
       transition={{ duration: 0.8, ease: 'easeInOut' }}
     >
-      <div className="flex items-start gap-4">
-        <div className="relative flex-shrink-0 h-[96px] aspect-square">
-          <motion.div 
-            key={currentMascot}
-            className={`${mascots[currentMascot]} bg-contain bg-no-repeat w-full h-full`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-          />
-          <AnimatePresence>
-            {hearts.map((heart) => (
-              <FallingHeart 
-                key={heart.id} 
-                delay={heart.delay} 
-                onComplete={() => removeHeart(heart.id)}
+      <div className='w-full bg-gradient-to-b from-white to-[#ADCFF1] p-6 shadow-[0_4px_6px_0_rgba(0,0,0,0.25)] rounded-[16px]'>
+        <div className="flex items-start gap-4">
+          <div className="relative flex-shrink-0 h-[96px] aspect-square">
+            <AnimatePresence mode='wait'>
+              <motion.div 
+                key={currentMascot}
+                className={`${cards[currentMascot].mascot} bg-contain bg-no-repeat w-full h-full`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
               />
-            ))}
-          </AnimatePresence>
-        </div>
-        <div className="relative self-center">
-          <div className="absolute -left-2 -top-4 text-4xl text-black">"</div>
-          <p className="pt-2 text-sm text-gray-600">
-            Lorem ipsum dolor sit amet consectetur. In in id eget in duis mattis
-            blandit quis. Est vel vitae tempor quis sed metus.
-          </p>
-          <div className="absolute -bottom-4 right-0 text-4xl text-black">
-            "
+            </AnimatePresence>
+            <AnimatePresence>
+              {hearts.map((heart) => (
+                <FallingHeart 
+                  key={heart.id} 
+                  delay={heart.delay} 
+                  onComplete={() => removeHeart(heart.id)}
+                />
+              ))}
+            </AnimatePresence>
+          </div>
+          <div className="relative self-center">
+            <AnimatePresence mode="wait">
+            <div className="absolute -left-2 -top-4 text-4xl text-black font-inter">“</div>
+              <motion.p 
+                key={currentMascot} 
+                className="pt-2 text-sm text-gray-600"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                {cards[currentMascot].text}
+              </motion.p>
+            </AnimatePresence>
+            <div className="absolute -bottom-8 right-0 text-4xl text-black font-inter">”</div>
           </div>
         </div>
       </div>

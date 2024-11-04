@@ -52,7 +52,6 @@ const WishCardResultPage = ({ setNextPage }) => {
     };
 
     async function ShareImage() {
-        const contentBox = document.getElementById('content-box');
         try {
             console.log("Starting canvas generation...");
 
@@ -117,9 +116,10 @@ const WishCardResultPage = ({ setNextPage }) => {
             });
 
             // Add user name below the text at the bottom right
+            const ADJUST_HEIGHT_RATIO = userWishData?.userInput.length > 105 ? 2 : 1.5;
             const nameText = new fabric.Text(userWishData?.name || '', {
                 left: canvas.width / 1.5,
-                top: userInput.top + userInput.height + 12 * PIXEL_RATIO,
+                top: userInput.top + userInput.height / ADJUST_HEIGHT_RATIO,
                 fontSize: 12 * PIXEL_RATIO,
                 fontFamily: 'Inter',
                 fill: '#000000',

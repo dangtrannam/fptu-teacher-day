@@ -96,7 +96,7 @@ const WishCardResultPage = ({ setNextPage }) => {
                     quality: 1.0 // max quality for image loading
                 });
             });
-            const shareText = `Cùng sẻ thông điệp yêu thương đến thầy cô FPT nhé!` + "\n" + `#FPTU20-11`;
+            const shareText = `Cùng chia sẻ thông điệp yêu thương đến thầy cô FPT nhé!` + "\n" + `#FPTU20-11`;
 
             // Add text with adjusted font size and line wrapping
             const userInput = new fabric.Textbox(userWishData?.userInput || 'Bạn chưa nhập lời chúc', {

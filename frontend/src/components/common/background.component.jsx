@@ -27,14 +27,14 @@ export default function Background() {
 
   return (
     <div 
-      className='w-screen h-screen overflow-hidden -z-10 bg-bgBase_Mobile min-[500px]:bg-bgBase_Tablet min-[1200px]:bg-bgBase bg-cover bg-center'
+      className='w-screen h-screen overflow-hidden -z-10 bg-bgBase_Mobile bg-top min-[500px]:bg-bgBase_Tablet min-[1200px]:bg-bgBase bg-cover max-[550px]:bg-top min-[1000px]:bg-center'
       onMouseMove={handleMouseMove}
     >
       <div
          className='hidden min-[1200px]:block absolute inset-0 bg-bgBase bg-cover bg-center'
       >
       <motion.div 
-        className="absolute inset-0 bg-animation_background_backward bg-cover bg-no-repeat bg-center"
+        className="absolute inset-0 bg-cover  bg-animation_background_backward bg-no-repeat bg-center top-10"
         style={{ 
           x: backwardX,
           width: 'calc(100% + 80px)',

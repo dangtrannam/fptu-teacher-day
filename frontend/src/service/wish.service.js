@@ -2,9 +2,22 @@ import axios from 'axios';
 import { WISH_ENDPOINT, IMAGE_ENDPOINT } from './apiConfig';
 import { getAuthHeaders } from '../constants/getAuthHeaders';
 
-export const getUploadData = async ({ page = 1, limit = 10, search = '' }) => {
+export const getUploadData = async ({
+  page = 1,
+  limit = 10,
+  search = '',
+  startDate,
+  endDate }) => {
   try {
-    const response = await axios.get(`${WISH_ENDPOINT}?page=${page}&limit=${limit}&search=${search}`, {
+    const params = new URLSearchParams({
+      page,
+      limit,
+      search,
+      ...(startDate ? { startDate } : {}),
+      ...(endDate ? { endDate } : {})
+    });
+
+    const response = await axios.get(`${WISH_ENDPOINT}?${params.toString()}`, {
       headers: getAuthHeaders()
     });
     return response.data;

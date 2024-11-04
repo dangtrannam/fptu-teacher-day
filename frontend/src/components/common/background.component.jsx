@@ -34,7 +34,7 @@ export default function Background() {
          className='hidden min-[1200px]:block absolute inset-0 bg-bgBase bg-cover bg-center'
       >
       <motion.div 
-        className="absolute inset-0 bg-cover  bg-animation_background_backward bg-no-repeat bg-center top-10 bg-red-400"
+        className="absolute inset-0 bg-cover  bg-animation_background_backward bg-no-repeat bg-center top-10"
         style={{ 
           x: backwardX,
           width: 'calc(100% + 80px)',

@@ -67,7 +67,7 @@ const IntroductionPage = ({ setNextPage }) => {
                 <div className="flex flex-col items-center justify-center space-y-6 w-full mt-10 px-4 lg:px-0">
                     <p className="text-center text-white text-sm md:text-base lg:text-xl font-inter flex flex-col uppercase font-bold">
                         <span>GỬI LỜI CHÚC ĐIỆN TỬ TỚI THẦY CÔ</span>
-                        <span>Đã có <strong className='text-orange-500'><Counter from={100} to={400} />+</strong> Lời chúc được gửi thành công</span>
+                        <span>Đã có <strong className='text-brand-600 font-extrabold text-xl'><Counter from={100} to={400} />+</strong> Lời chúc được gửi thành công</span>
                     </p>
                     <Button
                         variant='primary'

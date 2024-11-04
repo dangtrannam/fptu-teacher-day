@@ -64,6 +64,7 @@ export default {
             },
             textColor: {
                 'brand': 'rgba(242, 113, 37, 1)',
+                'brand-600': 'rgba(255,138,69,1)',
                 'black-custom': '#000000', // Custom black color if needed
             },
             borderColor: {
@@ -75,6 +76,10 @@ export default {
                 '704px': '704px',
                 '176px': '176px',
             },
+            boxShadow: {
+                'md': '0px 4px 4px 0px rgba(0, 0, 0, 0.25)', // Custom box shadow
+            },
+
         },
     },
     plugins: [],

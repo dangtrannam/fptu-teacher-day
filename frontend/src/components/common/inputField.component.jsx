@@ -7,7 +7,7 @@ const InputField = ({ placeholder, value, onChange, className, hint }) => (
             placeholder={placeholder}
             value={value}
             onChange={onChange}
-            className={`${className} w-60 h-14 px-6 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-500 placeholder:text-black placeholder:font-medium placeholder:text-sm`}
+            className={`${className} shadow-md w-60 h-14 px-6 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-500 placeholder:text-black placeholder:font-medium placeholder:text-sm`}
         />
         {!value && hint && (
             <span className="absolute right-6 top-1/2 transform -translate-y-1/2 text-gray-400 italic text-sm font-medium">

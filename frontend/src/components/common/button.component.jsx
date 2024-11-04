@@ -16,7 +16,7 @@ const Button = ({ label, size = 'medium', type, variant = 'primary', onClick = (
 
     return (
         <button
-            className={`button ${sizeClasses[size]} ${variantClasses[variant]} rounded-full border font-inter uppercase text-white text-lg md:text-xl font-semibold line-clamp-1 overflow-hidden relative`}
+            className={`button ${sizeClasses[size]} ${variantClasses[variant]} rounded-full border font-inter uppercase text-white text-lg md:text-xl font-semibold line-clamp-1 overflow-hidden relative shadow-md`}
             onClick={onClick}
             type={type}
         >

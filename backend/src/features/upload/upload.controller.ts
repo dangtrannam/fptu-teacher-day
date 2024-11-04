@@ -7,6 +7,7 @@ import { Express } from 'express';
 import * as path from 'path';
 import { diskStorage } from 'multer';
 import { editFileName, imageFileFilter } from './utils/file-upload.utils';
+import { ParseTimestampPipe } from './utils/pipes/timestamp.pipe';
 const fs = require('fs');
 
 @Controller('upload')
@@ -32,8 +33,10 @@ export class UploadController {
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
     @Query('limit', new DefaultValuePipe(20), ParseIntPipe) limit: number,
     @Query('search', new DefaultValuePipe('')) search: string,
+    @Query('startDate', ParseTimestampPipe) startDate?: Date,
+    @Query('endDate', ParseTimestampPipe) endDate?: Date,
   ) {
-    return this.uploadService.findAll(page, limit, search);
+    return this.uploadService.findAll(page, limit, search, startDate, endDate);
   }
 
   @Get(':id')

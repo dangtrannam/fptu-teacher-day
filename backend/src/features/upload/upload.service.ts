@@ -27,38 +27,52 @@ export class UploadService {
     page: number = 1,
     limit: number = 20,
     search: string = '',
+    startDate?: Date,
+    endDate?: Date,
   ): Promise<{
     data: any[],
     total: number,
     currentPage: number,
     totalPages: number,
   }> {
-    //create a seach filter
-    const searchFilter = search ? {
-      $or: [
+    let searchFilter: any = {};
+
+    // Add text search conditions
+    if (search?.trim()) {
+      searchFilter.$or = [
         { name: { $regex: search, $options: 'i' } },
         { schoolName: { $regex: search, $options: 'i' } },
         { userInput: { $regex: search, $options: 'i' } },
-      ],
-    } : {};
+      ];
+    }
 
-    // get total documents in the Upload collection
+    // Add timestamp range filter
+    if (startDate || endDate) {
+      searchFilter.timestamp = {};
+      if (startDate) {
+        searchFilter.timestamp.$gte = new Date(startDate);
+      }
+      if (endDate) {
+        // Add one day to endDate to include the entire day
+        const adjustedEndDate = new Date(endDate);
+        adjustedEndDate.setDate(adjustedEndDate.getDate() + 1);
+        searchFilter.timestamp.$lt = adjustedEndDate;
+      }
+    }
+
+    // Get total count and calculate pagination
     const total = await this.uploadModel.countDocuments(searchFilter);
-
-    // Get total pages
-    const totalPages = Math.ceil(total / limit);
-
-    // Ensure page doesn't exceed total pages
+    const totalPages = Math.max(1, Math.ceil(total / limit));
     const validatedPage = Math.max(1, Math.min(page, totalPages));
-
-    // Calculate skip
     const skip = (validatedPage - 1) * limit;
 
-    //get paginated documents
+    // Get paginated and sorted documents
     const uploads = await this.uploadModel
       .find(searchFilter)
+      .sort({ timestamp: -1 }) // Sort by timestamp descending
       .skip(skip)
       .limit(limit)
+      .lean()
       .exec();
 
     const data = uploads.map(upload => ({

@@ -67,7 +67,6 @@ const cards = [
     mascot: 'bg-mascot8',
     text: `20/11 chúc thầy cô yêu đời, yêu nghề, yêu luôn cả đám học trò lắm chuyện như chúng em!`
   }
-
 ]
 
 export default function CardComponent({ animate }) {
@@ -86,7 +85,7 @@ export default function CardComponent({ animate }) {
     const interval = setInterval(() => {
       setCurrentMascot((prev) => (prev + 1) % cards.length)
       generateHearts()
-    }, 3000)
+    }, 5000)
 
     return () => clearInterval(interval)
   }, [])
@@ -101,44 +100,47 @@ export default function CardComponent({ animate }) {
       animate={animate ? { y: '100%', x: "-50%" } : { x: "-50%", y: 0 }}
       transition={{ duration: 0.8, ease: 'easeInOut' }}
     >
-      <div className='w-full  bg-gradient-to-b from-white to-[#ADCFF1] p-6 shadow-[0_4px_6px_0_rgba(0,0,0,0.25)] rounded-[16px]'>
-      <div className="flex items-start gap-4">
-        <div className="relative flex-shrink-0 h-[96px] aspect-square">
-          <motion.div 
-            key={currentMascot}
-            className={`${cards[currentMascot].mascot} bg-contain bg-no-repeat w-full h-full`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-          />
-          <AnimatePresence>
-            {hearts.map((heart) => (
-              <FallingHeart 
-                key={heart.id} 
-                delay={heart.delay} 
-                onComplete={() => removeHeart(heart.id)}
+      <div className='w-full bg-gradient-to-b from-white to-[#ADCFF1] p-6 shadow-[0_4px_6px_0_rgba(0,0,0,0.25)] rounded-[16px]'>
+        <div className="flex items-start gap-4">
+          <div className="relative flex-shrink-0 h-[96px] aspect-square">
+            <AnimatePresence mode='wait'>
+              <motion.div 
+                key={currentMascot}
+                className={`${cards[currentMascot].mascot} bg-contain bg-no-repeat w-full h-full`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
               />
-            ))}
-          </AnimatePresence>
-        </div>
-        <div className="relative self-center">
-          <div className="absolute -left-2 -top-4 text-4xl text-black font-inter">“</div>
-          <motion.p className="pt-2 text-sm text-gray-600"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            exit={{ opacity: 0 }}
-          >
-            {cards[currentMascot].text}
-          </motion.p>
-          <div className="absolute -bottom-8 right-0 text-4xl text-black font-inter">
-            ”
+            </AnimatePresence>
+            <AnimatePresence>
+              {hearts.map((heart) => (
+                <FallingHeart 
+                  key={heart.id} 
+                  delay={heart.delay} 
+                  onComplete={() => removeHeart(heart.id)}
+                />
+              ))}
+            </AnimatePresence>
+          </div>
+          <div className="relative self-center">
+            <AnimatePresence mode="wait">
+            <div className="absolute -left-2 -top-4 text-4xl text-black font-inter">“</div>
+              <motion.p 
+                key={currentMascot} 
+                className="pt-2 text-sm text-gray-600"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                {cards[currentMascot].text}
+              </motion.p>
+            </AnimatePresence>
+            <div className="absolute -bottom-8 right-0 text-4xl text-black font-inter">”</div>
           </div>
         </div>
       </div>
-      </div>
-      
     </motion.div>
   )
 }

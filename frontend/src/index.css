@@ -1,50 +1,51 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@font-face {
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 400;
-    src: url('../src//fonts/Montserrat-Regular.ttf') format('truetype');
-}
 
 @font-face {
-    font-family: 'Montserrat SemiBold';
-    font-weight: 600;
-    src: url('../src//fonts/Montserrat-SemiBold.ttf') format('truetype');
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../src/fonts/Inter_18pt-Regular.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'Montserrat Bold';
-    font-weight: 700;
-    src: url('../src//fonts/Montserrat-Bold.ttf') format('truetype');
+  font-family: 'Inter SemiBold';
+  font-weight: 600;
+  src: url('../src/fonts/Inter_18pt-SemiBold.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'Montserrat ExtraBold';
-    font-weight: 800;
-    src: url('../src//fonts/Montserrat-ExtraBold.ttf') format('truetype');
+  font-family: 'Inter Bold';
+  font-weight: 700;
+  src: url('../src/fonts/Inter_18pt-Bold.ttf') format('truetype');
 }
 
-.font-montserrat {
-    font-family: 'Montserrat', sans-serif;
+@font-face {
+  font-family: 'Inter ExtraBold';
+  font-weight: 800;
+  src: url('../src/fonts/Inter_18pt-ExtraBold.ttf') format('truetype');
 }
 
-.font-montserrat-semibold {
-    font-family: 'Montserrat SemiBold', sans-serif;
+.font-inter {
+  font-family: 'Inter', sans-serif;
 }
 
-.font-montserrat-bold {
-    font-family: 'Montserrat Bold', sans-serif;
+.font-inter-semibold {
+  font-family: 'Inter SemiBold', sans-serif;
 }
 
-.font-montserrat-extrabold {
-    font-family: 'Montserrat ExtraBold', sans-serif;
+.font-inter-bold {
+  font-family: 'Inter Bold', sans-serif;
+}
+
+.font-inter-extrabold {
+  font-family: 'Inter ExtraBold', sans-serif;
 }
 
 img,
 video {
-    max-width: fit-content !important;
+  max-width: fit-content !important;
 }
 
 /* :root {

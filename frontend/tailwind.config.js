@@ -7,8 +7,11 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                inter: ["'Inter'", 'sans-serif'],
-                montserrat: ["'Montserrat'", 'sans-serif'],
+                inter: ['Inter', 'sans-serif'],
+                // montserrat: ["'Montserrat'", 'sans-serif'],
+            },
+            textStroke: {
+                '0.75': '0.75px white',
             },
             transitionDuration: {
                 '2000': '2000ms',
@@ -79,8 +82,20 @@ export default {
             boxShadow: {
                 'md': '0px 4px 4px 0px rgba(0, 0, 0, 0.25)', // Custom box shadow
             },
+            textStrokeWidth: {
+                '0.75': '0.75px',
+            },
 
         },
     },
-    plugins: [],
+    plugins: [
+        function ({ addUtilities }) {
+            addUtilities({
+                '.stroke-white': {
+                    '-webkit-text-stroke': '0.75px white',
+                    'text-stroke': '0.75px white',
+                },
+            });
+        }
+    ],
 }

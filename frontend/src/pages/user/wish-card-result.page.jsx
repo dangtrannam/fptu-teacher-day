@@ -70,7 +70,7 @@ const WishCardResultPage = ({ setNextPage }) => {
 
             // Load background image first
             const bgImg = await new Promise((resolve) => {
-                fabric.Image.fromURL('/assets/images/wish_card_bg_x3', (img) => {
+                fabric.Image.fromURL('/assets/images/wish_card_bg_x3.png', (img) => {
                     // Scale image accounting for pixel ratio
                     const scale = (offsetWidth * PIXEL_RATIO) / img.width;
                     img.scale(scale);

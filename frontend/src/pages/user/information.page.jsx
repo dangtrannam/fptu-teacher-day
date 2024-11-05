@@ -63,31 +63,31 @@ const InformationPage = ({ setNextPage }) => {
                             placeholder="Họ tên"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            className="w-full max-w-xs md:max-w-sm lg:max-w-md"
+                            className="w-full max-w-xs md:max-w-sm lg:max-w-md font-inter-bold"
                         />
                         <div className="h-6">
-                            {isSubmitted && errors.name && <p className="text-red-500 text-sm font-bold">{errors.name}</p>}
+                            {isSubmitted && errors.name && <p className="text-red-500 text-sm font-inter-bold">{errors.name}</p>}
                         </div>
 
                         <InputField
                             placeholder="Trường"
                             value={schoolName}
                             onChange={(e) => setSchoolName(e.target.value)}
-                            className="w-full max-w-xs md:max-w-sm lg:max-w-md"
+                            className="w-full max-w-xs md:max-w-sm lg:max-w-md font-inter-bold"
                         />
                         <div className="h-6">
-                            {isSubmitted && errors.schoolName && <p className="text-red-500 text-sm font-bold">{errors.schoolName}</p>}
+                            {isSubmitted && errors.schoolName && <p className="text-red-500 text-sm font-bold font-inter-bold">{errors.schoolName}</p>}
                         </div>
 
                         <InputField
                             placeholder="Lời chúc"
                             value={userInput}
                             onChange={(e) => setUserInput(e.target.value)}
-                            className="w-full max-w-xs md:max-w-sm lg:max-w-md"
+                            className="w-full max-w-xs md:max-w-sm lg:max-w-md font-inter-bold"
                             hint="tối đa 200 ký tự"
                         />
                         <div className="h-6">
-                            {isSubmitted && errors.userInput && <p className="text-red-500 text-sm font-bold">{errors.userInput}</p>}
+                            {isSubmitted && errors.userInput && <p className="text-red-500 text-sm font-bold font-inter-bold">{errors.userInput}</p>}
                         </div>
                     </form>
 

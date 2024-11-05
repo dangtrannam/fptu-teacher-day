@@ -58,12 +58,12 @@ const InformationPage = ({ setNextPage }) => {
             <div className="absolute left-1/2 -translate-x-1/2 top-[12vh] flex justify-center mt-6 mb-20 mx-auto flex-col items-center">
                 <SVGLogo className="w-24 md:w-32 lg:w-40 h-auto" />
                 <div className="flex flex-col items-center justify-center space-y-4 max-w-md w-full mt-10 px-4">
-                    <form className="flex flex-col items-center max-w-md w-full" onSubmit={handleSubmit}>
+                    <form className="flex flex-col w-80" onSubmit={handleSubmit}>
                         <InputField
                             placeholder="Họ tên"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            className="w-full max-w-xs md:max-w-sm lg:max-w-md font-inter-bold"
+                            className="w-full max-w-xs md:max-w-sm lg:max-w-md placeholder:font-bold font-inter"
                         />
                         <div className="h-6">
                             {isSubmitted && errors.name && <p className="text-red-500 text-sm font-inter-bold">{errors.name}</p>}
@@ -73,7 +73,7 @@ const InformationPage = ({ setNextPage }) => {
                             placeholder="Trường"
                             value={schoolName}
                             onChange={(e) => setSchoolName(e.target.value)}
-                            className="w-full max-w-xs md:max-w-sm lg:max-w-md font-inter-bold"
+                            className="w-full max-w-xs md:max-w-sm lg:max-w-md placeholder:font-bold font-inter"
                         />
                         <div className="h-6">
                             {isSubmitted && errors.schoolName && <p className="text-red-500 text-sm font-bold font-inter-bold">{errors.schoolName}</p>}
@@ -83,14 +83,13 @@ const InformationPage = ({ setNextPage }) => {
                             placeholder="Lời chúc"
                             value={userInput}
                             onChange={(e) => setUserInput(e.target.value)}
-                            className="w-full max-w-xs md:max-w-sm lg:max-w-md font-inter-bold"
+                            className="w-full max-w-xs md:max-w-sm lg:max-w-md placeholder:font-bold font-inter"
                             hint="tối đa 200 ký tự"
                         />
                         <div className="h-6">
                             {isSubmitted && errors.userInput && <p className="text-red-500 text-sm font-bold font-inter-bold">{errors.userInput}</p>}
                         </div>
                     </form>
-
 
                     <Button
                         variant="primary"

@@ -172,13 +172,13 @@ const WishCardResultPage = ({ setNextPage }) => {
     };
 
     return (
-        <div className="relative w-screen overflow-hidden">
+        <div className="relative w-screen min-h-screen overflow-hidden">
             <Background />
             <Header />
             <div className="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
-            <div className="absolute left-1/2 w-full -translate-x-1/2 top-[12vh] flex justify-center mt-6 mb-20 mx-auto flex-col items-center px-2 md:px-4">
-                <div className='w-full sm:max-w-[49rem] md:min-h-[32.5rem] bg-pink rounded-lg px-4 sm:px-16 pb-8 sm:pb-[50px] mx-auto mt-9 z-20'>
-                    <p className="flex flex-col font-medium text-xs md:text-xl w-full md:max-w-[100%] text-center mx-auto py-4 md:pt-10 md:pb-6 font-inter">
+            <div className="absolute left-1/2 w-full -translate-x-1/2 top-[12vh] flex flex-col items-center px-2 md:px-4">
+                <div className='w-full sm:max-w-[49rem] bg-pink rounded-lg px-4 sm:px-16 pb-8 sm:pb-[50px] mx-auto z-20'>
+                    <p className="flex flex-col font-medium text-xs md:text-xl w-full text-center mx-auto py-4 md:pt-10 md:pb-6 font-inter">
                         <span>Bạn đã gửi lời chúc thành công</span>
                         <span>Cùng <strong className='italic'>{userWishData?.name}</strong> chia sẻ thông điệp cảm ơn thầy cô nhé!</span>
                     </p>
@@ -194,18 +194,22 @@ const WishCardResultPage = ({ setNextPage }) => {
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col sm:flex-row justify-around items-center w-full max-w-[30rem] sm:max-w-[49rem] mx-auto mt-6 z-20 space-y-4 sm:space-y-0">
-                    <div className="flex-1 px-2 sm:px-4 md:px-8 xl:px-12 self-stretch">
-                        <Button
-                            variant="opacity"
-                            label="Gửi lời chúc khác"
-                            size="medium"
-                            onClick={handleAddOtherWish}
-                        />
-                    </div>
-                    <div className="flex-1 px-2 sm:px-4 md:px-8 xl:px-12 self-stretch">
-                        <Button variant="primary" label="Chia sẻ" size="medium" onClick={handleShare} />
-                    </div>
+
+                <div className="flex flex-col sm:flex-row justify-center gap-4 w-full max-w-[49rem] mt-4 z-20">
+                    <Button
+                        variant="opacity"
+                        label="Gửi lời chúc khác"
+                        size="medium"
+                        onClick={handleAddOtherWish}
+                        className="w-full sm:w-auto px-8"
+                    />
+                    <Button
+                        variant="primary"
+                        label="Chia sẻ"
+                        size="medium"
+                        onClick={handleShare}
+                        className="w-full sm:w-auto px-8"
+                    />
                 </div>
             </div>
         </div>

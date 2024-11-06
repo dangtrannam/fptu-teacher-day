@@ -172,10 +172,10 @@ const WishCardResultPage = ({ setNextPage }) => {
     };
 
     return (
-        <div className="relative w-screen min-h-screen overflow-hidden">
+        <div className="relative w-screen min-h-auto">
             <Background />
             <Header />
-            <div className="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
+            <div className="inset-0 bg-black bg-opacity-50 z-0 fixed"></div>
             <div className="absolute left-1/2 w-full -translate-x-1/2 top-[12vh] flex flex-col items-center px-2 md:px-4">
                 <div className='w-full sm:max-w-[49rem] bg-pink rounded-lg px-4 sm:px-16 pb-8 sm:pb-[50px] mx-auto z-20'>
                     <p className="flex flex-col font-medium text-xs md:text-xl w-full text-center mx-auto py-4 md:pt-10 md:pb-6 font-inter">
@@ -195,7 +195,7 @@ const WishCardResultPage = ({ setNextPage }) => {
                     </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row justify-center gap-4 w-full max-w-[49rem] mt-4 z-20">
+                <div className="flex flex-col sm:flex-row justify-center gap-4 w-full max-w-[49rem] mt-4 z-20 mb-6">
                     <Button
                         variant="opacity"
                         label="Gửi lời chúc khác"

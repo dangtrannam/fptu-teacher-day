@@ -60,14 +60,22 @@ const IntroductionPage = ({ setNextPage }) => {
             <Background />
             <CloudOverlay animate={animateClouds} />
             <CardComponent animate={animateClouds} />
-            <div className="absolute left-1/2 -translate-x-1/2 top-2 min-[500px]:top-10 min-[1200px]:top-10 flex flex-col items-center justify-center mt-16 mb-10 mx-auto max-w-2xl w-full z-[100]">
-                <div className="flex justify-center items-center w-full">
+            <div className="absolute left-1/2 -translate-x-1/2 top-2 min-[500px]:top-10 min-[1200px]:top-[2vh] flex flex-col items-center justify-center mt-16 mb-10 mx-auto max-w-2xl w-full z-[100]">
+                <div className="flex justify-center items-center w-[50%] xl:w-[70%]">
                     <SVGLogo />
                 </div>
                 <div className="flex flex-col items-center justify-center space-y-6 w-full mt-10 px-4 lg:px-0">
                     <p className="text-center text-white text-sm md:text-base lg:text-xl font-inter-bold flex flex-col uppercase">
-                        <span>TẠO THIỆP TRI ÂN THẦY CÔ</span>
-                        <span>Đã có <strong className="text-brand-600 font-inter-extrabold text-xl stroke-white"><Counter from={100} to={400} />+</strong> Lời chúc được gửi thành công</span>
+                        <span className=''
+                            style={{
+                            fontSize: 'clamp(0.5rem, 2vw + 0.85rem, 1rem)', // Adjusts between 1.25rem and 2rem
+                          }}
+                        >TẠO THIỆP TRI ÂN THẦY CÔ</span>
+                        <span
+                            style={{
+                            fontSize: 'clamp(0.5rem, 2vw + 0.85rem, 1rem)', // Adjusts between 1.25rem and 2rem
+                          }}
+                        >Đã có <strong className="text-brand-600 font-inter-extrabold text-xl stroke-white"><Counter from={100} to={400} />+</strong> Lời chúc được gửi thành công</span>
                     </p>
                     <Button
                         variant='primary'

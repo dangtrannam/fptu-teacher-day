@@ -101,14 +101,14 @@ const WishCardResultPage = ({ setNextPage }) => {
             // Add text with adjusted font size and line wrapping
             const userInput = new fabric.Textbox(userWishData?.userInput || 'Bạn chưa nhập lời chúc', {
                 left: canvas.width / 2,
-                top: canvas.height / 3,
+                top: canvas.height / 4,
                 fontSize: 12 * PIXEL_RATIO,
                 fontFamily: 'Inter',
                 fill: '#000000',
                 textAlign: 'center',
                 originX: 'center',
                 originY: 'center',
-                width: canvas.width * 0.9,
+                width: canvas.width * 0.85,
                 lineHeight: 1.5,
                 breakWords: true,
                 wordWrap: true,

@@ -55,8 +55,8 @@ const InformationPage = ({ setNextPage }) => {
         <div className="relative w-screen overflow-hidden">
             <Background />
             <Header />
-            <div className="absolute left-1/2 -translate-x-1/2 top-[12vh] flex justify-center mt-6 mb-20 mx-auto flex-col items-center">
-                <SVGLogo className="w-24 md:w-32 lg:w-40 h-auto" />
+            <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 flex justify-center mt-6 mb-20 mx-auto flex-col items-center">
+                <SVGLogo />
                 <div className="flex flex-col items-center justify-center space-y-4 max-w-md w-full mt-10 px-4">
                     <form className="flex flex-col w-80" onSubmit={handleSubmit}>
                         <InputField

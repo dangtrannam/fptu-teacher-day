@@ -96,7 +96,7 @@ export default function CardComponent({ animate }) {
 
   return (
     <motion.div 
-      className="absolute z-50 bottom-20 left-1/2 -translate-x-1/2 min-[500px]:bottom-16 min-[1200px]:bottom-10 w-full max-w-lg px-2"
+      className="absolute z-50 bottom-20 left-1/2 -translate-x-1/2 min-[500px]:bottom-16 min-[1200px]:bottom-10 w-full max-w-lg px-2 [@media(max-height:600px)]:bottom-3"
       animate={animate ? { y: '100%', x: "-50%" } : { x: "-50%", y: 0 }}
       transition={{ duration: 0.8, ease: 'easeInOut' }}
     >

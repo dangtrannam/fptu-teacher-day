@@ -17,5 +17,5 @@ export const informationSchema = Yup.object().shape({
     userInput: Yup.string()
         .transform((value) => value.trim()) // remove extra spaces
         .required('Lời chúc không được bỏ trống')
-        .max(200, 'Lời chúc không được dài quá 200 ký tự')
+        .max(170, 'Lời chúc không được dài quá 170 ký tự')
 });

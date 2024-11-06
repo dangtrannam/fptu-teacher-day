@@ -108,7 +108,7 @@ const WishCardResultPage = ({ setNextPage }) => {
                 textAlign: 'center',
                 originX: 'center',
                 originY: 'center',
-                width: canvas.width * 0.6,
+                width: canvas.width * 0.9,
                 lineHeight: 1.5,
                 breakWords: true,
                 wordWrap: true,
@@ -184,7 +184,7 @@ const WishCardResultPage = ({ setNextPage }) => {
                     </p>
                     {/* Show generated image instead of ContentBox */}
                     <div id='content-box' className='md:h-96 h-48 w-full aspect-video rounded-md bg-wish_card bg-center bg-cover bg-no-repeat'>
-                        <div className=' mx-auto px-12 md:px-20 md:pt-20 pt-3 text-center'>
+                        <div className=' mx-auto px-12 md:px-20 md:pt-4 pt-3 text-center'>
                             <span className="md:max-w-[80%] max-w-56 text-center text-xs md:text-xl font-normal font-inter">
                                 {userWishData?.userInput || 'Bạn chưa nhập lời chúc'}
                             </span>

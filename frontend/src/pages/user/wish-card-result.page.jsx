@@ -117,7 +117,8 @@ const WishCardResultPage = ({ setNextPage }) => {
             });
 
             // Add user name below the text at the bottom right
-            const ADJUST_HEIGHT_RATIO = userWishData?.userInput.length > 105 ? 2 : 1.5;
+            const ADJUST_HEIGHT_RATIO = userWishData?.userInput.length > 105 ? 1.75 : 1.5;
+
             const nameText = new fabric.Text(userWishData?.name || '', {
                 left: canvas.width / 1.5,
                 top: userInput.top + userInput.height / ADJUST_HEIGHT_RATIO,

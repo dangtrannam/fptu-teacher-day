@@ -7,6 +7,10 @@ const HeartIcon = () => (
   </svg>
 )
 
+function isMobile() {
+  return /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
 const FallingHeart = ({ delay, onComplete }) => (
   <motion.div
     className="absolute"
@@ -72,6 +76,7 @@ const cards = [
 export default function CardComponent({ animate }) {
   const [currentMascot, setCurrentMascot] = useState(0)
   const [hearts, setHearts] = useState([])
+  const [scaleFactor, setScaleFactor] = useState(window.devicePixelRatio || 1)
 
   const generateHearts = () => {
     const newHearts = Array(20).fill(null).map((_, index) => ({
@@ -90,15 +95,23 @@ export default function CardComponent({ animate }) {
     return () => clearInterval(interval)
   }, [])
 
+  useEffect(() => {
+    const handleResize = () => setScaleFactor(window.devicePixelRatio || 1)
+    window.addEventListener("resize", handleResize)
+
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
+
   const removeHeart = (id) => {
     setHearts(prevHearts => prevHearts.filter(heart => heart.id !== id))
   }
 
   return (
     <motion.div 
-      className="absolute z-50 bottom-20 left-1/2 -translate-x-1/2 min-[500px]:bottom-16 min-[1200px]:bottom-10 w-full max-w-lg px-2 [@media(max-height:600px)]:bottom-3"
+      className="absolute z-50 bottom-20 left-1/2 -translate-x-1/2 min-[500px]:bottom-3 min-[1200px]:bottom-10 w-[90%] max-w-lg px-2"
       animate={animate ? { y: '100%', x: "-50%" } : { x: "-50%", y: 0 }}
       transition={{ duration: 0.8, ease: 'easeInOut' }}
+      
     >
       <div className='w-full bg-gradient-to-b from-white to-[#ADCFF1] p-6 shadow-[0_4px_6px_0_rgba(0,0,0,0.25)] rounded-[16px]'>
         <div className="flex items-start gap-4">
@@ -125,7 +138,7 @@ export default function CardComponent({ animate }) {
           </div>
           <div className="relative self-center">
             <AnimatePresence mode="wait">
-            <div className="absolute -left-2 -top-4 text-4xl text-black font-inter">“</div>
+              <div className="absolute -left-2 -top-4 text-4xl text-black font-inter">“</div>
               <motion.p 
                 key={currentMascot} 
                 className="pt-2 text-sm text-gray-600"

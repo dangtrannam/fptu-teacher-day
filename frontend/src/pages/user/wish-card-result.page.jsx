@@ -172,12 +172,43 @@ const WishCardResultPage = ({ setNextPage }) => {
         handleRemoveLocalStorage(setNextPage);
     };
 
+    const [scaleFactor, setScaleFactor] = useState(window.devicePixelRatio || 1);
+
+    useEffect(() => {
+      const updateScale = () => {
+        console.log(window.devicePixelRatio)
+
+        setScaleFactor((window.devicePixelRatio) || 1);
+      };
+  
+      // Update the scale factor on window resize
+      window.addEventListener('resize', updateScale);
+  
+      // Clean up event listener on component unmount
+      return () => {
+        window.removeEventListener('resize', updateScale);
+      };
+    }, []);
+
     return (
         <div className="relative w-screen min-h-screen overflow-x-hidden overflow-y-scroll">
             <Background />
             <Header />
             <div className="fixed inset-0 bg-black bg-opacity-50 z-0"></div>
-            <div className="absolute left-1/2 w-full -translate-x-1/2 top-1/2 -translate-y-1/2 flex flex-col items-center px-2 md:px-4">
+            <div className="absolute 
+
+                top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
+            
+              flex flex-col items-center px-2 md:px-4 mx-auto"
+              style={
+                !isMobile()
+                  ? {
+                      transform: `translate(-50%, -50%) scale(${1 / scaleFactor})`,
+                      transformOrigin: 'center center',
+                    }
+                  : {}
+              }
+            >
                 <div className='w-full sm:max-w-[49rem] bg-pink rounded-lg px-4 sm:px-16 pb-8 sm:pb-[50px] mx-auto z-20'>
                     <p className="flex flex-col font-medium text-xs md:text-xl w-full text-center mx-auto py-4 md:pt-10 md:pb-6 font-inter">
                         <span>Bạn đã gửi lời chúc thành công</span>

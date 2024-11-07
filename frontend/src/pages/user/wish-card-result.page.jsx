@@ -6,8 +6,6 @@ import { postWishData } from '../../service/wish.service';
 import { getLocalStorageData, handleRemoveLocalStorage } from '../../service/localStorageService';
 // import html2canvaspro from 'html2canvas-pro';
 import { fabric } from 'fabric';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 function isMobile() {
     return /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -174,33 +172,12 @@ const WishCardResultPage = ({ setNextPage }) => {
         handleRemoveLocalStorage(setNextPage);
     };
 
-    const [scaleFactor, setScaleFactor] = useState(window.devicePixelRatio || 1);
-
-    useEffect(() => {
-      const updateScale = () => {
-        setScaleFactor(window.devicePixelRatio || 1);
-      };
-  
-      // Update the scale factor on window resize
-      window.addEventListener('resize', updateScale);
-  
-      // Clean up event listener on component unmount
-      return () => {
-        window.removeEventListener('resize', updateScale);
-      };
-    }, []);
-
     return (
         <div className="relative w-screen min-h-screen overflow-x-hidden overflow-y-scroll">
             <Background />
             <Header />
             <div className="fixed inset-0 bg-black bg-opacity-50 z-0"></div>
-            <div className="absolute left-[25%] top-[15%]  flex flex-col items-center px-2 md:px-4 mx-auto"
-                style={{
-                    transform: `scale(${1 / scaleFactor})`,
-                    transformOrigin: '0 0',
-                  }}
-            >
+            <div className="absolute left-1/2 w-full -translate-x-1/2 top-1/2 -translate-y-1/2 flex flex-col items-center px-2 md:px-4">
                 <div className='w-full sm:max-w-[49rem] bg-pink rounded-lg px-4 sm:px-16 pb-8 sm:pb-[50px] mx-auto z-20'>
                     <p className="flex flex-col font-medium text-xs md:text-xl w-full text-center mx-auto py-4 md:pt-10 md:pb-6 font-inter">
                         <span>Bạn đã gửi lời chúc thành công</span>

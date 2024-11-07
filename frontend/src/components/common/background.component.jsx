@@ -27,7 +27,7 @@ export default function Background() {
 
   return (
     <div 
-      className='w-screen h-screen overflow-hidden -z-10 bg-bgBase_Mobile bg-top min-[500px]:bg-bgBase_Tablet min-[1000px]:bg-bgBase bg-cover max-[550px]:bg-top min-[1000px]:bg-center'
+      className='w-screen h-screen overflow-hidden -z-10 bg-bgBase_Mobile bg-top min-[500px]:bg-bgBase_Tablet min-[500px]:bg-center min-[900px]:bg-bgBase bg-cover max-[550px]:bg-top min-[1000px]:bg-center'
       onMouseMove={handleMouseMove}
     >
       <div

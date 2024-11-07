@@ -7,6 +7,10 @@ import Background from '../../components/common/background.component';
 import { setLocalStorageData, getLocalStorageData } from '../../service/localStorageService';
 import { informationSchema } from './schema/userInputSchema';
 
+function isMobile() {
+    return /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
 const InformationPage = ({ setNextPage }) => {
     const [name, setName] = useState('');
     const [schoolName, setSchoolName] = useState('');
@@ -72,13 +76,20 @@ const InformationPage = ({ setNextPage }) => {
         <div className="relative w-screen overflow-hidden">
             <Background />
             <Header />
-            <div className={`absolute left-[40%] top-[20%] flex justify-center mt-6 mb-20 mx-auto flex-col items-center {
+            <div className={`absolute 
+                top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+            
+            flex justify-center mt-6 mb-20 mx-auto flex-col items-center {
 
                 }`}
-                style={{
-                    transform: `scale(${1 / scaleFactor})`,
-                    transformOrigin: '0 0',
-                  }}
+                style={
+                    !isMobile()
+                      ? {
+                          transform: `translate(-50%, -50%) scale(${1 / scaleFactor})`,
+                          transformOrigin: 'center center',
+                        }
+                      : {}
+                  }
                 >
                 <SVGLogo />
                 <div className={`flex flex-col items-center justify-center space-y-4 max-w-md w-full mt-10 px-4`}>

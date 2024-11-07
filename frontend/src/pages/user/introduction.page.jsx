@@ -62,19 +62,19 @@ const IntroductionPage = ({ setNextPage }) => {
     const [scaleFactor, setScaleFactor] = useState(window.devicePixelRatio || 1);
 
     useEffect(() => {
-      const updateScale = () => {
-        setScaleFactor(window.devicePixelRatio || 1);
-      };
-  
-      // Update the scale factor on window resize
-      window.addEventListener('resize', updateScale);
-  
-      // Clean up event listener on component unmount
-      return () => {
-        window.removeEventListener('resize', updateScale);
-      };
+        const updateScale = () => {
+            setScaleFactor(window.devicePixelRatio || 1);
+        };
+
+        // Update the scale factor on window resize
+        window.addEventListener('resize', updateScale);
+
+        // Clean up event listener on component unmount
+        return () => {
+            window.removeEventListener('resize', updateScale);
+        };
     }, []);
-  
+
 
     return (
         <div className="relative w-screen overflow-hidden">
@@ -82,18 +82,18 @@ const IntroductionPage = ({ setNextPage }) => {
             <CloudOverlay animate={animateClouds} />
             <CardComponent animate={animateClouds} />
             <div className="absolute left-1/2 -translate-x-1/2 top-9 min-[500px]:top-24 min-[1200px]:top-1/2 flex flex-col items-center justify-center mt-16 mb-10 mx-auto max-w-2xl w-full z-[100]"
-            
-            style={
-                !isMobile()
-                  ? {
-                      transform: `translate(-50%, -50%) scale(${1 / scaleFactor})`,
-                      transformOrigin: 'center center',
-                    }
-                  : {}
-              }
+
+                style={
+                    !isMobile()
+                        ? {
+                            transform: `translate(-50%, -50%) scale(${1 / scaleFactor})`,
+                            transformOrigin: 'center center',
+                        }
+                        : {}
+                }
             >
                 <div className="flex justify-center items-center w-[50%] xl:w-[70%]"
-                    
+
                 >
                     <SVGLogo />
                 </div>
@@ -103,13 +103,13 @@ const IntroductionPage = ({ setNextPage }) => {
                     <p className="text-center text-white text-sm md:text-base lg:text-xl font-inter-bold flex flex-col uppercase">
                         <span className=''
                             style={{
-                            fontSize: 'clamp(0.5rem, 2vw + 0.85rem, 1rem)', // Adjusts between 1.25rem and 2rem
-                          }}
+                                fontSize: 'clamp(0.5rem, 2vw + 0.85rem, 1rem)', // Adjusts between 1.25rem and 2rem
+                            }}
                         >TẠO THIỆP TRI ÂN THẦY CÔ</span>
                         <span
                             style={{
-                            fontSize: 'clamp(0.5rem, 2vw + 0.85rem, 1rem)', // Adjusts between 1.25rem and 2rem
-                          }}
+                                fontSize: 'clamp(0.5rem, 2vw + 0.85rem, 1rem)', // Adjusts between 1.25rem and 2rem
+                            }}
                         >Đã có <strong className="text-brand-600 font-inter-extrabold text-xl stroke-white"><Counter from={100} to={400} />+</strong> Lời chúc được gửi thành công</span>
                     </p>
                     <Button

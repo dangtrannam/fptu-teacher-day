@@ -55,23 +55,6 @@ const InformationPage = ({ setNextPage }) => {
         }
     };
 
-    const [scaleFactor, setScaleFactor] = useState(window.devicePixelRatio || 1);
-
-    useEffect(() => {
-      const updateScale = () => {
-        setScaleFactor(window.devicePixelRatio || 1);
-      };
-  
-      // Update the scale factor on window resize
-      window.addEventListener('resize', updateScale);
-  
-      // Clean up event listener on component unmount
-      return () => {
-        window.removeEventListener('resize', updateScale);
-      };
-    }, []);
-  
-
     return (
         <div className="relative w-screen overflow-hidden">
             <Background />
@@ -92,7 +75,7 @@ const InformationPage = ({ setNextPage }) => {
                   }
                 >
                 <SVGLogo />
-                <div className={`flex flex-col items-center justify-center space-y-4 max-w-md w-full mt-10 px-4`}>
+                <div className="flex flex-col items-center justify-center space-y-4 max-w-md w-full mt-10 px-4">
                     <form className="flex flex-col w-80" onSubmit={handleSubmit}>
                         <InputField
                             placeholder="Họ tên"
@@ -120,7 +103,7 @@ const InformationPage = ({ setNextPage }) => {
                             onChange={(e) => setUserInput(e.target.value)}
                             className="w-full max-w-xs md:max-w-sm lg:max-w-md placeholder:font-bold font-inter"
                             hint="tối đa 200 ký tự"
-                            />
+                        />
                         <div className="h-6">
                             {isSubmitted && errors.userInput && <p className="text-red-500 text-sm font-bold font-inter-bold">{errors.userInput}</p>}
                         </div>

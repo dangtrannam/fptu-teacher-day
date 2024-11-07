@@ -6,8 +6,6 @@ import { postWishData } from '../../service/wish.service';
 import { getLocalStorageData, handleRemoveLocalStorage } from '../../service/localStorageService';
 // import html2canvaspro from 'html2canvas-pro';
 import { fabric } from 'fabric';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 function isMobile() {
     return /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);

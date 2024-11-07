@@ -115,7 +115,7 @@ export default function CardComponent({ animate }) {
     >
       <div className='w-full bg-gradient-to-b from-white to-[#ADCFF1] p-6 shadow-[0_4px_6px_0_rgba(0,0,0,0.25)] rounded-[16px]'>
         <div className="flex items-start gap-4">
-          <div className="relative flex-shrink-0 h-[96px] [@media(max-height:600px)]:h-[66px] aspect-square">
+          <div className="relative flex-shrink-0 h-[96px] aspect-square">
             <AnimatePresence mode='wait'>
               <motion.div 
                 key={currentMascot}

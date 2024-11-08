@@ -135,7 +135,7 @@ const WishCardResultPage = ({ setNextPage }) => {
             const userInput = new fabric.Textbox(userWishData?.userInput || 'Bạn chưa nhập lời chúc', {
                 left: canvas.width / 2,
                 top: canvas.height / 2.75,
-                fontSize: 12 * PIXEL_RATIO,
+                fontSize: 10 * PIXEL_RATIO,
                 fontFamily: 'Inter',
                 fill: '#000000',
                 textAlign: 'center',
@@ -154,7 +154,7 @@ const WishCardResultPage = ({ setNextPage }) => {
             const nameText = new fabric.Text(userWishData?.name || '', {
                 left: canvas.width / 1.5,
                 top: userInput.top + userInput.height / ADJUST_HEIGHT_RATIO,
-                fontSize: 12 * PIXEL_RATIO,
+                fontSize: 10 * PIXEL_RATIO,
                 fontFamily: 'Inter',
                 fill: '#000000',
                 textAlign: 'center',

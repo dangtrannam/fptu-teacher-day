@@ -18,6 +18,7 @@ const InformationPage = ({ setNextPage }) => {
     const [errors, setErrors] = useState({});
     const [isSubmitted, setIsSubmitted] = useState(false);
     const savedData = getLocalStorageData();
+    const [scaleFactor, setScaleFactor] = useState(window.devicePixelRatio || 1);
 
     // Load saved data when the component mounts
     useEffect(() => {
@@ -67,13 +68,13 @@ const InformationPage = ({ setNextPage }) => {
                 }`}
                 style={
                     !isMobile()
-                      ? {
-                          transform: `translate(-50%, -50%) scale(${1 / scaleFactor})`,
-                          transformOrigin: 'center center',
+                        ? {
+                            transform: `translate(-50%, -50%) scale(${1 / scaleFactor})`,
+                            transformOrigin: 'center center',
                         }
-                      : {}
-                  }
-                >
+                        : {}
+                }
+            >
                 <SVGLogo />
                 <div className="flex flex-col items-center justify-center space-y-4 max-w-md w-full mt-10 px-4">
                     <form className="flex flex-col w-80" onSubmit={handleSubmit}>

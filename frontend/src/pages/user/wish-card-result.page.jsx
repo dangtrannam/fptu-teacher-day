@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import Header from '../../components/layout/Header';
 import Button from '../../components/common/button.component';
 import Background from '../../components/common/background.component';

@@ -56,45 +56,77 @@ const WishCardResultPage = ({ setNextPage }) => {
         try {
             console.log("Starting canvas generation...");
 
-            // Set higher DPI
-            // const PIXEL_RATIO = window.devicePixelRatio || 2;
-            // ? Set these 2 values to match the scale size on both mobile and desktop
             const PIXEL_RATIO = 3;
             const offsetWidth = 350;
 
             // Create initial canvas with temporary size
             const canvas = new fabric.Canvas(document.createElement('canvas'), {
-                width: 1600,  // increased base width
-                height: 1200, // increased base height
-                enableRetinaScaling: true, // enable high DPI rendering
+                width: 1500,
+                height: 1350, // Increased height to accommodate top text
+                enableRetinaScaling: true,
+                backgroundColor: 'rgba(255, 240, 235, 1)' // Set background color
             });
 
-            // Load background image first
+            // Add top text section without newline character
+            const topTextPart1 = 'Bạn đã gửi lời chúc thành công\n';
+            const boldText = 'Cùng ' + (userWishData?.name || '');
+            const topTextPart2 = ' chia sẻ thông điệp cảm ơn thầy cô nhé!';
+
+            const fullText = topTextPart1 + boldText + topTextPart2;
+
+            const topText = new fabric.Textbox(fullText, {
+                left: canvas.width / 2.9,
+                top: 12 * PIXEL_RATIO,
+                fontSize: 10 * PIXEL_RATIO,
+                fontFamily: 'Inter',
+                fill: '#000000',
+                textAlign: 'center',
+                originX: 'center',
+                originY: 'top',
+                lineHeight: 1.2,
+                fontWeight: 500,
+                width: canvas.width * 0.8,
+            });
+
+            const boldStartIndex = fullText.indexOf(userWishData?.name);
+            const boldEndIndex = boldStartIndex + boldText.length - "Cùng ".length;
+
+            topText.setSelectionStyles(
+                {
+                    fontWeight: 'bold',
+                    fontStyle: 'italic',
+                },
+                boldStartIndex,
+                boldEndIndex
+            );
+
+            canvas.add(topText);
+
+            // Load background image
+            const padding = 16 * PIXEL_RATIO;
             const bgImg = await new Promise((resolve) => {
                 fabric.Image.fromURL('/assets/images/wish_card_bg_x3.png', (img) => {
-                    // Scale image accounting for pixel ratio
-                    const scale = (offsetWidth * PIXEL_RATIO) / img.width;
+                    // Adjust scale to account for padding
+                    const scale = ((offsetWidth - 2 * padding/PIXEL_RATIO) * PIXEL_RATIO) / img.width;
                     img.scale(scale);
 
-
-                    // Resize canvas to match scaled image
                     canvas.setDimensions({
-                        width: img.width * scale,
-                        height: img.height * scale
+                        width: img.width * scale + (2 * padding),
+                        height: img.height * scale + (32 * PIXEL_RATIO) + (2 * padding) // Add extra height for top text and padding
                     });
 
                     img.set({
                         originX: 'center',
                         originY: 'center',
                         left: canvas.width / 2,
-                        top: canvas.height / 2
+                        top: (topText.top + topText.height) + (10 * PIXEL_RATIO) + (img.height * scale / 2) // Position below top text with margin
                     });
 
                     canvas.add(img);
                     resolve();
                 }, {
                     crossOrigin: 'anonymous',
-                    quality: 1.0 // max quality for image loading
+                    quality: 1.0
                 });
             });
             const shareText = `Cùng chia sẻ thông điệp yêu thương đến thầy cô FPT nhé!` + "\n" + `#FPTU20_11`;
@@ -102,22 +134,21 @@ const WishCardResultPage = ({ setNextPage }) => {
             // Add text with adjusted font size and line wrapping
             const userInput = new fabric.Textbox(userWishData?.userInput || 'Bạn chưa nhập lời chúc', {
                 left: canvas.width / 2,
-                top: canvas.height / 4,
+                top: canvas.height / 2.75,
                 fontSize: 12 * PIXEL_RATIO,
                 fontFamily: 'Inter',
                 fill: '#000000',
                 textAlign: 'center',
                 originX: 'center',
                 originY: 'center',
-                width: canvas.width * 0.85,
+                width: canvas.width * 0.75,
                 lineHeight: 1.5,
                 breakWords: true,
                 wordWrap: true,
                 padding: 12 * PIXEL_RATIO,
-                fontWeight: 400, // font-normal
+                fontWeight: 400,
             });
 
-            // Add user name below the text at the bottom right
             const ADJUST_HEIGHT_RATIO = userWishData?.userInput.length > 105 ? 1.75 : 1.5;
 
             const nameText = new fabric.Text(userWishData?.name || '', {
@@ -130,11 +161,10 @@ const WishCardResultPage = ({ setNextPage }) => {
                 originX: 'center',
                 originY: 'top',
                 fontStyle: 'italic',
-                fontWeight: 400, // font-normal
+                fontWeight: 400,
             });
 
             canvas.add(nameText);
-
             canvas.add(userInput);
             canvas.renderAll();
 
